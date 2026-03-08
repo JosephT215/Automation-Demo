@@ -1,0 +1,1362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Live Automation Demo — Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Clash+Display:wght@400;500;600;700&family=JetBrains+Mono:wght@300;400;500&family=Satoshi:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+
+:root {
+  --bg: #0d0d0f;
+  --surface: #141416;
+  --card: #1a1a1e;
+  --border: #2a2a30;
+  --border2: #343440;
+  --text: #e8e8f0;
+  --muted: #6b6b7e;
+  --muted2: #4a4a5a;
+  --re: #ff6b35;
+  --re2: #ff9a6c;
+  --co: #00c9a7;
+  --co2: #6eecd8;
+  --white: #ffffff;
+  --green: #22c55e;
+  --yellow: #f59e0b;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Satoshi', sans-serif;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ── TOP BAR ── */
+.topbar {
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  padding: 0 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 56px;
+  position: sticky;
+  top: 0;
+  z-index: 200;
+}
+
+.topbar-brand {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+  color: var(--muted);
+  letter-spacing: 0.05em;
+}
+.topbar-brand span { color: var(--text); }
+
+.topbar-tabs {
+  display: flex;
+  gap: 2px;
+  background: var(--bg);
+  padding: 4px;
+  border-radius: 8px;
+}
+
+.ttab {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  padding: 7px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  color: var(--muted);
+  letter-spacing: 0.05em;
+  border: none;
+  background: none;
+  transition: all 0.2s;
+}
+.ttab:hover { color: var(--text); }
+.ttab.re-active { background: var(--re); color: white; }
+.ttab.co-active { background: var(--co); color: #0a2e28; font-weight: 600; }
+.ttab.both-active { background: var(--border2); color: var(--text); }
+
+.topbar-status {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: var(--green);
+}
+.status-dot {
+  width: 7px; height: 7px;
+  background: var(--green);
+  border-radius: 50%;
+  animation: pulse 2s infinite;
+}
+@keyframes pulse {
+  0%,100% { opacity:1; }
+  50% { opacity:0.4; }
+}
+
+/* ── HERO ── */
+.hero {
+  padding: 60px 40px 40px;
+  text-align: center;
+  position: relative;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 50%; transform: translateX(-50%);
+  width: 800px; height: 300px;
+  background: radial-gradient(ellipse, rgba(255,107,53,0.08) 0%, rgba(0,201,167,0.06) 50%, transparent 70%);
+  pointer-events: none;
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--card);
+  border: 1px solid var(--border2);
+  border-radius: 100px;
+  padding: 6px 16px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: var(--muted);
+  margin-bottom: 28px;
+  letter-spacing: 0.08em;
+}
+.hero-badge::before {
+  content: '';
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--green);
+}
+
+.hero h1 {
+  font-family: 'Satoshi', sans-serif;
+  font-weight: 700;
+  font-size: clamp(32px, 5vw, 58px);
+  line-height: 1.1;
+  margin-bottom: 16px;
+  color: var(--white);
+}
+
+.hero h1 .re { color: var(--re); }
+.hero h1 .co { color: var(--co); }
+
+.hero p {
+  color: var(--muted);
+  font-size: 16px;
+  max-width: 520px;
+  margin: 0 auto 40px;
+  line-height: 1.6;
+}
+
+/* DEMO SELECTOR CARDS */
+.demo-selector {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+
+.ds-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 16px 24px;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-align: left;
+  min-width: 200px;
+}
+.ds-card:hover { border-color: var(--border2); transform: translateY(-2px); }
+.ds-card.re-sel { border-color: var(--re); background: rgba(255,107,53,0.06); }
+.ds-card.co-sel { border-color: var(--co); background: rgba(0,201,167,0.06); }
+.ds-card.both-sel { border-color: var(--border2); }
+
+.ds-icon { font-size: 24px; margin-bottom: 8px; display: block; }
+.ds-title { font-weight: 600; font-size: 14px; color: var(--white); margin-bottom: 3px; }
+.ds-sub { font-size: 12px; color: var(--muted); font-family: 'JetBrains Mono', monospace; }
+
+/* ── MAIN LAYOUT ── */
+.main { padding: 0 40px 80px; }
+
+/* SECTION LABEL */
+.section-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.section-label::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+/* GRID LAYOUTS */
+.side-by-side { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.single-col { display: grid; grid-template-columns: 1fr; }
+
+/* DEMO BLOCK */
+.demo-block {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.demo-block-header {
+  padding: 14px 20px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.dbh-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+.dbh-title { font-weight: 600; font-size: 14px; color: var(--white); }
+.dbh-sub { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--muted); margin-left: auto; }
+
+.demo-block-body { padding: 20px; }
+
+/* ── JOTFORM PREVIEW ── */
+.jf-form { display: flex; flex-direction: column; gap: 12px; }
+
+.jf-field {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.jf-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text);
+}
+.jf-label span {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--muted);
+  font-weight: 400;
+  margin-left: 6px;
+}
+
+.jf-input {
+  background: var(--surface);
+  border: 1px solid var(--border2);
+  border-radius: 6px;
+  padding: 9px 12px;
+  font-size: 13px;
+  color: var(--text);
+  font-family: 'Satoshi', sans-serif;
+  width: 100%;
+  outline: none;
+  transition: border-color 0.2s;
+}
+.jf-input:focus { border-color: var(--re); }
+.jf-input.co:focus { border-color: var(--co); }
+
+.jf-select {
+  background: var(--surface);
+  border: 1px solid var(--border2);
+  border-radius: 6px;
+  padding: 9px 12px;
+  font-size: 13px;
+  color: var(--text);
+  font-family: 'Satoshi', sans-serif;
+  width: 100%;
+  outline: none;
+  appearance: none;
+  cursor: pointer;
+}
+
+.jf-submit {
+  padding: 11px 20px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  margin-top: 4px;
+  transition: all 0.2s;
+  width: 100%;
+  letter-spacing: 0.02em;
+}
+.jf-submit.re { background: var(--re); color: white; }
+.jf-submit.co { background: var(--co); color: #0a2e28; }
+.jf-submit:hover { transform: translateY(-1px); filter: brightness(1.1); }
+.jf-submit:active { transform: translateY(0); }
+
+/* ── AIRTABLE PREVIEW ── */
+.at-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  font-size: 12px;
+}
+.at-view-btn {
+  padding: 4px 10px;
+  border-radius: 4px;
+  font-size: 11px;
+  cursor: pointer;
+  border: 1px solid var(--border2);
+  background: none;
+  color: var(--muted);
+  font-family: 'JetBrains Mono', monospace;
+  transition: all 0.15s;
+}
+.at-view-btn.active { background: var(--border2); color: var(--text); }
+
+.at-grid { overflow-x: auto; }
+.at-table { width: 100%; border-collapse: collapse; font-size: 12px; min-width: 500px; }
+.at-table th {
+  background: var(--surface);
+  padding: 8px 14px;
+  text-align: left;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--muted);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border-bottom: 1px solid var(--border);
+  white-space: nowrap;
+}
+.at-table td {
+  padding: 9px 14px;
+  border-bottom: 1px solid var(--border);
+  color: var(--text);
+  white-space: nowrap;
+}
+.at-table tr:hover td { background: rgba(255,255,255,0.02); }
+.at-table tr.new-row td { animation: rowFlash 1.5s ease; }
+
+@keyframes rowFlash {
+  0% { background: rgba(255,107,53,0.2); }
+  100% { background: transparent; }
+}
+@keyframes rowFlashGreen {
+  0% { background: rgba(0,201,167,0.2); }
+  100% { background: transparent; }
+}
+.at-table tr.new-row-co td { animation: rowFlashGreen 1.5s ease; }
+
+.status-badge {
+  display: inline-block;
+  padding: 3px 8px;
+  border-radius: 4px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  font-weight: 500;
+}
+.s-new { background: rgba(245,158,11,0.15); color: var(--yellow); border: 1px solid rgba(245,158,11,0.3); }
+.s-contacted { background: rgba(255,107,53,0.15); color: var(--re2); border: 1px solid rgba(255,107,53,0.3); }
+.s-replied { background: rgba(0,201,167,0.15); color: var(--co2); border: 1px solid rgba(0,201,167,0.3); }
+.s-booked { background: rgba(34,197,94,0.15); color: var(--green); border: 1px solid rgba(34,197,94,0.3); }
+.s-welcome { background: rgba(0,201,167,0.15); color: var(--co2); border: 1px solid rgba(0,201,167,0.3); }
+
+/* KANBAN */
+.kanban {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  padding: 16px;
+  min-height: 200px;
+}
+.kb-col {
+  flex-shrink: 0;
+  width: 160px;
+  background: var(--surface);
+  border-radius: 8px;
+  padding: 10px;
+}
+.kb-col-title {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.kb-count {
+  background: var(--border2);
+  color: var(--muted);
+  border-radius: 10px;
+  padding: 1px 6px;
+  font-size: 10px;
+}
+.kb-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 9px 10px;
+  margin-bottom: 7px;
+  font-size: 12px;
+  cursor: grab;
+  transition: all 0.2s;
+}
+.kb-card:hover { border-color: var(--border2); transform: translateY(-1px); }
+.kb-card-name { font-weight: 600; color: var(--white); font-size: 12px; margin-bottom: 3px; }
+.kb-card-sub { color: var(--muted); font-size: 11px; font-family: 'JetBrains Mono', monospace; }
+.kb-card.highlight-re { border-color: var(--re); background: rgba(255,107,53,0.06); animation: cardPop 0.5s ease; }
+.kb-card.highlight-co { border-color: var(--co); background: rgba(0,201,167,0.06); animation: cardPop 0.5s ease; }
+@keyframes cardPop {
+  0% { transform: scale(0.9); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+/* ── MAKE.COM FLOW ── */
+.make-flow-wrap { padding: 20px; overflow-x: auto; }
+.make-flow {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  min-width: max-content;
+}
+
+.make-node {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.make-node:hover .mn-circle { transform: scale(1.05); }
+
+.mn-circle {
+  width: 56px; height: 56px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  border: 2px solid var(--border2);
+  background: var(--surface);
+  transition: all 0.3s;
+  position: relative;
+}
+.mn-circle.active-re { border-color: var(--re); background: rgba(255,107,53,0.15); box-shadow: 0 0 16px rgba(255,107,53,0.3); }
+.mn-circle.active-co { border-color: var(--co); background: rgba(0,201,167,0.15); box-shadow: 0 0 16px rgba(0,201,167,0.3); }
+.mn-circle.done { border-color: var(--green); background: rgba(34,197,94,0.15); }
+.mn-circle.done::after {
+  content: '✓';
+  position: absolute;
+  bottom: -2px; right: -2px;
+  width: 16px; height: 16px;
+  background: var(--green);
+  border-radius: 50%;
+  font-size: 9px;
+  display: flex; align-items: center; justify-content: center;
+  color: white;
+}
+
+.mn-label { font-size: 10px; color: var(--muted); text-align: center; max-width: 70px; line-height: 1.3; font-family: 'JetBrains Mono', monospace; }
+.mn-app { font-size: 9px; color: var(--muted2); text-align: center; font-family: 'JetBrains Mono', monospace; margin-top: 2px; }
+
+.make-connector {
+  display: flex;
+  align-items: center;
+  padding: 0 4px;
+  margin-top: -20px;
+}
+.make-connector-line {
+  height: 2px;
+  width: 28px;
+  background: var(--border2);
+  transition: background 0.3s;
+  position: relative;
+  overflow: hidden;
+}
+.make-connector-line::after {
+  content: '';
+  position: absolute;
+  left: -100%; top: 0;
+  width: 100%; height: 100%;
+  background: linear-gradient(90deg, transparent, var(--re), transparent);
+}
+.make-connector-line.flowing-re::after { animation: flowRe 0.8s ease forwards; }
+.make-connector-line.flowing-co::after {
+  background: linear-gradient(90deg, transparent, var(--co), transparent);
+  animation: flowRe 0.8s ease forwards;
+}
+@keyframes flowRe { from { left: -100%; } to { left: 100%; } }
+
+/* ── GMAIL PREVIEW ── */
+.gmail-wrap { background: var(--surface); border-radius: 8px; overflow: hidden; }
+.gmail-header {
+  background: var(--bg);
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.gmail-header-dot { width: 10px; height: 10px; border-radius: 50%; }
+.gmail-title { font-size: 12px; color: var(--muted); font-family: 'JetBrains Mono', monospace; margin-left: 4px; }
+
+.gmail-email {
+  padding: 16px 20px;
+  display: none;
+  animation: emailSlide 0.4s ease;
+}
+.gmail-email.visible { display: block; }
+@keyframes emailSlide {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.gmail-meta { margin-bottom: 14px; }
+.gmail-meta div {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: var(--muted);
+  margin-bottom: 4px;
+}
+.gmail-meta div span { color: var(--text); }
+.gmail-subject { font-size: 15px; font-weight: 700; color: var(--white); margin-bottom: 14px; }
+.gmail-body { font-size: 13px; color: var(--text); line-height: 1.8; }
+.gmail-body .hl-re { color: var(--re2); font-weight: 600; }
+.gmail-body .hl-co { color: var(--co2); font-weight: 600; }
+.gmail-body .hl-link {
+  color: #60a5fa;
+  text-decoration: underline;
+  cursor: pointer;
+}
+.gmail-placeholder {
+  padding: 40px 20px;
+  text-align: center;
+  color: var(--muted2);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+}
+
+/* ── SLACK PREVIEW ── */
+.slack-wrap { background: #1a1d21; border-radius: 8px; overflow: hidden; font-family: 'Satoshi', sans-serif; }
+.slack-header {
+  background: #19181f;
+  padding: 10px 16px;
+  border-bottom: 1px solid #2a2a35;
+  font-size: 13px;
+  font-weight: 600;
+  color: #e0e0e8;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.slack-channel { color: #999; font-size: 13px; }
+
+.slack-messages { padding: 14px 16px; min-height: 100px; display: flex; flex-direction: column; gap: 12px; }
+.slack-msg {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+}
+.slack-avatar {
+  width: 32px; height: 32px;
+  border-radius: 6px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 16px;
+  flex-shrink: 0;
+}
+.slack-msg-content { flex: 1; }
+.slack-msg-name { font-size: 13px; font-weight: 700; color: #e0e0e8; margin-bottom: 2px; }
+.slack-msg-name span { font-size: 11px; font-weight: 400; color: #666; margin-left: 6px; font-family: 'JetBrains Mono', monospace; }
+.slack-msg-text { font-size: 13px; color: #c8c8d0; line-height: 1.6; }
+.slack-msg-text strong { color: #fff; }
+.slack-msg-text .tag-re { background: rgba(255,107,53,0.2); color: var(--re2); padding: 1px 6px; border-radius: 3px; font-size: 12px; }
+.slack-msg-text .tag-co { background: rgba(0,201,167,0.2); color: var(--co2); padding: 1px 6px; border-radius: 3px; font-size: 12px; }
+.slack-new { animation: slackPop 0.4s ease; }
+@keyframes slackPop { from { opacity:0; transform: translateX(-10px); } to { opacity:1; transform: translateX(0); } }
+
+/* ── RUN BUTTON ── */
+.run-section { padding: 24px 0 32px; text-align: center; }
+.run-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 36px;
+  border-radius: 10px;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  border: none;
+  letter-spacing: 0.02em;
+  transition: all 0.2s;
+  font-family: 'Satoshi', sans-serif;
+}
+.run-btn.re { background: var(--re); color: white; }
+.run-btn.co { background: var(--co); color: #0a2e28; }
+.run-btn.both { background: linear-gradient(135deg, var(--re), var(--co)); color: white; }
+.run-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.3); }
+.run-btn:active { transform: translateY(0); }
+.run-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+
+.run-hint { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--muted); margin-top: 10px; }
+
+/* ── PROGRESS LOG ── */
+.log-wrap {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 24px;
+  display: none;
+}
+.log-wrap.visible { display: block; }
+.log-header {
+  padding: 10px 16px;
+  background: var(--bg);
+  border-bottom: 1px solid var(--border);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: var(--muted);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.log-running { color: var(--yellow); }
+.log-done { color: var(--green); }
+.log-body { padding: 12px 16px; font-family: 'JetBrains Mono', monospace; font-size: 12px; line-height: 2; }
+.log-line { display: flex; align-items: center; gap: 10px; opacity: 0; }
+.log-line.show { opacity: 1; animation: logIn 0.3s ease; }
+@keyframes logIn { from { opacity:0; transform: translateX(-8px); } to { opacity:1; transform: translateX(0); } }
+.log-ts { color: var(--muted2); font-size: 10px; width: 60px; }
+.log-icon { font-size: 14px; }
+.log-msg { color: var(--text); }
+.log-msg .re { color: var(--re2); }
+.log-msg .co { color: var(--co2); }
+.log-msg .gr { color: var(--green); }
+
+/* SECTION SPACING */
+.block-section { margin-bottom: 28px; }
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  .side-by-side { grid-template-columns: 1fr; }
+  .topbar { padding: 0 16px; }
+  .main { padding: 0 16px 60px; }
+  .hero { padding: 40px 16px 30px; }
+  .demo-selector { flex-wrap: wrap; }
+}
+</style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="topbar">
+  <div class="topbar-brand">automation<span>.portfolio</span></div>
+  <div class="topbar-tabs">
+    <button class="ttab re-active" id="tab-re" onclick="setView('re')">🏠 Real Estate</button>
+    <button class="ttab" id="tab-co" onclick="setView('co')">🎓 Coaching</button>
+    <button class="ttab" id="tab-both" onclick="setView('both')">⚡ Both</button>
+  </div>
+  <div class="topbar-status"><div class="status-dot"></div>LIVE DEMO</div>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-badge">INTERACTIVE PORTFOLIO — CLICK TO SEE IT WORK</div>
+  <h1>Two Automation Systems<br><span class="re">Built.</span> <span class="co">Ready.</span> Live.</h1>
+  <p>This is exactly what you build for clients. Click "Run Automation" on any demo to watch the full system fire in real time — form submission, Airtable update, email sent, Slack alert.</p>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+
+  <!-- ══ SECTION: JOTFORM ══ -->
+  <div class="block-section">
+    <div class="section-label">01 — CLIENT INTAKE FORM (Jotform)</div>
+    <div id="jf-grid" class="side-by-side">
+
+      <!-- RE FORM -->
+      <div class="demo-block" id="jf-re">
+        <div class="demo-block-header">
+          <div class="dbh-dot" style="background:var(--re);"></div>
+          <div class="dbh-title">🏠 Property Inquiry Form</div>
+          <div class="dbh-sub">Sarah Chen Realty</div>
+        </div>
+        <div class="demo-block-body">
+          <div class="jf-form" id="form-re">
+            <div class="jf-field">
+              <div class="jf-label">Full Name <span>required</span></div>
+              <input class="jf-input" id="re-name" placeholder="e.g. James Whitfield" />
+            </div>
+            <div class="jf-field">
+              <div class="jf-label">Email Address <span>required</span></div>
+              <input class="jf-input" id="re-email" placeholder="james@email.com" />
+            </div>
+            <div class="jf-field">
+              <div class="jf-label">Are you looking to buy or sell? <span>required</span></div>
+              <select class="jf-select" id="re-intent">
+                <option value="">— Select —</option>
+                <option>Buy</option>
+                <option>Sell</option>
+                <option>Both</option>
+                <option>Just exploring</option>
+              </select>
+            </div>
+            <div class="jf-field">
+              <div class="jf-label">Budget Range <span>required</span></div>
+              <select class="jf-select" id="re-budget">
+                <option value="">— Select —</option>
+                <option>Under $300K</option>
+                <option>$300K–$500K</option>
+                <option>$500K–$800K</option>
+                <option>$800K+</option>
+              </select>
+            </div>
+            <div class="jf-field">
+              <div class="jf-label">When are you looking to move? <span>required</span></div>
+              <select class="jf-select" id="re-timeline">
+                <option value="">— Select —</option>
+                <option>ASAP</option>
+                <option>1–3 months</option>
+                <option>3–6 months</option>
+                <option>Just researching</option>
+              </select>
+            </div>
+            <div class="jf-field">
+              <div class="jf-label">Area of interest <span>optional</span></div>
+              <input class="jf-input" id="re-area" placeholder="e.g. Downtown Austin" />
+            </div>
+            <button class="jf-submit re" onclick="submitForm('re')">Submit Inquiry →</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- CO FORM -->
+      <div class="demo-block" id="jf-co">
+        <div class="demo-block-header">
+          <div class="dbh-dot" style="background:var(--co);"></div>
+          <div class="dbh-title">🎓 Client Onboarding Form</div>
+          <div class="dbh-sub">Webb Coaching</div>
+        </div>
+        <div class="demo-block-body">
+          <div class="jf-form" id="form-co">
+            <div class="jf-field">
+              <div class="jf-label">Full Name <span>required</span></div>
+              <input class="jf-input co" id="co-name" placeholder="e.g. Priya Sharma" />
+            </div>
+            <div class="jf-field">
+              <div class="jf-label">Email Address <span>required</span></div>
+              <input class="jf-input co" id="co-email" placeholder="priya@business.com" />
+            </div>
+            <div class="jf-field">
+              <div class="jf-label">What is your business? <span>required</span></div>
+              <input class="jf-input co" id="co-biz" placeholder="e.g. Online fitness coaching" />
+            </div>
+            <div class="jf-field">
+              <div class="jf-label">Your #1 goal for this program <span>required</span></div>
+              <input class="jf-input co" id="co-goal" placeholder="e.g. Get to $10K/month" />
+            </div>
+            <div class="jf-field">
+              <div class="jf-label">Current monthly revenue <span>required</span></div>
+              <select class="jf-select" id="co-rev">
+                <option value="">— Select —</option>
+                <option>Pre-revenue</option>
+                <option>$0–$2K/mo</option>
+                <option>$2K–$10K/mo</option>
+                <option>$10K–$30K/mo</option>
+                <option>$30K+/mo</option>
+              </select>
+            </div>
+            <div class="jf-field">
+              <div class="jf-label">Biggest challenge right now <span>required</span></div>
+              <select class="jf-select" id="co-challenge">
+                <option value="">— Select —</option>
+                <option>Getting clients</option>
+                <option>Pricing my offer</option>
+                <option>Systems & automation</option>
+                <option>Time management</option>
+                <option>Mindset / confidence</option>
+              </select>
+            </div>
+            <button class="jf-submit co" onclick="submitForm('co')">Submit & Start Onboarding →</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══ AUTOMATION LOG ══ -->
+  <div id="log-re" class="log-wrap">
+    <div class="log-header">
+      <span id="log-re-status" class="log-running">● MAKE.COM RUNNING</span>
+      <span style="margin-left:auto; color:var(--muted2);">Real Estate Scenario 1</span>
+    </div>
+    <div class="log-body" id="log-re-body"></div>
+  </div>
+  <div id="log-co" class="log-wrap">
+    <div class="log-header">
+      <span id="log-co-status" class="log-running">● MAKE.COM RUNNING</span>
+      <span style="margin-left:auto; color:var(--muted2);">Coaching Scenario 1</span>
+    </div>
+    <div class="log-body" id="log-co-body"></div>
+  </div>
+
+  <!-- ══ SECTION: AIRTABLE ══ -->
+  <div class="block-section">
+    <div class="section-label">02 — CRM DATABASE (Airtable)</div>
+    <div id="at-grid" class="side-by-side">
+
+      <!-- RE AIRTABLE -->
+      <div class="demo-block" id="at-re">
+        <div class="demo-block-header">
+          <div class="dbh-dot" style="background:var(--re);"></div>
+          <div class="dbh-title">🏠 Leads Table</div>
+          <div class="dbh-sub">Sarah Chen Realty CRM</div>
+        </div>
+        <div class="at-toolbar">
+          <button class="at-view-btn active" onclick="switchAtView('re','grid',this)">Grid</button>
+          <button class="at-view-btn" onclick="switchAtView('re','kanban',this)">Kanban</button>
+        </div>
+        <div id="re-grid-view" class="at-grid">
+          <table class="at-table">
+            <thead><tr>
+              <th>Name</th><th>Intent</th><th>Budget</th><th>Timeline</th><th>Status</th>
+            </tr></thead>
+            <tbody id="re-table-body">
+              <tr><td>Maria Torres</td><td>Buy</td><td>$300K–$500K</td><td>1–3 months</td><td><span class="status-badge s-replied">Replied</span></td></tr>
+              <tr><td>Kevin Park</td><td>Sell</td><td>$500K–$800K</td><td>ASAP</td><td><span class="status-badge s-booked">Meeting Booked</span></td></tr>
+              <tr><td>Diane Okafor</td><td>Buy</td><td>Under $300K</td><td>3–6 months</td><td><span class="status-badge s-new">New</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div id="re-kanban-view" class="kanban" style="display:none;">
+          <div class="kb-col">
+            <div class="kb-col-title">NEW <span class="kb-count" id="re-kb-new-count">1</span></div>
+            <div id="re-kb-new">
+              <div class="kb-card"><div class="kb-card-name">Diane Okafor</div><div class="kb-card-sub">Under $300K • 3–6mo</div></div>
+            </div>
+          </div>
+          <div class="kb-col">
+            <div class="kb-col-title">CONTACTED <span class="kb-count">0</span></div>
+            <div id="re-kb-contacted"></div>
+          </div>
+          <div class="kb-col">
+            <div class="kb-col-title">REPLIED <span class="kb-count">1</span></div>
+            <div class="kb-card"><div class="kb-card-name">Maria Torres</div><div class="kb-card-sub">$300–500K • 1–3mo</div></div>
+          </div>
+          <div class="kb-col">
+            <div class="kb-col-title">BOOKED <span class="kb-count">1</span></div>
+            <div class="kb-card"><div class="kb-card-name">Kevin Park</div><div class="kb-card-sub">$500–800K • ASAP</div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CO AIRTABLE -->
+      <div class="demo-block" id="at-co">
+        <div class="demo-block-header">
+          <div class="dbh-dot" style="background:var(--co);"></div>
+          <div class="dbh-title">🎓 Clients Table</div>
+          <div class="dbh-sub">Webb Coaching CRM</div>
+        </div>
+        <div class="at-toolbar">
+          <button class="at-view-btn active" onclick="switchAtView('co','grid',this)">Grid</button>
+          <button class="at-view-btn" onclick="switchAtView('co','kanban',this)">Kanban</button>
+        </div>
+        <div id="co-grid-view" class="at-grid">
+          <table class="at-table">
+            <thead><tr>
+              <th>Name</th><th>Business</th><th>Revenue</th><th>Challenge</th><th>Stage</th>
+            </tr></thead>
+            <tbody id="co-table-body">
+              <tr><td>Alex Nguyen</td><td>SEO Agency</td><td>$2K–$10K/mo</td><td>Getting clients</td><td><span class="status-badge s-booked">Call 1 Done</span></td></tr>
+              <tr><td>Simone Black</td><td>Life Coach</td><td>$0–$2K/mo</td><td>Pricing offer</td><td><span class="status-badge s-welcome">Welcome Sent</span></td></tr>
+              <tr><td>Omar Hassan</td><td>Ecomm Store</td><td>$10K–$30K/mo</td><td>Systems</td><td><span class="status-badge s-booked">Active</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div id="co-kanban-view" class="kanban" style="display:none;">
+          <div class="kb-col">
+            <div class="kb-col-title">FORM IN <span class="kb-count" id="co-kb-new-count">0</span></div>
+            <div id="co-kb-new"></div>
+          </div>
+          <div class="kb-col">
+            <div class="kb-col-title">WELCOME <span class="kb-count">1</span></div>
+            <div class="kb-card"><div class="kb-card-name">Simone Black</div><div class="kb-card-sub">Life Coach</div></div>
+          </div>
+          <div class="kb-col">
+            <div class="kb-col-title">CALL DONE <span class="kb-count">1</span></div>
+            <div class="kb-card"><div class="kb-card-name">Alex Nguyen</div><div class="kb-card-sub">SEO Agency</div></div>
+          </div>
+          <div class="kb-col">
+            <div class="kb-col-title">ACTIVE <span class="kb-count">1</span></div>
+            <div class="kb-card"><div class="kb-card-name">Omar Hassan</div><div class="kb-card-sub">Ecomm Store</div></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══ SECTION: MAKE.COM ══ -->
+  <div class="block-section">
+    <div class="section-label">03 — AUTOMATION FLOW (Make.com)</div>
+    <div id="mk-grid" class="side-by-side">
+
+      <div class="demo-block" id="mk-re">
+        <div class="demo-block-header">
+          <div class="dbh-dot" style="background:var(--re);"></div>
+          <div class="dbh-title">🏠 Scenario 1 — New Lead Response</div>
+          <div class="dbh-sub" id="mk-re-status">IDLE</div>
+        </div>
+        <div class="make-flow-wrap">
+          <div class="make-flow" id="make-flow-re">
+            <div class="make-node">
+              <div class="mn-circle" id="mn-re-0">🎣</div>
+              <div class="mn-label">Webhook Trigger</div>
+              <div class="mn-app">Make.com</div>
+            </div>
+            <div class="make-connector"><div class="make-connector-line" id="ml-re-0"></div></div>
+            <div class="make-node">
+              <div class="mn-circle" id="mn-re-1">🗄️</div>
+              <div class="mn-label">Create Record</div>
+              <div class="mn-app">Airtable</div>
+            </div>
+            <div class="make-connector"><div class="make-connector-line" id="ml-re-1"></div></div>
+            <div class="make-node">
+              <div class="mn-circle" id="mn-re-2">📧</div>
+              <div class="mn-label">Send Email</div>
+              <div class="mn-app">Gmail</div>
+            </div>
+            <div class="make-connector"><div class="make-connector-line" id="ml-re-2"></div></div>
+            <div class="make-node">
+              <div class="mn-circle" id="mn-re-3">💬</div>
+              <div class="mn-label">Slack Alert</div>
+              <div class="mn-app">Slack</div>
+            </div>
+            <div class="make-connector"><div class="make-connector-line" id="ml-re-3"></div></div>
+            <div class="make-node">
+              <div class="mn-circle" id="mn-re-4">✏️</div>
+              <div class="mn-label">Update Status</div>
+              <div class="mn-app">Airtable</div>
+            </div>
+            <div class="make-connector"><div class="make-connector-line" id="ml-re-4"></div></div>
+            <div class="make-node">
+              <div class="mn-circle" id="mn-re-5">✅</div>
+              <div class="mn-label">Done</div>
+              <div class="mn-app">Make.com</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="demo-block" id="mk-co">
+        <div class="demo-block-header">
+          <div class="dbh-dot" style="background:var(--co);"></div>
+          <div class="dbh-title">🎓 Scenario 1 — New Client Onboarding</div>
+          <div class="dbh-sub" id="mk-co-status">IDLE</div>
+        </div>
+        <div class="make-flow-wrap">
+          <div class="make-flow" id="make-flow-co">
+            <div class="make-node">
+              <div class="mn-circle" id="mn-co-0">🎣</div>
+              <div class="mn-label">Webhook Trigger</div>
+              <div class="mn-app">Make.com</div>
+            </div>
+            <div class="make-connector"><div class="make-connector-line" id="ml-co-0"></div></div>
+            <div class="make-node">
+              <div class="mn-circle" id="mn-co-1">🗄️</div>
+              <div class="mn-label">Create Client</div>
+              <div class="mn-app">Airtable</div>
+            </div>
+            <div class="make-connector"><div class="make-connector-line" id="ml-co-1"></div></div>
+            <div class="make-node">
+              <div class="mn-circle" id="mn-co-2">📧</div>
+              <div class="mn-label">Welcome Email</div>
+              <div class="mn-app">Gmail</div>
+            </div>
+            <div class="make-connector"><div class="make-connector-line" id="ml-co-2"></div></div>
+            <div class="make-node">
+              <div class="mn-circle" id="mn-co-3">💬</div>
+              <div class="mn-label">Slack Welcome</div>
+              <div class="mn-app">Slack</div>
+            </div>
+            <div class="make-connector"><div class="make-connector-line" id="ml-co-3"></div></div>
+            <div class="make-node">
+              <div class="mn-circle" id="mn-co-4">✏️</div>
+              <div class="mn-label">Update Stage</div>
+              <div class="mn-app">Airtable</div>
+            </div>
+            <div class="make-connector"><div class="make-connector-line" id="ml-co-4"></div></div>
+            <div class="make-node">
+              <div class="mn-circle" id="mn-co-5">✅</div>
+              <div class="mn-label">Done</div>
+              <div class="mn-app">Make.com</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ SECTION: GMAIL + SLACK ══ -->
+  <div class="block-section">
+    <div class="section-label">04 — AUTO EMAIL + SLACK NOTIFICATION</div>
+    <div id="gs-grid" class="side-by-side">
+
+      <!-- RE EMAIL + SLACK -->
+      <div style="display:flex; flex-direction:column; gap:12px;">
+        <div class="demo-block">
+          <div class="demo-block-header">
+            <div class="dbh-dot" style="background:var(--re);"></div>
+            <div class="dbh-title">📧 Gmail — Auto Reply</div>
+            <div class="dbh-sub">Real Estate</div>
+          </div>
+          <div class="gmail-wrap" style="margin:0; border-radius:0;">
+            <div class="gmail-header">
+              <div class="gmail-header-dot" style="background:#ff5f57;"></div>
+              <div class="gmail-header-dot" style="background:#ffbd2e;"></div>
+              <div class="gmail-header-dot" style="background:#28c840;"></div>
+              <div class="gmail-title">Gmail — Sent</div>
+            </div>
+            <div id="re-email-placeholder" class="gmail-placeholder">⏳ Submit the form above to trigger the auto-reply</div>
+            <div id="re-email-content" class="gmail-email">
+              <div class="gmail-meta">
+                <div>To: <span id="re-email-to">—</span></div>
+                <div>From: <span>sarah@sarahchenrealty.com</span></div>
+              </div>
+              <div class="gmail-subject" id="re-email-subject">—</div>
+              <div class="gmail-body" id="re-email-body"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="demo-block">
+          <div class="demo-block-header">
+            <div class="dbh-dot" style="background:var(--re);"></div>
+            <div class="dbh-title">💬 Slack — #new-leads</div>
+            <div class="dbh-sub">Real Estate</div>
+          </div>
+          <div class="slack-wrap">
+            <div class="slack-header">
+              <span style="color:#9b9b9b;">#</span>
+              <span class="slack-channel">new-leads</span>
+            </div>
+            <div class="slack-messages" id="re-slack-msgs">
+              <div class="slack-msg">
+                <div class="slack-avatar" style="background:#2d2d35;">⚡</div>
+                <div class="slack-msg-content">
+                  <div class="slack-msg-name">Make.com Bot <span>today at 9:12am</span></div>
+                  <div class="slack-msg-text">🏠 New lead: <strong>Kevin Park</strong> — Budget: <span class="tag-re">$500K–$800K</span> Timeline: <span class="tag-re">ASAP</span> — Check Airtable.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CO EMAIL + SLACK -->
+      <div style="display:flex; flex-direction:column; gap:12px;">
+        <div class="demo-block">
+          <div class="demo-block-header">
+            <div class="dbh-dot" style="background:var(--co);"></div>
+            <div class="dbh-title">📧 Gmail — Welcome Email</div>
+            <div class="dbh-sub">Coaching</div>
+          </div>
+          <div class="gmail-wrap" style="margin:0; border-radius:0;">
+            <div class="gmail-header">
+              <div class="gmail-header-dot" style="background:#ff5f57;"></div>
+              <div class="gmail-header-dot" style="background:#ffbd2e;"></div>
+              <div class="gmail-header-dot" style="background:#28c840;"></div>
+              <div class="gmail-title">Gmail — Sent</div>
+            </div>
+            <div id="co-email-placeholder" class="gmail-placeholder">⏳ Submit the form above to trigger the welcome email</div>
+            <div id="co-email-content" class="gmail-email">
+              <div class="gmail-meta">
+                <div>To: <span id="co-email-to">—</span></div>
+                <div>From: <span>marcus@webbcoaching.com</span></div>
+              </div>
+              <div class="gmail-subject" id="co-email-subject">—</div>
+              <div class="gmail-body" id="co-email-body"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="demo-block">
+          <div class="demo-block-header">
+            <div class="dbh-dot" style="background:var(--co);"></div>
+            <div class="dbh-title">💬 Slack — #new-clients</div>
+            <div class="dbh-sub">Coaching</div>
+          </div>
+          <div class="slack-wrap">
+            <div class="slack-header">
+              <span style="color:#9b9b9b;">#</span>
+              <span class="slack-channel">new-clients</span>
+            </div>
+            <div class="slack-messages" id="co-slack-msgs">
+              <div class="slack-msg">
+                <div class="slack-avatar" style="background:#0a2e28;">⚡</div>
+                <div class="slack-msg-content">
+                  <div class="slack-msg-name">Make.com Bot <span>today at 10:44am</span></div>
+                  <div class="slack-msg-text">🎉 New client: <strong>Omar Hassan</strong> — Ecomm Store — Goal: Scale to $50K/mo — Revenue: <span class="tag-co">$10K–$30K/mo</span></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- RESET -->
+  <div style="text-align:center; padding: 20px 0 40px;">
+    <button onclick="resetAll()" style="background:none; border:1px solid var(--border2); color:var(--muted); padding:10px 24px; border-radius:8px; cursor:pointer; font-family:'JetBrains Mono',monospace; font-size:12px; transition:all 0.2s;" onmouseover="this.style.borderColor='var(--border2)'; this.style.color='var(--text)'" onmouseout="this.style.borderColor='var(--border2)'; this.style.color='var(--muted)'">↺ Reset Both Demos</button>
+  </div>
+
+</div>
+
+<script>
+// ── STATE ──
+let reRunning = false, coRunning = false;
+let currentView = 'both';
+let reData = {}, coData = {};
+
+// ── VIEW SWITCHING ──
+function setView(v) {
+  currentView = v;
+  ['re','co','both'].forEach(x => {
+    const t = document.getElementById('tab-' + x);
+    t.className = 'ttab';
+    if (x === v) t.className = 'ttab ' + x + '-active';
+  });
+
+  const grids = ['jf-grid','at-grid','mk-grid','gs-grid'];
+  grids.forEach(g => {
+    const el = document.getElementById(g);
+    el.className = v === 'both' ? 'side-by-side' : 'single-col';
+  });
+
+  const reBlocks = ['jf-re','at-re','mk-re','log-re'];
+  const coBlocks = ['jf-co','at-co','mk-co','log-co'];
+
+  if (v === 're') {
+    reBlocks.forEach(id => { const e = document.getElementById(id); if(e) e.style.display = ''; });
+    coBlocks.forEach(id => { const e = document.getElementById(id); if(e && !e.classList.contains('log-wrap')) e.style.display = 'none'; else if(e) e.style.display = ''; });
+    document.querySelectorAll('#gs-grid > div').forEach((d,i) => { d.style.display = i===0 ? '' : 'none'; });
+  } else if (v === 'co') {
+    coBlocks.forEach(id => { const e = document.getElementById(id); if(e) e.style.display = ''; });
+    reBlocks.forEach(id => { const e = document.getElementById(id); if(e && !e.classList.contains('log-wrap')) e.style.display = 'none'; else if(e) e.style.display = ''; });
+    document.querySelectorAll('#gs-grid > div').forEach((d,i) => { d.style.display = i===1 ? '' : 'none'; });
+  } else {
+    [...reBlocks,...coBlocks].forEach(id => { const e = document.getElementById(id); if(e) e.style.display = ''; });
+    document.querySelectorAll('#gs-grid > div').forEach(d => { d.style.display = ''; });
+  }
+}
+
+// ── AIRTABLE VIEW SWITCH ──
+function switchAtView(demo, view, btn) {
+  btn.closest('.demo-block').querySelectorAll('.at-view-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById(demo+'-grid-view').style.display = view==='grid' ? '' : 'none';
+  document.getElementById(demo+'-kanban-view').style.display = view==='kanban' ? 'flex' : 'none';
+}
+
+// ── FORM SUBMIT ──
+function submitForm(demo) {
+  if (demo === 're') {
+    const name = document.getElementById('re-name').value || 'James Whitfield';
+    const email = document.getElementById('re-email').value || 'james@email.com';
+    const intent = document.getElementById('re-intent').value || 'Buy';
+    const budget = document.getElementById('re-budget').value || '$300K–$500K';
+    const timeline = document.getElementById('re-timeline').value || '1–3 months';
+    const area = document.getElementById('re-area').value || 'Downtown Austin';
+    reData = { name, email, intent, budget, timeline, area, firstName: name.split(' ')[0] };
+    runAutomation('re');
+  } else {
+    const name = document.getElementById('co-name').value || 'Priya Sharma';
+    const email = document.getElementById('co-email').value || 'priya@business.com';
+    const biz = document.getElementById('co-biz').value || 'Online fitness coaching';
+    const goal = document.getElementById('co-goal').value || 'Get to $10K/month';
+    const rev = document.getElementById('co-rev').value || '$2K–$10K/mo';
+    const challenge = document.getElementById('co-challenge').value || 'Getting clients';
+    coData = { name, email, biz, goal, rev, challenge, firstName: name.split(' ')[0] };
+    runAutomation('co');
+  }
+}
+
+// ── AUTOMATION ENGINE ──
+async function runAutomation(demo) {
+  if (demo === 're' && reRunning) return;
+  if (demo === 'co' && coRunning) return;
+  if (demo === 're') reRunning = true;
+  if (demo === 'co') coRunning = true;
+
+  const isRe = demo === 're';
+  const color = isRe ? 're' : 'co';
+  const data = isRe ? reData : coData;
+
+  // Show log
+  const logWrap = document.getElementById('log-' + demo);
+  const logBody = document.getElementById('log-' + demo + '-body');
+  const logStatus = document.getElementById('log-' + demo + '-status');
+  logWrap.classList.add('visible');
+  logBody.innerHTML = '';
+  logStatus.className = 'log-running';
+  logStatus.textContent = '● MAKE.COM RUNNING';
+  document.getElementById('mk-' + demo + '-status').textContent = 'RUNNING...';
+
+  // Reset nodes
+  for(let i=0;i<6;i++) {
+    const n = document.getElementById('mn-' + demo + '-' + i);
+    if(n) { n.className = 'mn-circle'; }
+    const l = document.getElementById('ml-' + demo + '-' + i);
+    if(l) { l.className = 'make-connector-line'; }
+  }
+
+  const steps = isRe ? [
+    { icon:'🎣', msg: `<span class="${color}">Webhook received</span> — Jotform submission from <span class="${color}">${data.name}</span>`, node:0 },
+    { icon:'🗄️', msg: `<span class="gr">Airtable record created</span> — Status set to "Contacted"`, node:1 },
+    { icon:'📧', msg: `<span class="${color}">Gmail sent</span> → ${data.email} — Subject: "Thanks for reaching out, ${data.firstName}!"`, node:2 },
+    { icon:'💬', msg: `<span class="${color}">Slack alert posted</span> → #new-leads — "${data.name} • ${data.budget} • ${data.timeline}"`, node:3 },
+    { icon:'✏️', msg: `<span class="gr">Airtable updated</span> — Status: New → Contacted`, node:4 },
+    { icon:'✅', msg: `<span class="gr">Scenario complete</span> — All 5 steps executed successfully`, node:5 },
+  ] : [
+    { icon:'🎣', msg: `<span class="${color}">Webhook received</span> — Jotform submission from <span class="${color}">${data.name}</span>`, node:0 },
+    { icon:'🗄️', msg: `<span class="gr">Airtable client created</span> — ${data.biz} • ${data.rev}`, node:1 },
+    { icon:'📧', msg: `<span class="${color}">Welcome email sent</span> → ${data.email} — Personalized with goal: "${data.goal}"`, node:2 },
+    { icon:'💬', msg: `<span class="${color}">Slack posted</span> → #new-clients — "${data.name} from ${data.biz}"`, node:3 },
+    { icon:'✏️', msg: `<span class="gr">Stage updated</span> — Form Received → Welcome Sent`, node:4 },
+    { icon:'✅', msg: `<span class="gr">Onboarding complete</span> — All steps executed in 8.4 seconds`, node:5 },
+  ];
+
+  const delays = [0, 800, 1600, 2400, 3200, 4000];
+  const now = new Date();
+
+  for (let i = 0; i < steps.length; i++) {
+    await sleep(delays[i]);
+    const s = steps[i];
+    const ts = new Date(now.getTime() + i * 1200);
+    const tsStr = ts.toTimeString().slice(0,8);
+
+    // Log line
+    const line = document.createElement('div');
+    line.className = 'log-line show';
+    line.innerHTML = `<span class="log-ts">${tsStr}</span><span class="log-icon">${s.icon}</span><span class="log-msg">${s.msg}</span>`;
+    logBody.appendChild(line);
+
+    // Animate node
+    const node = document.getElementById('mn-' + demo + '-' + s.node);
+    if (node) { node.className = 'mn-circle active-' + color; }
+
+    // Animate connector
+    if (s.node < 5) {
+      const line2 = document.getElementById('ml-' + demo + '-' + s.node);
+      if (line2) {
+        line2.className = 'make-connector-line flowing-' + color;
+        await sleep(600);
+        line2.className = 'make-connector-line';
+        if (node) node.className = 'mn-circle done';
+      }
+    } else {
+      if (node) { await sleep(300); node.className = 'mn-circle done'; }
+    }
+
+    // Trigger side effects
+    if (s.node === 1) addAirtableRow(demo, data);
+    if (s.node === 2) showEmail(demo, data);
+    if (s.node === 3) showSlack(demo, data);
+  }
+
+  logStatus.className = 'log-done';
+  logStatus.textContent = '✓ COMPLETED SUCCESSFULLY';
+  document.getElementById('mk-' + demo + '-status').textContent = 'DONE ✓';
+  if (demo === 're') reRunning = false;
+  if (demo === 'co') coRunning = false;
+}
+
+function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
+
+function addAirtableRow(demo, data) {
+  if (demo === 're') {
+    const tbody = document.getElementById('re-table-body');
+    const tr = document.createElement('tr');
+    tr.className = 'new-row';
+    tr.innerHTML = `<td>${data.name}</td><td>${data.intent}</td><td>${data.budget}</td><td>${data.timeline}</td><td><span class="status-badge s-contacted">Contacted</span></td>`;
+    tbody.prepend(tr);
+    // Kanban
+    const kb = document.getElementById('re-kb-new');
+    const card = document.createElement('div');
+    card.className = 'kb-card highlight-re';
+    card.innerHTML = `<div class="kb-card-name">${data.name}</div><div class="kb-card-sub">${data.budget} • ${data.timeline}</div>`;
+    kb.prepend(card);
+    document.getElementById('re-kb-new-count').textContent = kb.children.length;
+  } else {
+    const tbody = document.getElementById('co-table-body');
+    const tr = document.createElement('tr');
+    tr.className = 'new-row-co';
+    tr.innerHTML = `<td>${data.name}</td><td>${data.biz}</td><td>${data.rev}</td><td>${data.challenge}</td><td><span class="status-badge s-new">Form Received</span></td>`;
+    tbody.prepend(tr);
+    const kb = document.getElementById('co-kb-new');
+    const card = document.createElement('div');
+    card.className = 'kb-card highlight-co';
+    card.innerHTML = `<div class="kb-card-name">${data.name}</div><div class="kb-card-sub">${data.biz}</div>`;
+    kb.prepend(card);
+    document.getElementById('co-kb-new-count').textContent = kb.children.length;
+  }
+}
+
+function showEmail(demo, data) {
+  if (demo === 're') {
+    document.getElementById('re-email-placeholder').style.display = 'none';
+    document.getElementById('re-email-to').textContent = data.email;
+    document.getElementById('re-email-subject').textContent = `Thanks for reaching out, ${data.firstName} — let's find your perfect property`;
+    document.getElementById('re-email-body').innerHTML = `Hi <span class="hl-re">${data.firstName}</span>,<br><br>Thank you for reaching out! I saw you're looking to <span class="hl-re">${data.intent}</span> in the <span class="hl-re">${data.area || 'Austin'}</span> area with a budget of <span class="hl-re">${data.budget}</span>.<br><br>Based on your timeline of <span class="hl-re">${data.timeline}</span>, I'd love to jump on a quick 15-minute call.<br><br>👉 <span class="hl-link">[Book your call here — Calendly]</span><br><br>Looking forward to helping you,<br><strong>Sarah Chen</strong>`;
+    document.getElementById('re-email-content').classList.add('visible');
+  } else {
+    document.getElementById('co-email-placeholder').style.display = 'none';
+    document.getElementById('co-email-to').textContent = data.email;
+    document.getElementById('co-email-subject').textContent = `Welcome to the program, ${data.firstName} — here's what happens next`;
+    document.getElementById('co-email-body').innerHTML = `Hey <span class="hl-co">${data.firstName}</span> — welcome! I'm genuinely excited you're here.<br><br>I read your form. Your goal to <span class="hl-co">${data.goal}</span> and your challenge around <span class="hl-co">${data.challenge}</span> — we're going to work through exactly that.<br><br><strong>What happens next:</strong><br>1. 👉 <span class="hl-link">[Book your first call — Calendly]</span><br>2. 💬 <span class="hl-link">[Join our private Slack community]</span><br>3. 📖 <span class="hl-link">[Review your welcome guide]</span><br><br>Let's build something great,<br><strong>Marcus Webb</strong>`;
+    document.getElementById('co-email-content').classList.add('visible');
+  }
+}
+
+function showSlack(demo, data) {
+  const container = document.getElementById(demo + '-slack-msgs');
+  const msg = document.createElement('div');
+  msg.className = 'slack-msg slack-new';
+  const isRe = demo === 're';
+  const time = new Date().toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'});
+
+  msg.innerHTML = `
+    <div class="slack-avatar" style="background:${isRe ? '#2d2020' : '#0a2e28'};">⚡</div>
+    <div class="slack-msg-content">
+      <div class="slack-msg-name">Make.com Bot <span>today at ${time}</span></div>
+      <div class="slack-msg-text">${isRe
+        ? `🏠 New lead: <strong>${data.name}</strong> — Budget: <span class="tag-re">${data.budget}</span> Timeline: <span class="tag-re">${data.timeline}</span> — Check Airtable!`
+        : `🎉 New client: <strong>${data.name}</strong> from <strong>${data.biz}</strong> — Goal: ${data.goal} — Revenue: <span class="tag-co">${data.rev}</span>`
+      }</div>
+    </div>`;
+  container.appendChild(msg);
+}
+
+function resetAll() {
+  location.reload();
+}
+
+// Init
+setView('both');
+</script>
+</body>
+</html>
