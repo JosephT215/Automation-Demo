@@ -1,0 +1,1522 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Accounting & Employee Management Automation — automation.portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Fira+Code:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+
+:root {
+  --bg: #f0f4ff;
+  --dark: #0f1729;
+  --navy: #162040;
+  --card: #ffffff;
+  --border: #e2e8f0;
+  --border2: #cbd5e1;
+  --text: #1e293b;
+  --muted: #64748b;
+  --muted2: #94a3b8;
+  --accent: #2563eb;
+  --accent2: #3b82f6;
+  --accent-light: #eff6ff;
+  --green: #16a34a;
+  --green-light: #f0fdf4;
+  --yellow: #d97706;
+  --yellow-light: #fffbeb;
+  --red: #dc2626;
+  --purple: #7c3aed;
+  --purple-light: #f5f3ff;
+  --teal: #0d9488;
+  --teal-light: #f0fdfa;
+  --white: #ffffff;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* TOPBAR */
+.topbar {
+  background: var(--dark);
+  padding: 0 48px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 1px 0 rgba(255,255,255,0.06);
+}
+
+.brand {
+  font-family: 'Fira Code', monospace;
+  font-size: 13px;
+  font-weight: 400;
+  color: #64748b;
+  letter-spacing: 0.05em;
+}
+
+.brand span { color: #f0f4ff; }
+
+.topbar-center {
+  font-family: 'Fira Code', monospace;
+  font-size: 12px;
+  color: #4a5568;
+  background: rgba(255,255,255,0.05);
+  padding: 6px 16px;
+  border-radius: 100px;
+  border: 1px solid rgba(255,255,255,0.08);
+}
+
+.live-badge {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-family: 'Fira Code', monospace;
+  font-size: 11px;
+  color: #4ade80;
+}
+
+.live-dot {
+  width: 7px; height: 7px;
+  background: #4ade80;
+  border-radius: 50%;
+  animation: livePulse 2s infinite;
+}
+
+@keyframes livePulse {
+  0%,100% { opacity:1; box-shadow: 0 0 0 0 rgba(74,222,128,0.4); }
+  50% { opacity:0.7; box-shadow: 0 0 0 4px rgba(74,222,128,0); }
+}
+
+/* HERO */
+.hero {
+  background: var(--dark);
+  padding: 64px 48px 56px;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -100px; right: -100px;
+  width: 500px; height: 500px;
+  background: radial-gradient(circle, rgba(37,99,235,0.15) 0%, transparent 65%);
+  pointer-events: none;
+}
+
+.hero::after {
+  content: '';
+  position: absolute;
+  bottom: -80px; left: 200px;
+  width: 400px; height: 400px;
+  background: radial-gradient(circle, rgba(124,58,237,0.08) 0%, transparent 65%);
+  pointer-events: none;
+}
+
+.hero-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(37,99,235,0.15);
+  border: 1px solid rgba(37,99,235,0.3);
+  border-radius: 100px;
+  padding: 5px 14px;
+  font-family: 'Fira Code', monospace;
+  font-size: 11px;
+  color: var(--accent2);
+  margin-bottom: 24px;
+  letter-spacing: 0.06em;
+}
+
+.hero h1 {
+  font-size: clamp(32px, 5vw, 56px);
+  font-weight: 800;
+  color: white;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  margin-bottom: 16px;
+  max-width: 700px;
+}
+
+.hero h1 .accent { color: var(--accent2); }
+
+.hero-sub {
+  color: #64748b;
+  font-size: 16px;
+  max-width: 560px;
+  line-height: 1.7;
+  margin-bottom: 40px;
+}
+
+.hero-stats {
+  display: flex;
+  gap: 32px;
+  flex-wrap: wrap;
+}
+
+.hero-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.hs-num {
+  font-size: 28px;
+  font-weight: 800;
+  color: white;
+  letter-spacing: -0.03em;
+}
+
+.hs-label {
+  font-family: 'Fira Code', monospace;
+  font-size: 10px;
+  color: #4a5568;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+/* MAIN */
+.main {
+  padding: 40px 48px 80px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+/* SECTION DIVIDER */
+.sec-divider {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 20px;
+  margin-top: 40px;
+}
+
+.sec-num {
+  width: 28px; height: 28px;
+  background: var(--accent);
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Fira Code', monospace;
+  font-size: 12px;
+  font-weight: 600;
+  color: white;
+  flex-shrink: 0;
+}
+
+.sec-title {
+  font-weight: 700;
+  font-size: 13px;
+  color: var(--text);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.sec-line {
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+/* CARDS */
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+}
+
+.card-header {
+  padding: 14px 20px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #fafafa;
+}
+
+.ch-icon {
+  width: 32px; height: 32px;
+  border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 16px;
+  flex-shrink: 0;
+}
+
+.ch-title { font-weight: 700; font-size: 14px; color: var(--text); }
+.ch-sub { font-family: 'Fira Code', monospace; font-size: 10px; color: var(--muted2); margin-left: auto; }
+
+.card-body { padding: 20px; }
+
+/* TWO COL */
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.three-col { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+
+/* FORM */
+.form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.form-full { grid-column: 1 / -1; }
+
+.field { display: flex; flex-direction: column; gap: 5px; }
+.field label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text);
+}
+.field label span {
+  font-weight: 400;
+  color: var(--muted2);
+  font-size: 11px;
+  margin-left: 4px;
+  font-family: 'Fira Code', monospace;
+}
+
+.finput {
+  background: var(--bg);
+  border: 1px solid var(--border2);
+  border-radius: 8px;
+  padding: 9px 12px;
+  font-size: 13px;
+  color: var(--text);
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  width: 100%;
+  outline: none;
+  transition: all 0.2s;
+}
+.finput:focus { border-color: var(--accent); background: white; box-shadow: 0 0 0 3px rgba(37,99,235,0.08); }
+
+.fselect {
+  background: var(--bg);
+  border: 1px solid var(--border2);
+  border-radius: 8px;
+  padding: 9px 12px;
+  font-size: 13px;
+  color: var(--text);
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  width: 100%;
+  outline: none;
+  appearance: none;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.fselect:focus { border-color: var(--accent); background: white; }
+
+/* TWO FORMS SIDE BY SIDE */
+.forms-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 0; }
+
+/* SUBMIT BTN */
+.submit-btn {
+  width: 100%;
+  padding: 11px 20px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  border: none;
+  margin-top: 8px;
+  transition: all 0.2s;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  letter-spacing: -0.01em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+.btn-blue { background: var(--accent); color: white; }
+.btn-purple { background: var(--purple); color: white; }
+.submit-btn:hover { filter: brightness(1.08); transform: translateY(-1px); box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
+.submit-btn:active { transform: translateY(0); }
+
+/* LOG */
+.log-box {
+  background: var(--dark);
+  border-radius: 10px;
+  overflow: hidden;
+  display: none;
+  margin-bottom: 16px;
+}
+.log-box.show { display: block; animation: fadeIn 0.3s ease; }
+@keyframes fadeIn { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:translateY(0); } }
+
+.log-topbar {
+  padding: 10px 16px;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'Fira Code', monospace;
+  font-size: 11px;
+}
+
+.log-status-running { color: #f59e0b; }
+.log-status-done { color: #4ade80; }
+
+.log-content { padding: 12px 16px; font-family: 'Fira Code', monospace; font-size: 12px; }
+
+.log-line {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 4px 0;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.log-line.show { opacity: 1; animation: logSlide 0.3s ease; }
+@keyframes logSlide { from { opacity:0; transform:translateX(-6px); } to { opacity:1; transform:translateX(0); } }
+
+.log-ts { color: #374151; font-size: 10px; width: 55px; flex-shrink: 0; margin-top: 1px; }
+.log-ico { font-size: 13px; flex-shrink: 0; }
+.log-txt { color: #d1d5db; line-height: 1.5; }
+.log-txt .blu { color: #60a5fa; }
+.log-txt .grn { color: #4ade80; }
+.log-txt .yel { color: #fbbf24; }
+.log-txt .pur { color: #c084fc; }
+
+/* AIRTABLE */
+.at-tabs {
+  display: flex;
+  gap: 4px;
+  padding: 12px 16px 0;
+  border-bottom: 1px solid var(--border);
+  background: #fafafa;
+}
+.at-tab {
+  font-size: 12px;
+  font-weight: 600;
+  padding: 7px 14px;
+  cursor: pointer;
+  border-radius: 6px 6px 0 0;
+  color: var(--muted);
+  border: 1px solid transparent;
+  border-bottom: none;
+  background: none;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  transition: all 0.15s;
+  margin-bottom: -1px;
+}
+.at-tab.active {
+  background: white;
+  color: var(--text);
+  border-color: var(--border);
+  border-bottom-color: white;
+}
+
+.at-table-wrap { overflow-x: auto; }
+.at-tbl { width: 100%; border-collapse: collapse; font-size: 12px; min-width: 600px; }
+.at-tbl th {
+  padding: 9px 14px;
+  text-align: left;
+  font-family: 'Fira Code', monospace;
+  font-size: 10px;
+  color: var(--muted2);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border-bottom: 1px solid var(--border);
+  background: #fafafa;
+  white-space: nowrap;
+}
+.at-tbl td {
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--border);
+  color: var(--text);
+  white-space: nowrap;
+}
+.at-tbl tr:hover td { background: var(--accent-light); }
+.at-tbl tr.flash-blue td { animation: flashBlue 1.5s ease; }
+.at-tbl tr.flash-purple td { animation: flashPurple 1.5s ease; }
+@keyframes flashBlue { 0% { background: rgba(37,99,235,0.12); } 100% { background: transparent; } }
+@keyframes flashPurple { 0% { background: rgba(124,58,237,0.12); } 100% { background: transparent; } }
+
+/* BADGES */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 9px;
+  border-radius: 100px;
+  font-size: 11px;
+  font-weight: 600;
+  font-family: 'Fira Code', monospace;
+  white-space: nowrap;
+}
+.b-blue { background: var(--accent-light); color: var(--accent); border: 1px solid #bfdbfe; }
+.b-green { background: var(--green-light); color: var(--green); border: 1px solid #bbf7d0; }
+.b-yellow { background: var(--yellow-light); color: var(--yellow); border: 1px solid #fde68a; }
+.b-purple { background: var(--purple-light); color: var(--purple); border: 1px solid #ddd6fe; }
+.b-teal { background: var(--teal-light); color: var(--teal); border: 1px solid #99f6e4; }
+.b-red { background: #fef2f2; color: var(--red); border: 1px solid #fecaca; }
+
+/* MAKE FLOW */
+.make-flow {
+  display: flex;
+  align-items: center;
+  padding: 24px 20px;
+  overflow-x: auto;
+  gap: 0;
+}
+
+.mnode {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 7px;
+  flex-shrink: 0;
+  cursor: pointer;
+}
+
+.mn-ball {
+  width: 52px; height: 52px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 20px;
+  border: 2px solid var(--border2);
+  background: var(--bg);
+  transition: all 0.3s;
+  position: relative;
+}
+
+.mn-ball.active { border-color: var(--accent); background: var(--accent-light); box-shadow: 0 0 0 4px rgba(37,99,235,0.1); }
+.mn-ball.active-p { border-color: var(--purple); background: var(--purple-light); box-shadow: 0 0 0 4px rgba(124,58,237,0.1); }
+.mn-ball.done { border-color: var(--green); background: var(--green-light); }
+.mn-ball.done::after {
+  content: '✓';
+  position: absolute;
+  bottom: -3px; right: -3px;
+  width: 16px; height: 16px;
+  background: var(--green);
+  border-radius: 50%;
+  font-size: 9px;
+  color: white;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+.mn-label { font-size: 10px; color: var(--muted); text-align: center; max-width: 68px; line-height: 1.3; font-family: 'Fira Code', monospace; }
+.mn-app { font-size: 9px; color: var(--muted2); font-family: 'Fira Code', monospace; }
+
+.mconnect {
+  display: flex; align-items: center;
+  padding: 0 4px;
+  margin-bottom: 22px;
+}
+
+.mline {
+  height: 2px;
+  width: 32px;
+  background: var(--border2);
+  position: relative;
+  overflow: hidden;
+  transition: background 0.3s;
+}
+
+.mline::after {
+  content: '';
+  position: absolute;
+  left: -100%; top: 0;
+  width: 100%; height: 100%;
+}
+
+.mline.flow-blue::after {
+  background: linear-gradient(90deg, transparent, var(--accent), transparent);
+  animation: lineFlow 0.7s ease forwards;
+}
+.mline.flow-purple::after {
+  background: linear-gradient(90deg, transparent, var(--purple), transparent);
+  animation: lineFlow 0.7s ease forwards;
+}
+@keyframes lineFlow { from { left:-100%; } to { left:100%; } }
+
+/* EMAIL */
+.email-card {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.email-chrome {
+  background: #f8fafc;
+  border-bottom: 1px solid var(--border);
+  padding: 10px 16px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.ec-dot { width: 10px; height: 10px; border-radius: 50%; }
+
+.email-meta {
+  padding: 14px 18px;
+  border-bottom: 1px solid var(--border);
+  background: #fafafa;
+}
+
+.em-row {
+  font-family: 'Fira Code', monospace;
+  font-size: 11px;
+  color: var(--muted);
+  margin-bottom: 4px;
+  display: flex;
+  gap: 8px;
+}
+.em-row span { color: var(--text); font-weight: 500; }
+
+.email-subject {
+  padding: 12px 18px;
+  font-weight: 700;
+  font-size: 15px;
+  color: var(--text);
+  border-bottom: 1px solid var(--border);
+}
+
+.email-body {
+  padding: 18px 18px;
+  font-size: 13px;
+  line-height: 1.8;
+  color: var(--text);
+}
+
+.email-body .hi { color: var(--accent); font-weight: 700; }
+.email-body .hi-p { color: var(--purple); font-weight: 700; }
+.email-body .link { color: var(--accent); text-decoration: underline; cursor: pointer; }
+
+.email-placeholder {
+  padding: 40px 20px;
+  text-align: center;
+  color: var(--muted2);
+  font-family: 'Fira Code', monospace;
+  font-size: 12px;
+}
+
+/* SLACK */
+.slack-card {
+  background: #1a1d21;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.slack-top {
+  background: #19181f;
+  padding: 11px 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border-bottom: 1px solid #2a2d35;
+}
+
+.slack-channel-name {
+  font-size: 13px;
+  font-weight: 700;
+  color: #e0e0e8;
+}
+
+.slack-msgs { padding: 14px 16px; display: flex; flex-direction: column; gap: 12px; min-height: 120px; }
+
+.slack-msg {
+  display: flex;
+  gap: 10px;
+}
+
+.slack-av {
+  width: 32px; height: 32px;
+  border-radius: 6px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 15px;
+  flex-shrink: 0;
+}
+
+.slack-msg-inner { flex: 1; }
+.slack-name { font-size: 13px; font-weight: 700; color: #e0e0e8; margin-bottom: 3px; }
+.slack-name .ts { font-size: 11px; font-weight: 400; color: #555; margin-left: 6px; font-family: 'Fira Code', monospace; }
+.slack-text { font-size: 13px; color: #b0b0c0; line-height: 1.6; }
+.slack-text strong { color: white; }
+.stag-blue { background: rgba(37,99,235,0.2); color: #93c5fd; padding: 1px 6px; border-radius: 3px; font-size: 12px; }
+.stag-purple { background: rgba(124,58,237,0.2); color: #c4b5fd; padding: 1px 6px; border-radius: 3px; font-size: 12px; }
+.stag-green { background: rgba(22,163,74,0.2); color: #86efac; padding: 1px 6px; border-radius: 3px; font-size: 12px; }
+.stag-yellow { background: rgba(217,119,6,0.2); color: #fcd34d; padding: 1px 6px; border-radius: 3px; font-size: 12px; }
+.slack-new { animation: slackIn 0.4s ease; }
+@keyframes slackIn { from { opacity:0; transform:translateX(-8px); } to { opacity:1; transform:translateX(0); } }
+
+/* DASHBOARD WIDGETS */
+.dashboard-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 16px; }
+
+.dash-widget {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 16px;
+  transition: all 0.2s;
+}
+
+.dash-widget:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.06); transform: translateY(-1px); }
+
+.dw-icon { font-size: 22px; margin-bottom: 10px; display: block; }
+.dw-num {
+  font-size: 28px;
+  font-weight: 800;
+  color: var(--text);
+  letter-spacing: -0.03em;
+  margin-bottom: 2px;
+  transition: all 0.3s;
+}
+.dw-label { font-size: 12px; color: var(--muted); font-weight: 500; }
+.dw-change { font-family: 'Fira Code', monospace; font-size: 10px; color: var(--green); margin-top: 4px; }
+
+/* PAYROLL TABLE */
+.payroll-row-new td { animation: flashBlue 2s ease; }
+
+/* RESET BTN */
+.reset-btn {
+  background: none;
+  border: 1px solid var(--border2);
+  color: var(--muted);
+  padding: 9px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-family: 'Fira Code', monospace;
+  font-size: 12px;
+  transition: all 0.2s;
+}
+.reset-btn:hover { border-color: var(--accent); color: var(--accent); }
+
+/* SCENARIO LABEL */
+.scenario-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 12px;
+  border-radius: 100px;
+  font-family: 'Fira Code', monospace;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+}
+.sp-blue { background: var(--accent-light); color: var(--accent); border: 1px solid #bfdbfe; }
+.sp-purple { background: var(--purple-light); color: var(--purple); border: 1px solid #ddd6fe; }
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  .topbar { padding: 0 20px; }
+  .hero { padding: 40px 20px; }
+  .main { padding: 24px 20px 60px; }
+  .two-col, .forms-wrap, .three-col { grid-template-columns: 1fr; }
+  .dashboard-grid { grid-template-columns: repeat(2, 1fr); }
+  .form-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <div class="brand">automation<span>.portfolio</span></div>
+  <div class="topbar-center">accounting + employee management automation</div>
+  <div class="live-badge"><div class="live-dot"></div>LIVE DEMO</div>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-eyebrow">INTERACTIVE SIMULATOR — NO SIGNUP NEEDED</div>
+  <h1>Accounting & HR.<br><span class="accent">Fully Automated.</span></h1>
+  <p class="hero-sub">See exactly what happens when a new employee joins or an expense is submitted. Every step — Airtable updates, emails send, Slack alerts fire — all automatically. Fill in the forms below and watch it work live.</p>
+  <div class="hero-stats">
+    <div class="hero-stat">
+      <div class="hs-num">2</div>
+      <div class="hs-label">Live Scenarios</div>
+    </div>
+    <div class="hero-stat">
+      <div class="hs-num">5</div>
+      <div class="hs-label">Tools Connected</div>
+    </div>
+    <div class="hero-stat">
+      <div class="hs-num">0</div>
+      <div class="hs-label">Manual Steps</div>
+    </div>
+    <div class="hero-stat">
+      <div class="hs-num">&lt;10s</div>
+      <div class="hs-label">Response Time</div>
+    </div>
+  </div>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+
+  <!-- DASHBOARD -->
+  <div class="sec-divider">
+    <div class="sec-num">0</div>
+    <div class="sec-title">Live Dashboard — Updates as You Run Demos</div>
+    <div class="sec-line"></div>
+  </div>
+
+  <div class="dashboard-grid">
+    <div class="dash-widget">
+      <span class="dw-icon">👥</span>
+      <div class="dw-num" id="dw-employees">12</div>
+      <div class="dw-label">Total Employees</div>
+      <div class="dw-change">+1 this month</div>
+    </div>
+    <div class="dash-widget">
+      <span class="dw-icon">📋</span>
+      <div class="dw-num" id="dw-onboarding">2</div>
+      <div class="dw-label">In Onboarding</div>
+      <div class="dw-change">Active now</div>
+    </div>
+    <div class="dash-widget">
+      <span class="dw-icon">💰</span>
+      <div class="dw-num" id="dw-expenses">$4,280</div>
+      <div class="dw-label">Pending Expenses</div>
+      <div class="dw-change">3 awaiting approval</div>
+    </div>
+    <div class="dash-widget">
+      <span class="dw-icon">✅</span>
+      <div class="dw-num" id="dw-approved">8</div>
+      <div class="dw-label">Approved This Month</div>
+      <div class="dw-change">↑ 2 from last month</div>
+    </div>
+  </div>
+
+  <!-- SCENARIO 1 — EMPLOYEE ONBOARDING -->
+  <div class="sec-divider">
+    <div class="sec-num">1</div>
+    <div class="sec-title">Scenario 1 — New Employee Onboarding</div>
+    <div class="sec-line"></div>
+    <div class="scenario-pill sp-blue">Jotform → Airtable → Gmail → Slack</div>
+  </div>
+
+  <!-- FORMS -->
+  <div class="forms-wrap" style="margin-bottom:16px;">
+    <div class="card">
+      <div class="card-header">
+        <div class="ch-icon" style="background:#eff6ff;">📋</div>
+        <div class="ch-title">New Employee Intake Form</div>
+        <div class="ch-sub">Jotform</div>
+      </div>
+      <div class="card-body">
+        <div class="form-grid">
+          <div class="field">
+            <label>Full Name <span>required</span></label>
+            <input class="finput" id="emp-name" placeholder="e.g. Marcus Johnson" />
+          </div>
+          <div class="field">
+            <label>Personal Email <span>required</span></label>
+            <input class="finput" id="emp-email" placeholder="marcus@email.com" />
+          </div>
+          <div class="field">
+            <label>Job Title <span>required</span></label>
+            <input class="finput" id="emp-title" placeholder="e.g. Senior Accountant" />
+          </div>
+          <div class="field">
+            <label>Department <span>required</span></label>
+            <select class="fselect" id="emp-dept">
+              <option value="">— Select —</option>
+              <option>Accounting & Finance</option>
+              <option>Human Resources</option>
+              <option>Operations</option>
+              <option>Sales & Marketing</option>
+              <option>IT & Technology</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>Start Date <span>required</span></label>
+            <input class="finput" id="emp-start" type="date" />
+          </div>
+          <div class="field">
+            <label>Employment Type <span>required</span></label>
+            <select class="fselect" id="emp-type">
+              <option value="">— Select —</option>
+              <option>Full-time</option>
+              <option>Part-time</option>
+              <option>Contractor</option>
+              <option>Intern</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>Manager Name <span>required</span></label>
+            <input class="finput" id="emp-manager" placeholder="e.g. Sarah Mitchell" />
+          </div>
+          <div class="field">
+            <label>Salary / Rate <span>required</span></label>
+            <input class="finput" id="emp-salary" placeholder="e.g. $65,000/yr" />
+          </div>
+          <div class="field form-full">
+            <label>Emergency Contact <span>optional</span></label>
+            <input class="finput" id="emp-emergency" placeholder="Name & phone number" />
+          </div>
+        </div>
+        <button class="submit-btn btn-blue" onclick="runScenario1()">
+          ⚡ Submit & Trigger Onboarding Automation
+        </button>
+      </div>
+    </div>
+
+    <!-- MAKE FLOW S1 -->
+    <div class="card">
+      <div class="card-header">
+        <div class="ch-icon" style="background:#eff6ff;">⚡</div>
+        <div class="ch-title">Make.com — Onboarding Scenario</div>
+        <div class="ch-sub" id="s1-status">IDLE</div>
+      </div>
+      <div class="make-flow" id="make-flow-s1">
+        <div class="mnode">
+          <div class="mn-ball" id="mn-s1-0">🎣</div>
+          <div class="mn-label">Webhook Trigger</div>
+          <div class="mn-app">Make.com</div>
+        </div>
+        <div class="mconnect"><div class="mline" id="ml-s1-0"></div></div>
+        <div class="mnode">
+          <div class="mn-ball" id="mn-s1-1">🗄️</div>
+          <div class="mn-label">Create Employee Record</div>
+          <div class="mn-app">Airtable</div>
+        </div>
+        <div class="mconnect"><div class="mline" id="ml-s1-1"></div></div>
+        <div class="mnode">
+          <div class="mn-ball" id="mn-s1-2">📧</div>
+          <div class="mn-label">Welcome Email</div>
+          <div class="mn-app">Gmail</div>
+        </div>
+        <div class="mconnect"><div class="mline" id="ml-s1-2"></div></div>
+        <div class="mnode">
+          <div class="mn-ball" id="mn-s1-3">📧</div>
+          <div class="mn-label">Manager Alert</div>
+          <div class="mn-app">Gmail</div>
+        </div>
+        <div class="mconnect"><div class="mline" id="ml-s1-3"></div></div>
+        <div class="mnode">
+          <div class="mn-ball" id="mn-s1-4">💬</div>
+          <div class="mn-label">Slack #hr-team</div>
+          <div class="mn-app">Slack</div>
+        </div>
+        <div class="mconnect"><div class="mline" id="ml-s1-4"></div></div>
+        <div class="mnode">
+          <div class="mn-ball" id="mn-s1-5">✅</div>
+          <div class="mn-label">Done</div>
+          <div class="mn-app">Make.com</div>
+        </div>
+      </div>
+
+      <!-- LOG S1 -->
+      <div id="log-s1" class="log-box" style="margin:0 16px 16px;">
+        <div class="log-topbar">
+          <span id="log-s1-status" class="log-status-running">● RUNNING</span>
+          <span style="margin-left:auto; color:#374151; font-size:10px;">Employee Onboarding Scenario</span>
+        </div>
+        <div class="log-content" id="log-s1-body"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- AIRTABLE S1 -->
+  <div class="sec-divider" style="margin-top:24px;">
+    <div class="sec-num" style="background:var(--accent);">→</div>
+    <div class="sec-title">Airtable — Employee Database (Updates Live)</div>
+    <div class="sec-line"></div>
+  </div>
+
+  <div class="card" style="margin-bottom:16px;">
+    <div class="at-tabs">
+      <button class="at-tab active" onclick="switchTab('emp','grid',this)">Grid View</button>
+      <button class="at-tab" onclick="switchTab('emp','onboard',this)">Onboarding Pipeline</button>
+    </div>
+    <div id="emp-grid">
+      <div class="at-table-wrap">
+        <table class="at-tbl">
+          <thead><tr>
+            <th>Name</th><th>Job Title</th><th>Department</th><th>Type</th><th>Start Date</th><th>Manager</th><th>Status</th>
+          </tr></thead>
+          <tbody id="emp-table">
+            <tr><td>Sarah Mitchell</td><td>HR Director</td><td>Human Resources</td><td><span class="badge b-blue">Full-time</span></td><td>Jan 15, 2023</td><td>CEO</td><td><span class="badge b-green">Active</span></td></tr>
+            <tr><td>James Okafor</td><td>Senior Accountant</td><td>Accounting & Finance</td><td><span class="badge b-blue">Full-time</span></td><td>Mar 3, 2023</td><td>Sarah Mitchell</td><td><span class="badge b-green">Active</span></td></tr>
+            <tr><td>Priya Nair</td><td>Operations Lead</td><td>Operations</td><td><span class="badge b-blue">Full-time</span></td><td>Jun 12, 2024</td><td>CEO</td><td><span class="badge b-teal">Onboarding</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div id="emp-onboard" style="display:none; padding:16px;">
+      <div style="display:flex; gap:12px; overflow-x:auto; padding-bottom:8px;">
+        <div style="flex-shrink:0; width:180px; background:var(--bg); border-radius:8px; padding:12px;">
+          <div style="font-family:'Fira Code',monospace; font-size:10px; color:var(--muted); text-transform:uppercase; letter-spacing:0.1em; margin-bottom:10px;">FORM SUBMITTED</div>
+          <div id="kb-submitted" style="display:flex; flex-direction:column; gap:8px;">
+            <div style="background:white; border:1px solid var(--border); border-radius:6px; padding:10px; border-left:3px solid var(--accent);">
+              <div style="font-weight:700; font-size:12px;">Priya Nair</div>
+              <div style="font-size:11px; color:var(--muted); font-family:'Fira Code',monospace;">Operations Lead</div>
+            </div>
+          </div>
+        </div>
+        <div style="flex-shrink:0; width:180px; background:var(--bg); border-radius:8px; padding:12px;">
+          <div style="font-family:'Fira Code',monospace; font-size:10px; color:var(--muted); text-transform:uppercase; letter-spacing:0.1em; margin-bottom:10px;">WELCOME SENT</div>
+          <div id="kb-welcome"></div>
+        </div>
+        <div style="flex-shrink:0; width:180px; background:var(--bg); border-radius:8px; padding:12px;">
+          <div style="font-family:'Fira Code',monospace; font-size:10px; color:var(--muted); text-transform:uppercase; letter-spacing:0.1em; margin-bottom:10px;">IT SETUP</div>
+          <div id="kb-it"></div>
+        </div>
+        <div style="flex-shrink:0; width:180px; background:var(--bg); border-radius:8px; padding:12px;">
+          <div style="font-family:'Fira Code',monospace; font-size:10px; color:var(--muted); text-transform:uppercase; letter-spacing:0.1em; margin-bottom:10px;">ACTIVE</div>
+          <div style="display:flex; flex-direction:column; gap:8px;">
+            <div style="background:white; border:1px solid var(--border); border-radius:6px; padding:10px; border-left:3px solid var(--green);">
+              <div style="font-weight:700; font-size:12px;">Sarah Mitchell</div>
+              <div style="font-size:11px; color:var(--muted); font-family:'Fira Code',monospace;">HR Director</div>
+            </div>
+            <div style="background:white; border:1px solid var(--border); border-radius:6px; padding:10px; border-left:3px solid var(--green);">
+              <div style="font-weight:700; font-size:12px;">James Okafor</div>
+              <div style="font-size:11px; color:var(--muted); font-family:'Fira Code',monospace;">Sr. Accountant</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- EMAIL + SLACK S1 -->
+  <div class="two-col" style="margin-bottom:16px;">
+    <div>
+      <div class="sec-divider" style="margin-top:0;">
+        <div class="sec-num" style="background:var(--accent);">→</div>
+        <div class="sec-title">Gmail — Employee Welcome Email</div>
+        <div class="sec-line"></div>
+      </div>
+      <div class="email-card">
+        <div class="email-chrome">
+          <div class="ec-dot" style="background:#ff5f57;"></div>
+          <div class="ec-dot" style="background:#ffbd2e;"></div>
+          <div class="ec-dot" style="background:#28c840;"></div>
+          <span style="font-family:'Fira Code',monospace; font-size:11px; color:var(--muted2); margin-left:8px;">Gmail — Sent</span>
+        </div>
+        <div id="s1-email-placeholder" class="email-placeholder">⏳ Submit the onboarding form above to trigger the welcome email</div>
+        <div id="s1-email" style="display:none;">
+          <div class="email-meta">
+            <div class="em-row">To: <span id="s1-email-to">—</span></div>
+            <div class="em-row">From: <span><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="7e160c3e1d11130e1f1007501d1113">[email&#160;protected]</a> (via Gmail)</span></div>
+          </div>
+          <div class="email-subject" id="s1-email-subject">—</div>
+          <div class="email-body" id="s1-email-body"></div>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="sec-divider" style="margin-top:0;">
+        <div class="sec-num" style="background:var(--accent);">→</div>
+        <div class="sec-title">Slack — #hr-team Notifications</div>
+        <div class="sec-line"></div>
+      </div>
+      <div class="slack-card">
+        <div class="slack-top">
+          <span style="color:#9b9b9b; font-size:14px;">#</span>
+          <span class="slack-channel-name">hr-team</span>
+        </div>
+        <div class="slack-msgs" id="s1-slack">
+          <div class="slack-msg">
+            <div class="slack-av" style="background:#1e3a5f;">⚡</div>
+            <div class="slack-msg-inner">
+              <div class="slack-name">Make.com Bot <span class="ts">today 9:00am</span></div>
+              <div class="slack-text">👥 <strong>Priya Nair</strong> onboarding starts <span class="stag-blue">Jun 12</span> — Operations Lead. Manager: <span class="stag-green">CEO</span>. IT setup needed.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SCENARIO 2 — EXPENSE APPROVAL -->
+  <div class="sec-divider" style="margin-top:40px;">
+    <div class="sec-num">2</div>
+    <div class="sec-title">Scenario 2 — Expense Submission & Approval</div>
+    <div class="sec-line"></div>
+    <div class="scenario-pill sp-purple">Jotform → Airtable → Gmail → Slack</div>
+  </div>
+
+  <div class="forms-wrap" style="margin-bottom:16px;">
+    <div class="card">
+      <div class="card-header">
+        <div class="ch-icon" style="background:var(--purple-light);">💰</div>
+        <div class="ch-title">Expense Submission Form</div>
+        <div class="ch-sub">Jotform</div>
+      </div>
+      <div class="card-body">
+        <div class="form-grid">
+          <div class="field">
+            <label>Your Name <span>required</span></label>
+            <input class="finput" id="exp-name" placeholder="e.g. James Okafor" />
+          </div>
+          <div class="field">
+            <label>Your Email <span>required</span></label>
+            <input class="finput" id="exp-email" placeholder="james@company.com" />
+          </div>
+          <div class="field">
+            <label>Expense Category <span>required</span></label>
+            <select class="fselect" id="exp-cat">
+              <option value="">— Select —</option>
+              <option>Travel & Transport</option>
+              <option>Software & Subscriptions</option>
+              <option>Office Supplies</option>
+              <option>Client Entertainment</option>
+              <option>Training & Development</option>
+              <option>Equipment</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>Amount <span>required</span></label>
+            <input class="finput" id="exp-amount" placeholder="e.g. $245.00" />
+          </div>
+          <div class="field">
+            <label>Date of Expense <span>required</span></label>
+            <input class="finput" id="exp-date" type="date" />
+          </div>
+          <div class="field">
+            <label>Vendor / Supplier <span>required</span></label>
+            <input class="finput" id="exp-vendor" placeholder="e.g. Delta Airlines" />
+          </div>
+          <div class="field form-full">
+            <label>Business Purpose <span>required</span></label>
+            <input class="finput" id="exp-purpose" placeholder="e.g. Client meeting in New York" />
+          </div>
+          <div class="field form-full">
+            <label>Manager Approver <span>required</span></label>
+            <select class="fselect" id="exp-manager">
+              <option value="">— Select approver —</option>
+              <option>Sarah Mitchell (HR Director)</option>
+              <option>CEO / Owner</option>
+              <option>Finance Controller</option>
+            </select>
+          </div>
+        </div>
+        <button class="submit-btn btn-purple" onclick="runScenario2()">
+          💰 Submit Expense & Trigger Approval Flow
+        </button>
+      </div>
+    </div>
+
+    <!-- MAKE FLOW S2 -->
+    <div class="card">
+      <div class="card-header">
+        <div class="ch-icon" style="background:var(--purple-light);">⚡</div>
+        <div class="ch-title">Make.com — Expense Approval Scenario</div>
+        <div class="ch-sub" id="s2-status">IDLE</div>
+      </div>
+      <div class="make-flow" id="make-flow-s2">
+        <div class="mnode">
+          <div class="mn-ball" id="mn-s2-0">🎣</div>
+          <div class="mn-label">Webhook Trigger</div>
+          <div class="mn-app">Make.com</div>
+        </div>
+        <div class="mconnect"><div class="mline" id="ml-s2-0"></div></div>
+        <div class="mnode">
+          <div class="mn-ball" id="mn-s2-1">🗄️</div>
+          <div class="mn-label">Log in Airtable</div>
+          <div class="mn-app">Airtable</div>
+        </div>
+        <div class="mconnect"><div class="mline" id="ml-s2-1"></div></div>
+        <div class="mnode">
+          <div class="mn-ball" id="mn-s2-2">🔀</div>
+          <div class="mn-label">Router: Amount Check</div>
+          <div class="mn-app">Make.com</div>
+        </div>
+        <div class="mconnect"><div class="mline" id="ml-s2-2"></div></div>
+        <div class="mnode">
+          <div class="mn-ball" id="mn-s2-3">📧</div>
+          <div class="mn-label">Approval Request</div>
+          <div class="mn-app">Gmail → Manager</div>
+        </div>
+        <div class="mconnect"><div class="mline" id="ml-s2-3"></div></div>
+        <div class="mnode">
+          <div class="mn-ball" id="mn-s2-4">💬</div>
+          <div class="mn-label">Slack #finance</div>
+          <div class="mn-app">Slack</div>
+        </div>
+        <div class="mconnect"><div class="mline" id="ml-s2-4"></div></div>
+        <div class="mnode">
+          <div class="mn-ball" id="mn-s2-5">📧</div>
+          <div class="mn-label">Confirm to Employee</div>
+          <div class="mn-app">Gmail</div>
+        </div>
+        <div class="mconnect"><div class="mline" id="ml-s2-5"></div></div>
+        <div class="mnode">
+          <div class="mn-ball" id="mn-s2-6">✅</div>
+          <div class="mn-label">Done</div>
+          <div class="mn-app">Make.com</div>
+        </div>
+      </div>
+
+      <div id="log-s2" class="log-box" style="margin:0 16px 16px;">
+        <div class="log-topbar">
+          <span id="log-s2-status" class="log-status-running">● RUNNING</span>
+          <span style="margin-left:auto; color:#374151; font-size:10px;">Expense Approval Scenario</span>
+        </div>
+        <div class="log-content" id="log-s2-body"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- AIRTABLE S2 -->
+  <div class="sec-divider" style="margin-top:24px;">
+    <div class="sec-num" style="background:var(--purple);">→</div>
+    <div class="sec-title">Airtable — Expense Tracker (Updates Live)</div>
+    <div class="sec-line"></div>
+  </div>
+
+  <div class="card" style="margin-bottom:16px;">
+    <div class="at-table-wrap">
+      <table class="at-tbl">
+        <thead><tr>
+          <th>Employee</th><th>Category</th><th>Amount</th><th>Vendor</th><th>Purpose</th><th>Approver</th><th>Status</th>
+        </tr></thead>
+        <tbody id="exp-table">
+          <tr><td>Sarah Mitchell</td><td>Software & Subscriptions</td><td>$299.00</td><td>Adobe Creative</td><td>Design tools</td><td>CEO</td><td><span class="badge b-green">Approved</span></td></tr>
+          <tr><td>James Okafor</td><td>Travel & Transport</td><td>$1,240.00</td><td>Delta Airlines</td><td>Client meeting NYC</td><td>Sarah Mitchell</td><td><span class="badge b-yellow">Pending</span></td></tr>
+          <tr><td>Priya Nair</td><td>Office Supplies</td><td>$87.50</td><td>Staples</td><td>Office materials</td><td>CEO</td><td><span class="badge b-green">Approved</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- EMAIL + SLACK S2 -->
+  <div class="two-col" style="margin-bottom:40px;">
+    <div>
+      <div class="sec-divider" style="margin-top:0;">
+        <div class="sec-num" style="background:var(--purple);">→</div>
+        <div class="sec-title">Gmail — Approval Request to Manager</div>
+        <div class="sec-line"></div>
+      </div>
+      <div class="email-card">
+        <div class="email-chrome">
+          <div class="ec-dot" style="background:#ff5f57;"></div>
+          <div class="ec-dot" style="background:#ffbd2e;"></div>
+          <div class="ec-dot" style="background:#28c840;"></div>
+          <span style="font-family:'Fira Code',monospace; font-size:11px; color:var(--muted2); margin-left:8px;">Gmail — Sent</span>
+        </div>
+        <div id="s2-email-placeholder" class="email-placeholder">⏳ Submit the expense form above to trigger the approval email</div>
+        <div id="s2-email" style="display:none;">
+          <div class="email-meta">
+            <div class="em-row">To: <span id="s2-email-to">—</span></div>
+            <div class="em-row">From: <span><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="36534e4653584553457655595b4657584f1855595b">[email&#160;protected]</a> (via Gmail)</span></div>
+          </div>
+          <div class="email-subject" id="s2-email-subject">—</div>
+          <div class="email-body" id="s2-email-body"></div>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="sec-divider" style="margin-top:0;">
+        <div class="sec-num" style="background:var(--purple);">→</div>
+        <div class="sec-title">Slack — #finance Notifications</div>
+        <div class="sec-line"></div>
+      </div>
+      <div class="slack-card">
+        <div class="slack-top">
+          <span style="color:#9b9b9b; font-size:14px;">#</span>
+          <span class="slack-channel-name">finance</span>
+        </div>
+        <div class="slack-msgs" id="s2-slack">
+          <div class="slack-msg">
+            <div class="slack-av" style="background:#2d1a4f;">⚡</div>
+            <div class="slack-msg-inner">
+              <div class="slack-name">Make.com Bot <span class="ts">today 10:15am</span></div>
+              <div class="slack-text">💰 Expense approved: <strong>Sarah Mitchell</strong> — <span class="stag-purple">$299.00</span> Adobe Creative. <span class="stag-green">Auto-approved</span> (under $500 threshold).</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RESET -->
+  <div style="text-align:center; padding-bottom:20px;">
+    <button class="reset-btn" onclick="location.reload()">↺ Reset All Demos</button>
+    <p style="margin-top:12px; font-family:'Fira Code',monospace; font-size:11px; color:var(--muted2);">Want this built for your business? → <a href="https://contra.com/s/BMcFPFU6-automated-lead-followup-system-jotform-airtable-make-gmail-slack" style="color:var(--accent);">contra.com/joseph_tucker</a></p>
+  </div>
+
+</div>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+let s1running = false, s2running = false;
+
+function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
+
+// TAB SWITCH
+function switchTab(demo, view, btn) {
+  if (demo === 'emp') {
+    document.getElementById('emp-grid').style.display = view === 'grid' ? '' : 'none';
+    document.getElementById('emp-onboard').style.display = view === 'onboard' ? '' : 'none';
+  }
+  btn.closest('.card').querySelectorAll('.at-tab').forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+}
+
+// SCENARIO 1 — EMPLOYEE ONBOARDING
+async function runScenario1() {
+  if (s1running) return;
+  s1running = true;
+
+  const name = document.getElementById('emp-name').value || 'Marcus Johnson';
+  const email = document.getElementById('emp-email').value || 'marcus@email.com';
+  const title = document.getElementById('emp-title').value || 'Senior Accountant';
+  const dept = document.getElementById('emp-dept').value || 'Accounting & Finance';
+  const start = document.getElementById('emp-start').value || 'March 15, 2026';
+  const type = document.getElementById('emp-type').value || 'Full-time';
+  const manager = document.getElementById('emp-manager').value || 'Sarah Mitchell';
+  const salary = document.getElementById('emp-salary').value || '$65,000/yr';
+  const firstName = name.split(' ')[0];
+
+  // Show log
+  const logBox = document.getElementById('log-s1');
+  const logBody = document.getElementById('log-s1-body');
+  const logStatus = document.getElementById('log-s1-status');
+  logBox.classList.add('show');
+  logBody.innerHTML = '';
+  logStatus.className = 'log-status-running';
+  logStatus.textContent = '● RUNNING';
+  document.getElementById('s1-status').textContent = 'RUNNING...';
+
+  // Reset nodes
+  for(let i=0;i<6;i++) {
+    const n = document.getElementById('mn-s1-'+i);
+    if(n) n.className = 'mn-ball';
+    const l = document.getElementById('ml-s1-'+i);
+    if(l) l.className = 'mline';
+  }
+
+  const steps = [
+    { icon:'🎣', msg:`<span class="blu">Webhook received</span> — Jotform submission from <span class="blu">${name}</span>`, node:0 },
+    { icon:'🗄️', msg:`<span class="grn">Airtable record created</span> — ${title} / ${dept} — Status: Onboarding`, node:1 },
+    { icon:'📧', msg:`<span class="blu">Welcome email sent</span> → ${email} — Subject: "Welcome to the team, ${firstName}!"`, node:2 },
+    { icon:'📧', msg:`<span class="yel">Manager alert sent</span> → ${manager} — New hire starting soon`, node:3 },
+    { icon:'💬', msg:`<span class="blu">Slack posted</span> → #hr-team — "${name} joins ${dept} on ${start}"`, node:4 },
+    { icon:'✅', msg:`<span class="grn">Onboarding scenario complete</span> — All steps executed in 6.2 seconds`, node:5 },
+  ];
+
+  const delays = [0, 700, 1400, 2100, 2800, 3500];
+  const now = new Date();
+
+  for(let i=0; i<steps.length; i++) {
+    await sleep(delays[i]);
+    const s = steps[i];
+    const ts = new Date(now.getTime() + i*1000).toTimeString().slice(0,8);
+    const line = document.createElement('div');
+    line.className = 'log-line show';
+    line.innerHTML = `<span class="log-ts">${ts}</span><span class="log-ico">${s.icon}</span><span class="log-txt">${s.msg}</span>`;
+    logBody.appendChild(line);
+
+    const node = document.getElementById('mn-s1-'+s.node);
+    if(node) node.className = 'mn-ball active';
+
+    if(s.node < 5) {
+      const ln = document.getElementById('ml-s1-'+s.node);
+      if(ln) {
+        ln.className = 'mline flow-blue';
+        await sleep(500);
+        ln.className = 'mline';
+        if(node) node.className = 'mn-ball done';
+      }
+    } else {
+      if(node) { await sleep(300); node.className = 'mn-ball done'; }
+    }
+
+    // Side effects
+    if(s.node === 1) addEmployeeRow(name, title, dept, type, start, manager);
+    if(s.node === 2) showS1Email(name, email, firstName, title, dept, start, manager, salary);
+    if(s.node === 4) addS1Slack(name, dept, title, start);
+  }
+
+  // Update dashboard
+  const empNum = document.getElementById('dw-employees');
+  empNum.textContent = parseInt(empNum.textContent) + 1;
+  const onbNum = document.getElementById('dw-onboarding');
+  onbNum.textContent = parseInt(onbNum.textContent) + 1;
+
+  logStatus.className = 'log-status-done';
+  logStatus.textContent = '✓ COMPLETED';
+  document.getElementById('s1-status').textContent = 'DONE ✓';
+  s1running = false;
+}
+
+function addEmployeeRow(name, title, dept, type, start, manager) {
+  const tbody = document.getElementById('emp-table');
+  const tr = document.createElement('tr');
+  tr.className = 'flash-blue';
+  tr.innerHTML = `<td>${name}</td><td>${title}</td><td>${dept}</td><td><span class="badge b-blue">${type||'Full-time'}</span></td><td>${start}</td><td>${manager}</td><td><span class="badge b-teal">Onboarding</span></td>`;
+  tbody.prepend(tr);
+
+  // Add to kanban
+  const kb = document.getElementById('kb-submitted');
+  const card = document.createElement('div');
+  card.style.cssText = 'background:white; border:1px solid #e2e8f0; border-radius:6px; padding:10px; border-left:3px solid #2563eb; animation:flashBlue 0.5s ease;';
+  card.innerHTML = `<div style="font-weight:700; font-size:12px;">${name}</div><div style="font-size:11px; color:#64748b; font-family:'Fira Code',monospace;">${title}</div>`;
+  kb.appendChild(card);
+}
+
+function showS1Email(name, email, firstName, title, dept, start, manager, salary) {
+  document.getElementById('s1-email-placeholder').style.display = 'none';
+  document.getElementById('s1-email-to').textContent = email;
+  document.getElementById('s1-email-subject').textContent = `Welcome to the team, ${firstName}! Here's everything you need to know`;
+  document.getElementById('s1-email-body').innerHTML = `Hi <span class="hi">${firstName}</span>,<br><br>
+We're thrilled to have you joining us as <span class="hi">${title}</span> in the <span class="hi">${dept}</span> department!<br><br>
+<strong>Your start date:</strong> <span class="hi">${start}</span><br>
+<strong>Your manager:</strong> <span class="hi">${manager}</span><br>
+<strong>Your compensation:</strong> <span class="hi">${salary}</span><br><br>
+Before your first day, please complete the following:<br>
+1. 📋 <span class="link">[Complete your HR onboarding checklist]</span><br>
+2. 💻 <span class="link">[Set up your company email & accounts]</span><br>
+3. 📖 <span class="link">[Review the employee handbook]</span><br><br>
+If you have any questions, reply to this email or reach out to <span class="hi">${manager}</span> directly.<br><br>
+Welcome aboard!<br>
+<strong>HR Team</strong>`;
+  document.getElementById('s1-email').style.display = 'block';
+}
+
+function addS1Slack(name, dept, title, start) {
+  const container = document.getElementById('s1-slack');
+  const msg = document.createElement('div');
+  msg.className = 'slack-msg slack-new';
+  const time = new Date().toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'});
+  msg.innerHTML = `
+    <div class="slack-av" style="background:#1e3a5f;">⚡</div>
+    <div class="slack-msg-inner">
+      <div class="slack-name">Make.com Bot <span class="ts">today ${time}</span></div>
+      <div class="slack-text">🎉 New employee: <strong>${name}</strong> — <span class="stag-blue">${title}</span> joining <span class="stag-green">${dept}</span> on <strong>${start}</strong>. IT setup required.</div>
+    </div>`;
+  container.appendChild(msg);
+}
+
+// SCENARIO 2 — EXPENSE
+async function runScenario2() {
+  if (s2running) return;
+  s2running = true;
+
+  const name = document.getElementById('exp-name').value || 'James Okafor';
+  const email = document.getElementById('exp-email').value || 'james@company.com';
+  const cat = document.getElementById('exp-cat').value || 'Travel & Transport';
+  const amount = document.getElementById('exp-amount').value || '$245.00';
+  const vendor = document.getElementById('exp-vendor').value || 'Delta Airlines';
+  const purpose = document.getElementById('exp-purpose').value || 'Client meeting in New York';
+  const mgr = document.getElementById('exp-manager').value || 'Sarah Mitchell (HR Director)';
+  const firstName = name.split(' ')[0];
+
+  const amountNum = parseFloat(amount.replace(/[^0-9.]/g,'')) || 245;
+  const autoApprove = amountNum < 500;
+
+  const logBox = document.getElementById('log-s2');
+  const logBody = document.getElementById('log-s2-body');
+  const logStatus = document.getElementById('log-s2-status');
+  logBox.classList.add('show');
+  logBody.innerHTML = '';
+  logStatus.className = 'log-status-running';
+  logStatus.textContent = '● RUNNING';
+  document.getElementById('s2-status').textContent = 'RUNNING...';
+
+  for(let i=0;i<7;i++) {
+    const n = document.getElementById('mn-s2-'+i);
+    if(n) n.className = 'mn-ball';
+    const l = document.getElementById('ml-s2-'+i);
+    if(l) l.className = 'mline';
+  }
+
+  const steps = [
+    { icon:'🎣', msg:`<span class="pur">Webhook received</span> — Expense submission from <span class="pur">${name}</span>`, node:0 },
+    { icon:'🗄️', msg:`<span class="grn">Airtable record logged</span> — ${cat} • ${amount} • ${vendor}`, node:1 },
+    { icon:'🔀', msg:`<span class="yel">Router: amount check</span> — ${amount} is ${autoApprove ? '<span class="grn">under $500 → auto-approve route</span>' : '<span class="yel">over $500 → manager approval route</span>'}`, node:2 },
+    { icon:'📧', msg:`<span class="pur">Approval email sent</span> → ${mgr} — Expense: ${amount} for ${purpose}`, node:3 },
+    { icon:'💬', msg:`<span class="pur">Slack posted</span> → #finance — "${name} submitted ${amount} expense for ${cat}"`, node:4 },
+    { icon:'📧', msg:`<span class="grn">Confirmation sent</span> → ${email} — "Your expense has been ${autoApprove ? 'auto-approved' : 'submitted for approval'}"`, node:5 },
+    { icon:'✅', msg:`<span class="grn">Expense scenario complete</span> — All steps executed in 7.1 seconds`, node:6 },
+  ];
+
+  const delays = [0, 700, 1400, 2100, 2800, 3500, 4200];
+  const now = new Date();
+
+  for(let i=0; i<steps.length; i++) {
+    await sleep(delays[i]);
+    const s = steps[i];
+    const ts = new Date(now.getTime() + i*1000).toTimeString().slice(0,8);
+    const line = document.createElement('div');
+    line.className = 'log-line show';
+    line.innerHTML = `<span class="log-ts">${ts}</span><span class="log-ico">${s.icon}</span><span class="log-txt">${s.msg}</span>`;
+    logBody.appendChild(line);
+
+    const node = document.getElementById('mn-s2-'+s.node);
+    if(node) node.className = 'mn-ball active-p';
+
+    if(s.node < 6) {
+      const ln = document.getElementById('ml-s2-'+s.node);
+      if(ln) {
+        ln.className = 'mline flow-purple';
+        await sleep(500);
+        ln.className = 'mline';
+        if(node) node.className = 'mn-ball done';
+      }
+    } else {
+      if(node) { await sleep(300); node.className = 'mn-ball done'; }
+    }
+
+    if(s.node === 1) addExpenseRow(name, cat, amount, vendor, purpose, mgr, autoApprove);
+    if(s.node === 3) showS2Email(name, email, firstName, cat, amount, vendor, purpose, mgr, autoApprove);
+    if(s.node === 4) addS2Slack(name, cat, amount, vendor, autoApprove);
+  }
+
+  // Update dashboard
+  const expNum = document.getElementById('dw-expenses');
+  const currentExp = parseFloat(expNum.textContent.replace(/[^0-9.]/g,'')) || 4280;
+  expNum.textContent = '$' + (currentExp + amountNum).toLocaleString();
+  if(autoApprove) {
+    const appNum = document.getElementById('dw-approved');
+    appNum.textContent = parseInt(appNum.textContent) + 1;
+  }
+
+  logStatus.className = 'log-status-done';
+  logStatus.textContent = '✓ COMPLETED';
+  document.getElementById('s2-status').textContent = 'DONE ✓';
+  s2running = false;
+}
+
+function addExpenseRow(name, cat, amount, vendor, purpose, mgr, autoApprove) {
+  const tbody = document.getElementById('exp-table');
+  const tr = document.createElement('tr');
+  tr.className = 'flash-purple';
+  const statusBadge = autoApprove
+    ? '<span class="badge b-green">Auto-Approved</span>'
+    : '<span class="badge b-yellow">Pending Approval</span>';
+  tr.innerHTML = `<td>${name}</td><td>${cat}</td><td>${amount}</td><td>${vendor}</td><td>${purpose}</td><td>${mgr.split('(')[0].trim()}</td><td>${statusBadge}</td>`;
+  tbody.prepend(tr);
+}
+
+function showS2Email(name, email, firstName, cat, amount, vendor, purpose, mgr, autoApprove) {
+  document.getElementById('s2-email-placeholder').style.display = 'none';
+  document.getElementById('s2-email-to').textContent = mgr;
+  document.getElementById('s2-email-subject').textContent = `Action Required: Expense approval needed — ${amount} from ${name}`;
+  document.getElementById('s2-email-body').innerHTML = `Hi <span class="hi-p">${mgr.split(' ')[0]}</span>,<br><br>
+<strong>${name}</strong> has submitted an expense that requires your approval:<br><br>
+<strong>Category:</strong> <span class="hi-p">${cat}</span><br>
+<strong>Amount:</strong> <span class="hi-p">${amount}</span><br>
+<strong>Vendor:</strong> <span class="hi-p">${vendor}</span><br>
+<strong>Purpose:</strong> <span class="hi-p">${purpose}</span><br><br>
+${autoApprove
+  ? `✅ <strong>This expense is under the $500 auto-approval threshold and has been automatically approved.</strong> No action needed.`
+  : `Please review and respond:<br>👍 <span class="link">[Approve this expense]</span><br>❌ <span class="link">[Reject this expense]</span>`
+}<br><br>
+View all pending expenses in <span class="link">[Airtable → Expense Tracker]</span><br><br>
+<strong>Automated Finance System</strong>`;
+  document.getElementById('s2-email').style.display = 'block';
+}
+
+function addS2Slack(name, cat, amount, vendor, autoApprove) {
+  const container = document.getElementById('s2-slack');
+  const msg = document.createElement('div');
+  msg.className = 'slack-msg slack-new';
+  const time = new Date().toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'});
+  msg.innerHTML = `
+    <div class="slack-av" style="background:#2d1a4f;">⚡</div>
+    <div class="slack-msg-inner">
+      <div class="slack-name">Make.com Bot <span class="ts">today ${time}</span></div>
+      <div class="slack-text">💰 Expens
