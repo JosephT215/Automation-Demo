@@ -1,0 +1,890 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Joseph Tucker — CRM & Automation Specialist</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+
+:root{
+  --bg:#080c14;
+  --surface:#0d1220;
+  --card:#111827;
+  --border:rgba(255,255,255,0.07);
+  --border2:rgba(255,255,255,0.12);
+  --text:#f1f5f9;
+  --muted:#64748b;
+  --muted2:#94a3b8;
+  --accent:#3b82f6;
+  --accent2:#60a5fa;
+  --green:#22c55e;
+  --yellow:#f59e0b;
+  --purple:#a78bfa;
+  --teal:#2dd4bf;
+  --orange:#fb923c;
+}
+
+html{scroll-behavior:smooth;}
+
+body{
+  background:var(--bg);
+  color:var(--text);
+  font-family:'DM Sans',sans-serif;
+  min-height:100vh;
+  overflow-x:hidden;
+}
+
+/* BG GRID */
+body::before{
+  content:'';
+  position:fixed;
+  inset:0;
+  background-image:
+    linear-gradient(rgba(59,130,246,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(59,130,246,0.03) 1px, transparent 1px);
+  background-size:48px 48px;
+  pointer-events:none;
+  z-index:0;
+}
+
+/* GLOW */
+.glow-orb{
+  position:fixed;
+  border-radius:50%;
+  filter:blur(120px);
+  pointer-events:none;
+  z-index:0;
+}
+.glow-1{width:600px;height:600px;background:rgba(59,130,246,0.07);top:-200px;right:-100px;}
+.glow-2{width:500px;height:500px;background:rgba(167,139,250,0.05);bottom:-100px;left:-100px;}
+
+/* NAV */
+nav{
+  position:sticky;
+  top:0;
+  z-index:100;
+  padding:20px 64px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  backdrop-filter:blur(20px);
+  background:rgba(8,12,20,0.8);
+  border-bottom:1px solid var(--border);
+}
+
+.nav-logo{
+  font-family:'Syne',sans-serif;
+  font-weight:800;
+  font-size:18px;
+  letter-spacing:-0.02em;
+  color:var(--text);
+}
+
+.nav-logo span{color:var(--accent2);}
+
+.nav-links{
+  display:flex;
+  align-items:center;
+  gap:32px;
+}
+
+.nav-links a{
+  font-family:'DM Mono',monospace;
+  font-size:12px;
+  color:var(--muted);
+  text-decoration:none;
+  letter-spacing:0.05em;
+  transition:color 0.2s;
+}
+.nav-links a:hover{color:var(--text);}
+
+.nav-cta{
+  background:var(--accent);
+  color:white!important;
+  padding:8px 18px;
+  border-radius:8px;
+  font-family:'DM Sans',sans-serif!important;
+  font-weight:500!important;
+  font-size:13px!important;
+  letter-spacing:0!important;
+  transition:all 0.2s!important;
+}
+.nav-cta:hover{background:#2563eb!important;transform:translateY(-1px);box-shadow:0 4px 16px rgba(59,130,246,0.3);}
+
+/* HERO */
+.hero{
+  position:relative;
+  z-index:1;
+  padding:120px 64px 80px;
+  max-width:1200px;
+  margin:0 auto;
+}
+
+.hero-tag{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  background:rgba(59,130,246,0.1);
+  border:1px solid rgba(59,130,246,0.2);
+  border-radius:100px;
+  padding:6px 16px;
+  font-family:'DM Mono',monospace;
+  font-size:11px;
+  color:var(--accent2);
+  letter-spacing:0.1em;
+  margin-bottom:32px;
+  animation:fadeUp 0.6s ease both;
+}
+
+.live-dot{
+  width:6px;height:6px;
+  background:var(--green);
+  border-radius:50%;
+  animation:pulse 2s infinite;
+}
+
+@keyframes pulse{
+  0%,100%{box-shadow:0 0 0 0 rgba(34,197,94,0.4);}
+  50%{box-shadow:0 0 0 5px rgba(34,197,94,0);}
+}
+
+.hero h1{
+  font-family:'Syne',sans-serif;
+  font-size:clamp(40px,6vw,72px);
+  font-weight:800;
+  line-height:1.05;
+  letter-spacing:-0.04em;
+  margin-bottom:24px;
+  animation:fadeUp 0.6s 0.1s ease both;
+}
+
+.hero h1 .line2{
+  color:transparent;
+  -webkit-text-stroke:1px rgba(255,255,255,0.2);
+  background:linear-gradient(135deg,var(--accent2),var(--purple));
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  background-clip:text;
+}
+
+.hero-sub{
+  font-size:17px;
+  color:var(--muted2);
+  max-width:560px;
+  line-height:1.75;
+  margin-bottom:48px;
+  font-weight:300;
+  animation:fadeUp 0.6s 0.2s ease both;
+}
+
+.hero-actions{
+  display:flex;
+  gap:16px;
+  flex-wrap:wrap;
+  animation:fadeUp 0.6s 0.3s ease both;
+}
+
+.btn-primary{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  background:var(--accent);
+  color:white;
+  padding:14px 28px;
+  border-radius:10px;
+  font-weight:600;
+  font-size:14px;
+  text-decoration:none;
+  transition:all 0.2s;
+  box-shadow:0 0 0 0 rgba(59,130,246,0.4);
+}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(59,130,246,0.35);}
+
+.btn-ghost{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  background:rgba(255,255,255,0.05);
+  border:1px solid var(--border2);
+  color:var(--text);
+  padding:14px 28px;
+  border-radius:10px;
+  font-weight:500;
+  font-size:14px;
+  text-decoration:none;
+  transition:all 0.2s;
+}
+.btn-ghost:hover{background:rgba(255,255,255,0.08);transform:translateY(-2px);}
+
+/* STACK */
+.stack-bar{
+  position:relative;
+  z-index:1;
+  border-top:1px solid var(--border);
+  border-bottom:1px solid var(--border);
+  padding:20px 64px;
+  display:flex;
+  align-items:center;
+  gap:40px;
+  overflow-x:auto;
+  background:rgba(255,255,255,0.01);
+}
+
+.stack-label{
+  font-family:'DM Mono',monospace;
+  font-size:10px;
+  color:var(--muted);
+  letter-spacing:0.15em;
+  text-transform:uppercase;
+  white-space:nowrap;
+  flex-shrink:0;
+}
+
+.stack-items{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  flex-wrap:nowrap;
+}
+
+.stack-chip{
+  display:flex;
+  align-items:center;
+  gap:7px;
+  background:rgba(255,255,255,0.04);
+  border:1px solid var(--border);
+  border-radius:8px;
+  padding:7px 14px;
+  font-family:'DM Mono',monospace;
+  font-size:12px;
+  color:var(--muted2);
+  white-space:nowrap;
+  flex-shrink:0;
+  transition:all 0.2s;
+}
+.stack-chip:hover{border-color:var(--border2);color:var(--text);}
+.stack-chip span{font-size:15px;}
+
+/* SECTION */
+.section{
+  position:relative;
+  z-index:1;
+  max-width:1200px;
+  margin:0 auto;
+  padding:80px 64px;
+}
+
+.section-eyebrow{
+  font-family:'DM Mono',monospace;
+  font-size:11px;
+  color:var(--accent2);
+  letter-spacing:0.12em;
+  text-transform:uppercase;
+  margin-bottom:12px;
+}
+
+.section-title{
+  font-family:'Syne',sans-serif;
+  font-size:clamp(28px,4vw,42px);
+  font-weight:700;
+  letter-spacing:-0.03em;
+  margin-bottom:16px;
+  line-height:1.15;
+}
+
+.section-sub{
+  color:var(--muted2);
+  font-size:15px;
+  max-width:560px;
+  line-height:1.7;
+  font-weight:300;
+  margin-bottom:48px;
+}
+
+/* DEMO CARDS */
+.demos-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(340px,1fr));
+  gap:16px;
+}
+
+.demo-card{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:16px;
+  overflow:hidden;
+  text-decoration:none;
+  display:block;
+  transition:all 0.3s;
+  position:relative;
+  animation:fadeUp 0.6s ease both;
+}
+
+.demo-card:hover{
+  border-color:var(--border2);
+  transform:translateY(-4px);
+  box-shadow:0 20px 40px rgba(0,0,0,0.3);
+}
+
+.demo-card:hover .dc-arrow{transform:translate(3px,-3px);}
+
+.dc-top{
+  padding:24px 24px 20px;
+  position:relative;
+}
+
+.dc-icon-wrap{
+  width:48px;height:48px;
+  border-radius:12px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:22px;
+  margin-bottom:16px;
+}
+
+.dc-title{
+  font-family:'Syne',sans-serif;
+  font-size:18px;
+  font-weight:700;
+  letter-spacing:-0.02em;
+  color:var(--text);
+  margin-bottom:8px;
+}
+
+.dc-desc{
+  font-size:13px;
+  color:var(--muted);
+  line-height:1.6;
+  font-weight:300;
+  margin-bottom:16px;
+}
+
+.dc-tags{
+  display:flex;
+  flex-wrap:wrap;
+  gap:6px;
+  margin-bottom:20px;
+}
+
+.dc-tag{
+  font-family:'DM Mono',monospace;
+  font-size:10px;
+  padding:3px 9px;
+  border-radius:6px;
+  letter-spacing:0.03em;
+}
+
+.dc-footer{
+  padding:14px 24px;
+  border-top:1px solid var(--border);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+
+.dc-live{
+  display:flex;
+  align-items:center;
+  gap:6px;
+  font-family:'DM Mono',monospace;
+  font-size:11px;
+  color:var(--green);
+}
+
+.dc-live-dot{
+  width:6px;height:6px;
+  background:var(--green);
+  border-radius:50%;
+}
+
+.dc-arrow{
+  font-size:18px;
+  color:var(--muted);
+  transition:transform 0.2s;
+}
+
+/* CARD COLORS */
+.card-blue .dc-icon-wrap{background:rgba(59,130,246,0.1);}
+.card-blue:hover{box-shadow:0 20px 40px rgba(0,0,0,0.3),0 0 0 1px rgba(59,130,246,0.2);}
+.card-blue .dc-tag-main{background:rgba(59,130,246,0.1);color:#60a5fa;border:1px solid rgba(59,130,246,0.2);}
+
+.card-green .dc-icon-wrap{background:rgba(34,197,94,0.1);}
+.card-green:hover{box-shadow:0 20px 40px rgba(0,0,0,0.3),0 0 0 1px rgba(34,197,94,0.2);}
+.card-green .dc-tag-main{background:rgba(34,197,94,0.1);color:#4ade80;border:1px solid rgba(34,197,94,0.2);}
+
+.card-purple .dc-icon-wrap{background:rgba(167,139,250,0.1);}
+.card-purple:hover{box-shadow:0 20px 40px rgba(0,0,0,0.3),0 0 0 1px rgba(167,139,250,0.2);}
+.card-purple .dc-tag-main{background:rgba(167,139,250,0.1);color:#c4b5fd;border:1px solid rgba(167,139,250,0.2);}
+
+.card-teal .dc-icon-wrap{background:rgba(45,212,191,0.1);}
+.card-teal:hover{box-shadow:0 20px 40px rgba(0,0,0,0.3),0 0 0 1px rgba(45,212,191,0.2);}
+.card-teal .dc-tag-main{background:rgba(45,212,191,0.1);color:#5eead4;border:1px solid rgba(45,212,191,0.2);}
+
+.card-orange .dc-icon-wrap{background:rgba(251,146,60,0.1);}
+.card-orange:hover{box-shadow:0 20px 40px rgba(0,0,0,0.3),0 0 0 1px rgba(251,146,60,0.2);}
+.card-orange .dc-tag-main{background:rgba(251,146,60,0.1);color:#fdba74;border:1px solid rgba(251,146,60,0.2);}
+
+.tag-neutral{background:rgba(255,255,255,0.05);color:var(--muted2);border:1px solid var(--border);}
+
+/* COMING SOON OVERLAY */
+.dc-coming{
+  position:absolute;
+  top:16px;right:16px;
+  background:rgba(245,158,11,0.15);
+  border:1px solid rgba(245,158,11,0.3);
+  border-radius:100px;
+  padding:3px 10px;
+  font-family:'DM Mono',monospace;
+  font-size:10px;
+  color:#fbbf24;
+  letter-spacing:0.08em;
+}
+
+/* ABOUT */
+.about-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:48px;
+  align-items:center;
+}
+
+.about-stats{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:16px;
+}
+
+.stat-box{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:12px;
+  padding:24px;
+  transition:all 0.2s;
+}
+.stat-box:hover{border-color:var(--border2);transform:translateY(-2px);}
+
+.stat-num{
+  font-family:'Syne',sans-serif;
+  font-size:36px;
+  font-weight:800;
+  letter-spacing:-0.04em;
+  margin-bottom:4px;
+}
+
+.stat-label{
+  font-family:'DM Mono',monospace;
+  font-size:11px;
+  color:var(--muted);
+  letter-spacing:0.05em;
+}
+
+.about-text p{
+  color:var(--muted2);
+  font-size:15px;
+  line-height:1.8;
+  font-weight:300;
+  margin-bottom:20px;
+}
+
+.about-text strong{color:var(--text);font-weight:500;}
+
+/* PROCESS */
+.process-steps{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:16px;
+  margin-top:0;
+}
+
+.ps-card{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:12px;
+  padding:24px;
+  position:relative;
+  transition:all 0.2s;
+}
+.ps-card:hover{border-color:var(--border2);transform:translateY(-2px);}
+
+.ps-num{
+  font-family:'DM Mono',monospace;
+  font-size:11px;
+  color:var(--muted);
+  letter-spacing:0.1em;
+  margin-bottom:16px;
+}
+
+.ps-icon{font-size:24px;margin-bottom:12px;display:block;}
+
+.ps-title{
+  font-family:'Syne',sans-serif;
+  font-weight:700;
+  font-size:15px;
+  margin-bottom:8px;
+  letter-spacing:-0.02em;
+}
+
+.ps-desc{
+  font-size:13px;
+  color:var(--muted);
+  line-height:1.6;
+  font-weight:300;
+}
+
+/* CTA */
+.cta-section{
+  position:relative;
+  z-index:1;
+  margin:0 64px 80px;
+  border-radius:20px;
+  background:linear-gradient(135deg,rgba(37,99,235,0.15),rgba(124,58,237,0.1));
+  border:1px solid rgba(59,130,246,0.2);
+  padding:64px;
+  text-align:center;
+  overflow:hidden;
+}
+
+.cta-section::before{
+  content:'';
+  position:absolute;
+  top:0;left:50%;
+  transform:translateX(-50%);
+  width:400px;height:200px;
+  background:radial-gradient(ellipse,rgba(59,130,246,0.12),transparent 70%);
+  pointer-events:none;
+}
+
+.cta-section h2{
+  font-family:'Syne',sans-serif;
+  font-size:clamp(28px,4vw,44px);
+  font-weight:800;
+  letter-spacing:-0.03em;
+  margin-bottom:16px;
+  position:relative;
+}
+
+.cta-section p{
+  color:var(--muted2);
+  font-size:16px;
+  max-width:480px;
+  margin:0 auto 40px;
+  line-height:1.7;
+  font-weight:300;
+  position:relative;
+}
+
+.cta-btns{
+  display:flex;
+  gap:16px;
+  justify-content:center;
+  flex-wrap:wrap;
+  position:relative;
+}
+
+/* FOOTER */
+footer{
+  position:relative;
+  z-index:1;
+  border-top:1px solid var(--border);
+  padding:32px 64px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+
+.footer-brand{
+  font-family:'Syne',sans-serif;
+  font-weight:700;
+  font-size:15px;
+  letter-spacing:-0.02em;
+}
+.footer-brand span{color:var(--accent2);}
+
+.footer-links{
+  display:flex;
+  gap:24px;
+}
+
+.footer-links a{
+  font-family:'DM Mono',monospace;
+  font-size:11px;
+  color:var(--muted);
+  text-decoration:none;
+  letter-spacing:0.05em;
+  transition:color 0.2s;
+}
+.footer-links a:hover{color:var(--text);}
+
+.footer-copy{
+  font-family:'DM Mono',monospace;
+  font-size:11px;
+  color:var(--muted);
+  letter-spacing:0.05em;
+}
+
+/* ANIMATIONS */
+@keyframes fadeUp{
+  from{opacity:0;transform:translateY(20px);}
+  to{opacity:1;transform:translateY(0);}
+}
+
+.demo-card:nth-child(1){animation-delay:0s;}
+.demo-card:nth-child(2){animation-delay:0.08s;}
+.demo-card:nth-child(3){animation-delay:0.16s;}
+.demo-card:nth-child(4){animation-delay:0.24s;}
+.demo-card:nth-child(5){animation-delay:0.32s;}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  nav{padding:16px 24px;}
+  .nav-links{display:none;}
+  .hero{padding:80px 24px 60px;}
+  .stack-bar{padding:16px 24px;}
+  .section{padding:60px 24px;}
+  .demos-grid{grid-template-columns:1fr;}
+  .about-grid{grid-template-columns:1fr;}
+  .process-steps{grid-template-columns:1fr 1fr;}
+  .cta-section{margin:0 24px 60px;padding:40px 24px;}
+  footer{padding:24px;flex-direction:column;gap:16px;text-align:center;}
+}
+</style>
+</head>
+<body>
+
+<div class="glow-orb glow-1"></div>
+<div class="glow-orb glow-2"></div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Joseph<span>Tucker</span></div>
+  <div class="nav-links">
+    <a href="#demos">Live Demos</a>
+    <a href="#about">About</a>
+    <a href="#process">Process</a>
+    <a href="https://calendly.com/tuckerjoseph255/intro-call" target="_blank" class="nav-cta">Book a Call →</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-tag"><div class="live-dot"></div>AVAILABLE FOR NEW CLIENTS — LAS VEGAS, NV</div>
+  <h1>
+    I automate the work<br>
+    <span class="line2">your team hates doing.</span>
+  </h1>
+  <p class="hero-sub">I build custom automation systems using Jotform, Airtable, Make.com, Gmail & Slack. When someone fills out your form — everything else happens automatically. No more copy-paste. No more missed leads.</p>
+  <div class="hero-actions">
+    <a href="#demos" class="btn-primary">⚡ See Live Demos</a>
+    <a href="https://calendly.com/tuckerjoseph255/intro-call" target="_blank" class="btn-ghost">📅 Book Free Call</a>
+  </div>
+</section>
+
+<!-- STACK BAR -->
+<div class="stack-bar">
+  <div class="stack-label">Built with</div>
+  <div class="stack-items">
+    <div class="stack-chip"><span>📋</span> Jotform</div>
+    <div class="stack-chip"><span>🗄️</span> Airtable</div>
+    <div class="stack-chip"><span>⚡</span> Make.com</div>
+    <div class="stack-chip"><span>📧</span> Gmail</div>
+    <div class="stack-chip"><span>💬</span> Slack</div>
+    <div class="stack-chip"><span>🔀</span> Zapier</div>
+  </div>
+</div>
+
+<!-- DEMOS -->
+<section class="section" id="demos">
+  <div class="section-eyebrow">Interactive Portfolio</div>
+  <h2 class="section-title">Live automation demos.<br>Click any to try it.</h2>
+  <p class="section-sub">These aren't mockups. Fill in the forms and watch the real automation flow — Airtable updates, emails fire, Slack notifies. All live.</p>
+
+  <div class="demos-grid">
+
+    <!-- Real Estate + Coaching -->
+    <a href="automation-demo-simulator.html" target="_blank" class="demo-card card-blue">
+      <div class="dc-top">
+        <div class="dc-icon-wrap">🏠</div>
+        <div class="dc-title">Real Estate & Coaching</div>
+        <div class="dc-desc">Lead capture form → Airtable CRM → personalised follow-up email → Slack sales alert. Zero manual work after setup.</div>
+        <div class="dc-tags">
+          <span class="dc-tag dc-tag-main">Lead Follow-Up</span>
+          <span class="dc-tag tag-neutral">Real Estate</span>
+          <span class="dc-tag tag-neutral">Coaching</span>
+        </div>
+      </div>
+      <div class="dc-footer">
+        <div class="dc-live"><div class="dc-live-dot"></div>LIVE DEMO</div>
+        <div class="dc-arrow">↗</div>
+      </div>
+    </a>
+
+    <!-- Accounting -->
+    <a href="accounting-employee-simulator.html" target="_blank" class="demo-card card-green">
+      <div class="dc-top">
+        <div class="dc-icon-wrap">💼</div>
+        <div class="dc-title">Accounting & HR</div>
+        <div class="dc-desc">New employee onboarding automation + expense submission & approval flow with smart routing based on amount.</div>
+        <div class="dc-tags">
+          <span class="dc-tag dc-tag-main">Onboarding</span>
+          <span class="dc-tag tag-neutral">Expense Approval</span>
+          <span class="dc-tag tag-neutral">HR</span>
+        </div>
+      </div>
+      <div class="dc-footer">
+        <div class="dc-live"><div class="dc-live-dot"></div>LIVE DEMO</div>
+        <div class="dc-arrow">↗</div>
+      </div>
+    </a>
+
+    <!-- Recruitment -->
+    <a href="recruitment-simulator.html" target="_blank" class="demo-card card-purple">
+      <div class="dc-top">
+        <div class="dc-icon-wrap">🎯</div>
+        <div class="dc-title">Recruitment Agency</div>
+        <div class="dc-desc">Candidate application form → Airtable pipeline → automated screening email → recruiter Slack alert → interview scheduler.</div>
+        <div class="dc-tags">
+          <span class="dc-tag dc-tag-main">Candidate Pipeline</span>
+          <span class="dc-tag tag-neutral">Recruitment</span>
+          <span class="dc-tag tag-neutral">Hiring</span>
+        </div>
+        <div class="dc-coming">COMING SOON</div>
+      </div>
+      <div class="dc-footer">
+        <div class="dc-live" style="color:var(--muted)"><div class="dc-live-dot" style="background:var(--muted)"></div>IN PROGRESS</div>
+        <div class="dc-arrow">↗</div>
+      </div>
+    </a>
+
+    <!-- Medical -->
+    <a href="medical-dental-simulator.html" target="_blank" class="demo-card card-teal">
+      <div class="dc-top">
+        <div class="dc-icon-wrap">🏥</div>
+        <div class="dc-title">Medical & Dental Clinic</div>
+        <div class="dc-desc">Patient intake form → appointment booking → reminder emails → staff Slack notification → no-show follow-up sequence.</div>
+        <div class="dc-tags">
+          <span class="dc-tag dc-tag-main">Patient Intake</span>
+          <span class="dc-tag tag-neutral">Appointments</span>
+          <span class="dc-tag tag-neutral">Healthcare</span>
+        </div>
+        <div class="dc-coming">COMING SOON</div>
+      </div>
+      <div class="dc-footer">
+        <div class="dc-live" style="color:var(--muted)"><div class="dc-live-dot" style="background:var(--muted)"></div>IN PROGRESS</div>
+        <div class="dc-arrow">↗</div>
+      </div>
+    </a>
+
+    <!-- Ecommerce -->
+    <a href="ecommerce-simulator.html" target="_blank" class="demo-card card-orange">
+      <div class="dc-top">
+        <div class="dc-icon-wrap">🛒</div>
+        <div class="dc-title">E-commerce Store</div>
+        <div class="dc-desc">Order placed → Airtable inventory update → fulfilment email → low-stock Slack alert → automated customer review request.</div>
+        <div class="dc-tags">
+          <span class="dc-tag dc-tag-main">Order Management</span>
+          <span class="dc-tag tag-neutral">Inventory</span>
+          <span class="dc-tag tag-neutral">E-commerce</span>
+        </div>
+        <div class="dc-coming">COMING SOON</div>
+      </div>
+      <div class="dc-footer">
+        <div class="dc-live" style="color:var(--muted)"><div class="dc-live-dot" style="background:var(--muted)"></div>IN PROGRESS</div>
+        <div class="dc-arrow">↗</div>
+      </div>
+    </a>
+
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="section" id="about">
+  <div class="about-grid">
+    <div class="about-text">
+      <div class="section-eyebrow">About</div>
+      <h2 class="section-title">Built by someone who actually uses these tools.</h2>
+      <p>I'm Joseph Tucker, a CRM & Automation Specialist based in Las Vegas. I build working automation systems — not templates, not "strategies" — <strong>actual connected systems</strong> that run in the background while you focus on your business.</p>
+      <p>Every demo on this page was built with the exact same tools I'll use for your project: <strong>Jotform, Airtable, Make.com, Gmail, and Slack.</strong> If you can see it working here, I can build it for you.</p>
+      <p>Delivery in <strong>3–5 business days.</strong> Fixed price. No surprises.</p>
+      <div style="margin-top:32px;">
+        <a href="https://contra.com/s/BMcFPFU6-automated-lead-followup-system-jotform-airtable-make-gmail-slack" target="_blank" class="btn-primary" style="display:inline-flex;">View on Contra →</a>
+      </div>
+    </div>
+    <div class="about-stats">
+      <div class="stat-box">
+        <div class="stat-num" style="color:var(--accent2);">$500</div>
+        <div class="stat-label">STARTING PRICE</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-num" style="color:var(--green);">3–5</div>
+        <div class="stat-label">DAY DELIVERY</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-num" style="color:var(--purple);">5+</div>
+        <div class="stat-label">TOOLS INTEGRATED</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-num" style="color:var(--teal);">0</div>
+        <div class="stat-label">MANUAL STEPS AFTER</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="section" id="process">
+  <div class="section-eyebrow">How It Works</div>
+  <h2 class="section-title">From conversation to live system in 5 days.</h2>
+  <p class="section-sub">Simple, clear process. You don't need to know anything about automation — that's my job.</p>
+
+  <div class="process-steps">
+    <div class="ps-card">
+      <div class="ps-num">01</div>
+      <span class="ps-icon">📞</span>
+      <div class="ps-title">Free Discovery Call</div>
+      <div class="ps-desc">30 minutes. We map out exactly what's currently manual in your business and what we'll automate.</div>
+    </div>
+    <div class="ps-card">
+      <div class="ps-num">02</div>
+      <span class="ps-icon">🗺️</span>
+      <div class="ps-title">I Build the Blueprint</div>
+      <div class="ps-desc">I design the full automation flow and send you a preview before building anything.</div>
+    </div>
+    <div class="ps-card">
+      <div class="ps-num">03</div>
+      <span class="ps-icon">⚡</span>
+      <div class="ps-title">Build & Test</div>
+      <div class="ps-desc">I connect all your tools, build the Make.com scenario, and test every path until it's bulletproof.</div>
+    </div>
+    <div class="ps-card">
+      <div class="ps-num">04</div>
+      <span class="ps-icon">🎓</span>
+      <div class="ps-title">Handover & Support</div>
+      <div class="ps-desc">I walk you through everything with a Loom video. 30-day support included for any tweaks.</div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<div class="cta-section">
+  <h2>Ready to stop doing things manually?</h2>
+  <p>Book a free 30-minute call. No commitment. I'll tell you exactly what can be automated in your business and what it would cost.</p>
+  <div class="cta-btns">
+    <a href="https://calendly.com/tuckerjoseph255/intro-call" target="_blank" class="btn-primary">📅 Book Free Discovery Call</a>
+    <a href="https://contra.com/s/BMcFPFU6-automated-lead-followup-system-jotform-airtable-make-gmail-slack" target="_blank" class="btn-ghost">View Contra Profile →</a>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">Joseph<span>Tucker</span></div>
+  <div class="footer-links">
+    <a href="#demos">Demos</a>
+    <a href="https://contra.com/s/BMcFPFU6-automated-lead-followup-system-jotform-airtable-make-gmail-slack" target="_blank">Contra</a>
+    <a href="https://calendly.com/tuckerjoseph255/intro-call" target="_blank">Book a Call</a>
+  </div>
+  <div class="footer-copy">CRM & Automation Specialist — Las Vegas, NV</div>
+</footer>
+
+</body>
+</html>
