@@ -3,327 +3,277 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Medical & Dental Clinic Automation — automation.portfolio</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<title>Medical & Dental Clinic Automation Simulator</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700;800;900&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box;}
-:root{
-  --bg:#f8fafb;--dark:#0d1b2a;--navy:#112240;
-  --card:#ffffff;--border:#e4eaf0;--border2:#ccd6e0;
-  --text:#1a2e44;--muted:#6b7f94;--muted2:#a8b8c8;
-  --accent:#00897b;--accent2:#26a69a;--accent-light:#e0f2f1;
-  --blue:#1565c0;--blue-light:#e3f2fd;
-  --red:#c62828;--red-light:#ffebee;
-  --yellow:#f57f17;--yellow-light:#fff8e1;
-  --green:#2e7d32;--green-light:#e8f5e9;
-  --white:#ffffff;
-}
-body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;min-height:100vh;overflow-x:hidden;}
-
-.topbar{background:var(--dark);padding:0 44px;height:56px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;}
-.brand{font-family:'IBM Plex Mono',monospace;font-size:13px;font-weight:400;color:#4a5e72;letter-spacing:0.05em;}
-.brand span{color:#f8fafb;}
-.tb-mid{font-family:'IBM Plex Mono',monospace;font-size:10px;color:#3a4a5a;letter-spacing:0.1em;text-transform:uppercase;}
-.live{display:flex;align-items:center;gap:6px;font-family:'IBM Plex Mono',monospace;font-size:10px;color:#4dd0e1;}
-.ldot{width:6px;height:6px;background:#4dd0e1;border-radius:50%;animation:lp 2s infinite;}
-@keyframes lp{0%,100%{opacity:1;}50%{opacity:0.3;}}
-
-.hero{background:var(--dark);padding:56px 44px 44px;position:relative;overflow:hidden;}
-.hero::before{content:'';position:absolute;top:-120px;right:-120px;width:480px;height:480px;background:radial-gradient(circle,rgba(0,137,123,0.12) 0%,transparent 65%);pointer-events:none;}
-.hero-eyebrow{font-family:'IBM Plex Mono',monospace;font-size:10px;color:#4dd0e1;letter-spacing:0.15em;text-transform:uppercase;margin-bottom:18px;}
-.hero h1{font-size:clamp(28px,4.5vw,52px);font-weight:700;color:white;line-height:1.1;letter-spacing:-0.02em;margin-bottom:14px;}
-.hero h1 em{font-style:normal;color:#4dd0e1;}
-.hero-sub{color:#4a5e72;font-size:15px;max-width:520px;line-height:1.7;margin-bottom:32px;}
-.hero-tools{display:flex;gap:8px;flex-wrap:wrap;}
-.htool{font-family:'IBM Plex Mono',monospace;font-size:9px;padding:5px 12px;border:1px solid #1e3a4a;color:#4a5e72;border-radius:3px;}
-
-.main{padding:32px 44px 80px;max-width:1400px;margin:0 auto;}
-
-.slbl{display:flex;align-items:center;gap:12px;margin-bottom:16px;margin-top:32px;}
-.slbl-tag{font-family:'IBM Plex Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:0.12em;color:var(--accent);}
-.slbl-line{flex:1;height:1px;background:var(--border);}
-
-.card{background:var(--card);border:1px solid var(--border);border-radius:10px;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,0.04);}
-.card-hdr{padding:12px 18px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:9px;background:#fafcfd;}
-.ch-ico{font-size:17px;}
-.ch-ttl{font-weight:700;font-size:13px;color:var(--text);}
-.ch-sub{font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--muted2);margin-left:auto;}
+:root{--bg:#f0f7ff;--dark:#0a1628;--card:#ffffff;--border:#d0e4f7;--border2:#b0cce8;--text:#0a1628;--muted:#5a7a9a;--muted2:#8aaac8;--teal:#0891b2;--teal2:#06b6d4;--teal-light:#ecfeff;--green:#059669;--green-light:#ecfdf5;--red:#dc2626;--red-light:#fef2f2;--yellow:#d97706;--yellow-light:#fffbeb;}
+body{background:var(--bg);color:var(--text);font-family:'Nunito',sans-serif;min-height:100vh;overflow-x:hidden;}
+.topbar{background:var(--dark);padding:0 48px;height:58px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;}
+.brand{display:flex;align-items:center;gap:10px;}
+.brand-icon{width:30px;height:30px;background:var(--teal);border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:15px;}
+.brand-name{font-weight:800;font-size:16px;color:white;letter-spacing:-0.02em;}
+.brand-name span{color:var(--teal2);}
+.topbar-tag{font-family:'IBM Plex Mono',monospace;font-size:11px;color:#2a4a6a;background:rgba(255,255,255,0.05);padding:5px 14px;border-radius:100px;border:1px solid rgba(255,255,255,0.07);}
+.live-pill{display:flex;align-items:center;gap:6px;font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--teal2);}
+.live-d{width:6px;height:6px;background:var(--teal2);border-radius:50%;animation:lp 2s infinite;}
+@keyframes lp{0%,100%{opacity:1;}50%{opacity:0.4;}}
+.hero{background:var(--dark);padding:56px 48px 48px;position:relative;overflow:hidden;}
+.hero::before{content:'';position:absolute;top:-80px;right:-80px;width:400px;height:400px;background:radial-gradient(circle,rgba(8,145,178,0.15) 0%,transparent 65%);pointer-events:none;}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(8,145,178,0.15);border:1px solid rgba(8,145,178,0.3);border-radius:100px;padding:5px 14px;font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--teal2);margin-bottom:20px;letter-spacing:0.08em;}
+.hero h1{font-size:clamp(28px,4.5vw,52px);font-weight:900;color:white;line-height:1.08;letter-spacing:-0.03em;margin-bottom:14px;}
+.hero h1 em{color:var(--teal2);font-style:normal;}
+.hero-sub{color:#2a4a6a;font-size:15px;max-width:520px;line-height:1.7;margin-bottom:36px;font-weight:400;}
+.hero-nums{display:flex;gap:40px;}
+.hn-val{font-size:26px;font-weight:800;color:white;letter-spacing:-0.03em;}
+.hn-key{font-family:'IBM Plex Mono',monospace;font-size:10px;color:#2a4a6a;text-transform:uppercase;letter-spacing:0.1em;margin-top:2px;}
+.main{padding:36px 48px 80px;max-width:1400px;margin:0 auto;}
+.sdiv{display:flex;align-items:center;gap:12px;margin-bottom:18px;margin-top:36px;}
+.sdiv-num{width:26px;height:26px;background:var(--teal);border-radius:6px;display:flex;align-items:center;justify-content:center;font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:600;color:white;flex-shrink:0;}
+.sdiv-title{font-weight:800;font-size:12px;text-transform:uppercase;letter-spacing:0.08em;}
+.sdiv-line{flex:1;height:1px;background:var(--border);}
+.spill{display:inline-flex;align-items:center;gap:6px;padding:4px 12px;border-radius:100px;font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:500;letter-spacing:0.04em;background:var(--teal-light);color:var(--teal);border:1px solid #a5f3fc;}
+.card{background:var(--card);border:1px solid var(--border);border-radius:12px;overflow:hidden;box-shadow:0 1px 4px rgba(8,145,178,0.06);}
+.card-hdr{padding:13px 18px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:9px;background:#f5faff;}
+.ch-ico{width:30px;height:30px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0;}
+.ch-ttl{font-weight:800;font-size:13px;}
+.ch-sub{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--muted2);margin-left:auto;}
 .card-body{padding:18px;}
-
 .two-col{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
 .fgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
 .ffull{grid-column:1/-1;}
 .field{display:flex;flex-direction:column;gap:4px;}
-.field label{font-size:11px;font-weight:600;color:var(--text);}
-.field label span{font-weight:400;color:var(--muted2);font-size:10px;margin-left:3px;}
-.finput{background:var(--bg);border:1px solid var(--border2);border-radius:6px;padding:9px 11px;font-size:12px;color:var(--text);font-family:'Inter',sans-serif;width:100%;outline:none;transition:all 0.2s;}
-.finput:focus{border-color:var(--accent);box-shadow:0 0 0 2px rgba(0,137,123,0.1);}
-.fselect{background:var(--bg);border:1px solid var(--border2);border-radius:6px;padding:9px 11px;font-size:12px;color:var(--text);font-family:'Inter',sans-serif;width:100%;outline:none;appearance:none;cursor:pointer;}
-.fselect:focus{border-color:var(--accent);}
-.sbtn{width:100%;padding:11px;border-radius:7px;font-size:13px;font-weight:700;cursor:pointer;border:none;margin-top:8px;transition:all 0.2s;font-family:'Inter',sans-serif;}
-.sbtn-teal{background:var(--accent);color:white;}
-.sbtn-blue{background:var(--blue);color:white;}
-.sbtn:hover{filter:brightness(1.08);transform:translateY(-1px);}
-
-.logbox{background:var(--dark);border-radius:8px;overflow:hidden;display:none;margin-bottom:14px;}
-.logbox.show{display:block;animation:fadeUp 0.3s ease;}
-@keyframes fadeUp{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:translateY(0);}}
-.log-hdr{padding:8px 14px;border-bottom:1px solid rgba(255,255,255,0.06);display:flex;align-items:center;gap:8px;font-family:'IBM Plex Mono',monospace;font-size:10px;}
-.lrun{color:#fbbf24;}.ldone{color:#4ade80;}
+.field label{font-size:12px;font-weight:700;}
+.field label span{font-weight:400;color:var(--muted2);font-size:11px;margin-left:4px;font-family:'IBM Plex Mono',monospace;}
+.finput,.fselect{background:#f5faff;border:1px solid var(--border2);border-radius:7px;padding:8px 11px;font-size:13px;color:var(--text);font-family:'Nunito',sans-serif;width:100%;outline:none;transition:all 0.2s;}
+.finput:focus,.fselect:focus{border-color:var(--teal);background:white;box-shadow:0 0 0 3px rgba(8,145,178,0.08);}
+.fselect{appearance:none;cursor:pointer;}
+.sbtn{width:100%;padding:11px 18px;border-radius:8px;font-size:14px;font-weight:800;cursor:pointer;border:none;margin-top:8px;transition:all 0.2s;font-family:'Nunito',sans-serif;display:flex;align-items:center;justify-content:center;gap:7px;}
+.sbtn-teal{background:var(--teal);color:white;}
+.sbtn-grn{background:var(--green);color:white;}
+.sbtn:hover{filter:brightness(1.08);transform:translateY(-1px);box-shadow:0 4px 12px rgba(0,0,0,0.15);}
+.logbox{background:var(--dark);border-radius:10px;overflow:hidden;display:none;margin-bottom:14px;}
+.logbox.show{display:block;animation:fadeIn 0.3s ease;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:translateY(0);}}
+.log-top{padding:9px 14px;border-bottom:1px solid rgba(255,255,255,0.05);display:flex;align-items:center;gap:8px;font-family:'IBM Plex Mono',monospace;font-size:10px;}
+.ls-run{color:#f59e0b;}.ls-done{color:#4ade80;}
 .log-body{padding:10px 14px;font-family:'IBM Plex Mono',monospace;font-size:11px;}
-.ll{display:flex;gap:8px;align-items:flex-start;padding:3px 0;opacity:0;}
-.ll.show{opacity:1;animation:llin 0.25s ease;}
-@keyframes llin{from{opacity:0;transform:translateX(-5px);}to{opacity:1;transform:translateX(0);}}
-.lts{color:#374151;font-size:9px;width:52px;flex-shrink:0;margin-top:1px;}
-.lic{font-size:12px;flex-shrink:0;}
-.lmsg{color:#6b7280;line-height:1.5;}
-.lmsg .te{color:#4dd0e1;}.lmsg .gr{color:#4ade80;}.lmsg .ye{color:#fbbf24;}
-
+.ll{display:flex;align-items:flex-start;gap:9px;padding:3px 0;opacity:0;}
+.ll.show{opacity:1;animation:llIn 0.3s ease;}
+@keyframes llIn{from{opacity:0;transform:translateX(-5px);}to{opacity:1;transform:translateX(0);}}
+.ll-ts{color:#1a3a5a;font-size:10px;width:52px;flex-shrink:0;margin-top:1px;}
+.ll-ic{font-size:12px;flex-shrink:0;}
+.ll-tx{color:#a8c8e8;line-height:1.5;}
+.ll-tx .t{color:#22d3ee;}.ll-tx .g{color:#4ade80;}.ll-tx .y{color:#fbbf24;}.ll-tx .r{color:#f87171;}
 .mflow{display:flex;align-items:center;padding:20px 18px;overflow-x:auto;gap:0;}
 .mnode{display:flex;flex-direction:column;align-items:center;gap:6px;flex-shrink:0;}
-.mball{width:48px;height:48px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:18px;border:2px solid var(--border2);background:var(--bg);transition:all 0.3s;position:relative;}
-.mball.act{border-color:var(--accent);background:var(--accent-light);box-shadow:0 0 0 3px rgba(0,137,123,0.1);}
-.mball.act-b{border-color:var(--blue);background:var(--blue-light);box-shadow:0 0 0 3px rgba(21,101,192,0.1);}
-.mball.done{border-color:var(--green);background:var(--green-light);}
-.mball.done::after{content:'✓';position:absolute;bottom:-2px;right:-2px;width:15px;height:15px;background:var(--green);border-radius:50%;font-size:8px;color:white;display:flex;align-items:center;justify-content:center;font-family:'IBM Plex Mono',monospace;font-weight:700;}
-.mlabel{font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--muted);text-align:center;max-width:64px;line-height:1.3;}
-.mapp{font-family:'IBM Plex Mono',monospace;font-size:8px;color:var(--muted2);}
+.mn-b{width:48px;height:48px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:18px;border:2px solid var(--border2);background:var(--bg);transition:all 0.3s;position:relative;}
+.mn-b.act{border-color:var(--teal);background:var(--teal-light);box-shadow:0 0 0 4px rgba(8,145,178,0.1);}
+.mn-b.actg{border-color:var(--green);background:var(--green-light);box-shadow:0 0 0 4px rgba(5,150,105,0.1);}
+.mn-b.done{border-color:var(--green);background:var(--green-light);}
+.mn-b.done::after{content:'✓';position:absolute;bottom:-3px;right:-3px;width:15px;height:15px;background:var(--green);border-radius:50%;font-size:8px;color:white;display:flex;align-items:center;justify-content:center;}
+.mn-lbl{font-size:9px;color:var(--muted);text-align:center;max-width:64px;line-height:1.3;font-family:'IBM Plex Mono',monospace;}
+.mn-app{font-size:9px;color:var(--muted2);font-family:'IBM Plex Mono',monospace;}
 .mconn{display:flex;align-items:center;padding:0 3px;margin-bottom:20px;}
-.mline{height:2px;width:26px;background:var(--border2);position:relative;overflow:hidden;}
+.mline{height:2px;width:28px;background:var(--border2);position:relative;overflow:hidden;}
 .mline::after{content:'';position:absolute;left:-100%;top:0;width:100%;height:100%;}
-.mline.flow-t::after{background:linear-gradient(90deg,transparent,var(--accent),transparent);animation:lf 0.7s ease forwards;}
-.mline.flow-b::after{background:linear-gradient(90deg,transparent,var(--blue),transparent);animation:lf 0.7s ease forwards;}
+.mline.flt::after{background:linear-gradient(90deg,transparent,var(--teal),transparent);animation:lf 0.6s ease forwards;}
+.mline.flg::after{background:linear-gradient(90deg,transparent,var(--green),transparent);animation:lf 0.6s ease forwards;}
 @keyframes lf{from{left:-100%;}to{left:100%;}}
-
-.at-tbl-wrap{overflow-x:auto;}
+.at-wrap{overflow-x:auto;}
 .at-tbl{width:100%;border-collapse:collapse;font-size:12px;min-width:560px;}
-.at-tbl th{padding:8px 13px;text-align:left;font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--muted2);letter-spacing:0.08em;text-transform:uppercase;border-bottom:1px solid var(--border);background:#fafcfd;white-space:nowrap;}
+.at-tbl th{padding:8px 13px;text-align:left;font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--muted2);letter-spacing:0.08em;text-transform:uppercase;border-bottom:1px solid var(--border);background:#f5faff;white-space:nowrap;}
 .at-tbl td{padding:9px 13px;border-bottom:1px solid var(--border);color:var(--text);white-space:nowrap;}
-.at-tbl tr:hover td{background:#f0fdfc;}
-.at-tbl tr.nr-t td{animation:flt 1.5s ease;}
-.at-tbl tr.nr-b td{animation:flb 1.5s ease;}
-@keyframes flt{0%{background:rgba(0,137,123,0.1);}100%{background:transparent;}}
-@keyframes flb{0%{background:rgba(21,101,192,0.1);}100%{background:transparent;}}
-
-.badge{display:inline-flex;align-items:center;padding:2px 8px;border-radius:3px;font-family:'IBM Plex Mono',monospace;font-size:9px;font-weight:600;}
-.b-t{background:var(--accent-light);color:var(--accent);border:1px solid #80cbc4;}
-.b-g{background:var(--green-light);color:var(--green);border:1px solid #a5d6a7;}
-.b-b{background:var(--blue-light);color:var(--blue);border:1px solid #90caf9;}
-.b-y{background:var(--yellow-light);color:var(--yellow);border:1px solid #ffe082;}
-.b-r{background:var(--red-light);color:var(--red);border:1px solid #ef9a9a;}
-
-.ecard{background:white;border:1px solid var(--border);border-radius:8px;overflow:hidden;}
-.echrome{background:#f8fafb;border-bottom:1px solid var(--border);padding:9px 14px;display:flex;align-items:center;gap:5px;}
-.ecdot{width:9px;height:9px;border-radius:50%;}
-.emeta{padding:12px 16px;border-bottom:1px solid var(--border);background:#fafcfd;}
-.emrow{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--muted);margin-bottom:3px;}
-.emrow span{color:var(--text);}
-.esubj{padding:10px 16px;font-weight:700;font-size:14px;color:var(--text);border-bottom:1px solid var(--border);}
-.ebody{padding:16px;font-size:13px;line-height:1.8;color:var(--text);}
-.ebody .hi{color:var(--accent);font-weight:700;}
-.ebody .hi-b{color:var(--blue);font-weight:700;}
-.ebody .lnk{color:var(--blue);text-decoration:underline;cursor:pointer;}
-.eph{padding:36px 16px;text-align:center;color:var(--muted2);font-family:'IBM Plex Mono',monospace;font-size:11px;}
-
-.slcard{background:#1a1d21;border-radius:8px;overflow:hidden;}
-.sltop{background:#19181f;padding:10px 14px;display:flex;align-items:center;gap:7px;border-bottom:1px solid #2a2d35;}
-.slcn{font-size:13px;font-weight:700;color:#e0e0e8;}
-.slmsgs{padding:12px 14px;display:flex;flex-direction:column;gap:10px;min-height:110px;}
-.slmsg{display:flex;gap:9px;}
-.slav{width:30px;height:30px;border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;}
-.slinner{flex:1;}
-.slname{font-size:12px;font-weight:700;color:#e0e0e8;margin-bottom:2px;}
-.slname .ts{font-size:10px;font-weight:400;color:#555;margin-left:5px;font-family:'IBM Plex Mono',monospace;}
-.sltext{font-size:12px;color:#b0b0c0;line-height:1.6;}
-.sltext strong{color:white;}
-.stag{padding:1px 6px;border-radius:3px;font-size:11px;}
-.stag-t{background:rgba(0,137,123,0.2);color:#4dd0e1;}
-.stag-g{background:rgba(52,211,153,0.15);color:#6ee7b7;}
-.stag-y{background:rgba(245,127,23,0.15);color:#ffcc02;}
-.stag-r{background:rgba(198,40,40,0.15);color:#ef9a9a;}
-.slnew{animation:slin 0.35s ease;}
-@keyframes slin{from{opacity:0;transform:translateX(-7px);}to{opacity:1;transform:translateX(0);}}
-
-.dash{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:14px;}
-.dw{background:var(--card);border:1px solid var(--border);border-radius:9px;padding:14px;}
-.dw-ico{font-size:20px;margin-bottom:7px;display:block;}
-.dw-n{font-size:25px;font-weight:700;color:var(--text);letter-spacing:-0.03em;margin-bottom:2px;}
-.dw-l{font-size:11px;color:var(--muted);}
-.dw-c{font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--green);margin-top:3px;}
-
-.reset-btn{background:none;border:1px solid var(--border2);color:var(--muted);padding:8px 18px;border-radius:6px;cursor:pointer;font-family:'IBM Plex Mono',monospace;font-size:10px;transition:all 0.2s;}
-.reset-btn:hover{border-color:var(--accent);color:var(--accent);}
-
-@media(max-width:900px){.topbar,.hero,.main{padding-left:20px;padding-right:20px;}.two-col,.fgrid{grid-template-columns:1fr;}.dash{grid-template-columns:repeat(2,1fr);}.ffull{grid-column:1;}}
+.at-tbl tr:hover td{background:#f0f9ff;}
+.at-tbl tr.fl-t td{animation:flt 1.5s ease;}
+@keyframes flt{0%{background:rgba(8,145,178,0.1);}100%{background:transparent;}}
+.badge{display:inline-flex;align-items:center;gap:3px;padding:2px 8px;border-radius:100px;font-size:10px;font-weight:700;font-family:'IBM Plex Mono',monospace;white-space:nowrap;}
+.b-t{background:var(--teal-light);color:var(--teal);border:1px solid #a5f3fc;}
+.b-g{background:var(--green-light);color:var(--green);border:1px solid #a7f3d0;}
+.b-y{background:var(--yellow-light);color:var(--yellow);border:1px solid #fde68a;}
+.b-r{background:var(--red-light);color:var(--red);border:1px solid #fecaca;}
+.ecard{background:white;border:1px solid var(--border);border-radius:10px;overflow:hidden;}
+.echrome{background:#f0f7ff;border-bottom:1px solid var(--border);padding:9px 14px;display:flex;align-items:center;gap:5px;}
+.ecd{width:9px;height:9px;border-radius:50%;}
+.emeta{padding:12px 16px;border-bottom:1px solid var(--border);background:#f5faff;}
+.em-row{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--muted);margin-bottom:3px;display:flex;gap:7px;}
+.em-row span{color:var(--text);font-weight:700;}
+.esubj{padding:11px 16px;font-weight:800;font-size:14px;border-bottom:1px solid var(--border);}
+.ebody{padding:16px;font-size:13px;line-height:1.8;}
+.ebody .hi{color:var(--teal);font-weight:700;}
+.ebody .hig{color:var(--green);font-weight:700;}
+.ebody .lnk{color:var(--teal);text-decoration:underline;cursor:pointer;}
+.epholder{padding:36px 16px;text-align:center;color:var(--muted2);font-family:'IBM Plex Mono',monospace;font-size:11px;}
+.slack{background:#1a1d21;border-radius:10px;overflow:hidden;}
+.slack-top{background:#19181f;padding:10px 14px;display:flex;align-items:center;gap:7px;border-bottom:1px solid #2a2d35;}
+.slack-cn{font-size:13px;font-weight:700;color:#e0e0e8;}
+.slack-msgs{padding:12px 14px;display:flex;flex-direction:column;gap:10px;min-height:110px;}
+.smsg{display:flex;gap:9px;}
+.sav{width:30px;height:30px;border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0;}
+.smi{flex:1;}
+.sname{font-size:12px;font-weight:700;color:#e0e0e8;margin-bottom:2px;}
+.sname .ts{font-size:10px;font-weight:400;color:#555;margin-left:5px;font-family:'IBM Plex Mono',monospace;}
+.stxt{font-size:12px;color:#b0b0c0;line-height:1.6;}
+.stxt strong{color:white;}
+.st{background:rgba(8,145,178,0.2);color:#22d3ee;padding:1px 5px;border-radius:3px;font-size:11px;}
+.sg{background:rgba(5,150,105,0.2);color:#4ade80;padding:1px 5px;border-radius:3px;font-size:11px;}
+.sy{background:rgba(217,119,6,0.2);color:#fcd34d;padding:1px 5px;border-radius:3px;font-size:11px;}
+.snew{animation:sIn 0.4s ease;}
+@keyframes sIn{from{opacity:0;transform:translateX(-6px);}to{opacity:1;transform:translateX(0);}}
+.dgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:14px;}
+.dw{background:white;border:1px solid var(--border);border-radius:10px;padding:14px;transition:all 0.2s;}
+.dw:hover{box-shadow:0 4px 12px rgba(8,145,178,0.1);transform:translateY(-1px);}
+.dw-ico{font-size:20px;margin-bottom:8px;display:block;}
+.dw-num{font-size:26px;font-weight:900;letter-spacing:-0.03em;margin-bottom:2px;transition:all 0.3s;}
+.dw-lbl{font-size:11px;color:var(--muted);font-weight:600;}
+.reset-btn{background:none;border:1px solid var(--border2);color:var(--muted);padding:8px 18px;border-radius:7px;cursor:pointer;font-family:'IBM Plex Mono',monospace;font-size:11px;transition:all 0.2s;}
+.reset-btn:hover{border-color:var(--teal);color:var(--teal);}
+@media(max-width:900px){.topbar,.hero,.main{padding-left:20px;padding-right:20px;}.two-col,.fgrid{grid-template-columns:1fr;}.dgrid{grid-template-columns:repeat(2,1fr);}}
 </style>
 </head>
 <body>
-
 <div class="topbar">
-  <div class="brand">automation<span>.portfolio</span></div>
-  <div class="tb-mid">medical & dental clinic automation</div>
-  <div class="live"><div class="ldot"></div>LIVE DEMO</div>
+  <div class="brand"><div class="brand-icon">🏥</div><div class="brand-name">Clinic<span>Flow</span></div></div>
+  <div class="topbar-tag">medical & dental clinic automation</div>
+  <div class="live-pill"><div class="live-d"></div>LIVE DEMO</div>
 </div>
-
 <div class="hero">
-  <div class="hero-eyebrow">Interactive Simulator — No Signup Needed</div>
-  <h1>Clinic Admin.<br><em>Fully Automated.</em></h1>
-  <p class="hero-sub">See what happens when a patient books an appointment or a follow-up is needed. Every notification, reminder and update fires automatically. Fill in the forms and watch it live.</p>
-  <div class="hero-tools">
-    <div class="htool">Jotform</div><div class="htool">Airtable</div><div class="htool">Make.com</div><div class="htool">Gmail</div><div class="htool">Slack</div>
+  <div class="hero-badge">INTERACTIVE SIMULATOR — NO SIGNUP NEEDED</div>
+  <h1>Patient intake.<br><em>Fully automated.</em></h1>
+  <p class="hero-sub">Watch what happens when a new patient books an appointment. Confirmation emails fire, your team gets Slacked, Airtable updates — zero manual work from your staff.</p>
+  <div class="hero-nums">
+    <div><div class="hn-val">2</div><div class="hn-key">Live Scenarios</div></div>
+    <div><div class="hn-val">0</div><div class="hn-key">Manual Steps</div></div>
+    <div><div class="hn-val">&lt;8s</div><div class="hn-key">Response Time</div></div>
   </div>
 </div>
-
 <div class="main">
-
-  <!-- DASHBOARD -->
-  <div class="slbl" style="margin-top:0;"><div class="slbl-tag">Live Dashboard</div><div class="slbl-line"></div></div>
-  <div class="dash">
-    <div class="dw"><span class="dw-ico">📅</span><div class="dw-n" id="dw-apts">38</div><div class="dw-l">Appointments Today</div><div class="dw-c">+2 this hour</div></div>
-    <div class="dw"><span class="dw-ico">🆕</span><div class="dw-n" id="dw-new">7</div><div class="dw-l">New Patients</div><div class="dw-c">This week</div></div>
-    <div class="dw"><span class="dw-ico">⏰</span><div class="dw-n" id="dw-remind">14</div><div class="dw-l">Reminders Sent</div><div class="dw-c">Auto-sent today</div></div>
-    <div class="dw"><span class="dw-ico">✅</span><div class="dw-n" id="dw-confirmed">31</div><div class="dw-l">Confirmed</div><div class="dw-c">↑ 89% rate</div></div>
+  <div class="sdiv"><div class="sdiv-num">0</div><div class="sdiv-title">Live Dashboard</div><div class="sdiv-line"></div></div>
+  <div class="dgrid">
+    <div class="dw"><span class="dw-ico">📅</span><div class="dw-num" id="dw-apt">24</div><div class="dw-lbl">Appointments Today</div></div>
+    <div class="dw"><span class="dw-ico">🆕</span><div class="dw-num" id="dw-new">8</div><div class="dw-lbl">New Patients</div></div>
+    <div class="dw"><span class="dw-ico">✅</span><div class="dw-num" id="dw-conf">19</div><div class="dw-lbl">Confirmed</div></div>
+    <div class="dw"><span class="dw-ico">⏰</span><div class="dw-num" id="dw-remind">5</div><div class="dw-lbl">Reminders Sent</div></div>
   </div>
 
-  <!-- SCENARIO 1 — PATIENT BOOKING -->
-  <div class="slbl"><div class="slbl-tag">Scenario 1 — New Patient Books Appointment</div><div class="slbl-line"></div></div>
-
+  <div class="sdiv"><div class="sdiv-num">1</div><div class="sdiv-title">Scenario 1 — New Patient Booking</div><div class="sdiv-line"></div><div class="spill">Jotform → Airtable → Gmail → Slack</div></div>
   <div class="two-col" style="margin-bottom:14px;">
     <div class="card">
-      <div class="card-hdr"><span class="ch-ico">📋</span><div class="ch-ttl">Patient Appointment Form</div><div class="ch-sub">Jotform</div></div>
+      <div class="card-hdr"><div class="ch-ico" style="background:var(--teal-light);">🩺</div><div class="ch-ttl">New Patient Intake Form</div><div class="ch-sub">Jotform</div></div>
       <div class="card-body">
         <div class="fgrid">
-          <div class="field"><label>Patient Full Name <span>required</span></label><input class="finput" id="p-name" placeholder="e.g. Linda Martinez" /></div>
-          <div class="field"><label>Email <span>required</span></label><input class="finput" id="p-email" placeholder="linda@email.com" /></div>
-          <div class="field"><label>Phone <span>required</span></label><input class="finput" id="p-phone" placeholder="+1 702 555 0199" /></div>
-          <div class="field"><label>Date of Birth <span>required</span></label><input class="finput" id="p-dob" type="date" /></div>
+          <div class="field"><label>Full Name <span>required</span></label><input class="finput" id="p-name" placeholder="e.g. Jordan Williams"/></div>
+          <div class="field"><label>Email <span>required</span></label><input class="finput" id="p-email" placeholder="jordan@email.com"/></div>
+          <div class="field"><label>Phone <span>required</span></label><input class="finput" id="p-phone" placeholder="(702) 555-0123"/></div>
+          <div class="field"><label>Date of Birth <span>required</span></label><input class="finput" id="p-dob" type="date"/></div>
           <div class="field"><label>Appointment Type <span>required</span></label>
-            <select class="fselect" id="p-type">
-              <option value="">— Select —</option>
-              <option>General Checkup</option><option>Dental Cleaning</option><option>X-Ray</option><option>Consultation</option><option>Follow-up</option><option>Emergency</option>
-            </select>
+            <select class="fselect" id="p-type"><option value="">— Select —</option><option>New Patient Exam</option><option>Teeth Cleaning</option><option>Emergency Visit</option><option>Consultation</option><option>Follow-up</option><option>X-Ray</option></select>
           </div>
-          <div class="field"><label>Preferred Date <span>required</span></label><input class="finput" id="p-date" type="date" /></div>
+          <div class="field"><label>Preferred Date <span>required</span></label><input class="finput" id="p-date" type="date"/></div>
           <div class="field"><label>Preferred Time <span>required</span></label>
-            <select class="fselect" id="p-time">
-              <option value="">— Select —</option>
-              <option>9:00 AM</option><option>10:00 AM</option><option>11:00 AM</option><option>2:00 PM</option><option>3:00 PM</option><option>4:00 PM</option>
-            </select>
+            <select class="fselect" id="p-time"><option value="">— Select —</option><option>8:00 AM</option><option>9:00 AM</option><option>10:00 AM</option><option>11:00 AM</option><option>1:00 PM</option><option>2:00 PM</option><option>3:00 PM</option><option>4:00 PM</option></select>
           </div>
-          <div class="field"><label>Insurance Provider <span>optional</span></label><input class="finput" id="p-ins" placeholder="e.g. Blue Cross Blue Shield" /></div>
-          <div class="field ffull"><label>Symptoms / Notes <span>optional</span></label><input class="finput" id="p-notes" placeholder="Describe your symptoms or reason for visit" /></div>
+          <div class="field"><label>Insurance Provider <span>optional</span></label><input class="finput" id="p-ins" placeholder="e.g. Delta Dental"/></div>
+          <div class="field ffull"><label>Reason for Visit <span>required</span></label><input class="finput" id="p-reason" placeholder="e.g. Regular checkup and cleaning"/></div>
         </div>
-        <button class="sbtn sbtn-teal" onclick="runS1()">📅 Book Appointment & Trigger Automation</button>
+        <button class="sbtn sbtn-teal" onclick="runS1()">🩺 Submit & Trigger Patient Automation</button>
       </div>
     </div>
-
     <div class="card">
-      <div class="card-hdr"><span class="ch-ico">⚡</span><div class="ch-ttl">Make.com — Booking Scenario</div><div class="ch-sub" id="s1-st">IDLE</div></div>
+      <div class="card-hdr"><div class="ch-ico" style="background:var(--teal-light);">⚡</div><div class="ch-ttl">Make.com — Patient Booking Scenario</div><div class="ch-sub" id="s1st">IDLE</div></div>
       <div class="mflow">
-        <div class="mnode"><div class="mball" id="n0">🎣</div><div class="mlabel">Webhook</div><div class="mapp">Make.com</div></div>
-        <div class="mconn"><div class="mline" id="l0"></div></div>
-        <div class="mnode"><div class="mball" id="n1">🗄️</div><div class="mlabel">Create Patient</div><div class="mapp">Airtable</div></div>
-        <div class="mconn"><div class="mline" id="l1"></div></div>
-        <div class="mnode"><div class="mball" id="n2">📧</div><div class="mlabel">Confirm Email</div><div class="mapp">Gmail</div></div>
-        <div class="mconn"><div class="mline" id="l2"></div></div>
-        <div class="mnode"><div class="mball" id="n3">💬</div><div class="mlabel">Slack Alert</div><div class="mapp">#front-desk</div></div>
-        <div class="mconn"><div class="mline" id="l3"></div></div>
-        <div class="mnode"><div class="mball" id="n4">⏰</div><div class="mlabel">Schedule Reminder</div><div class="mapp">Make.com</div></div>
-        <div class="mconn"><div class="mline" id="l4"></div></div>
-        <div class="mnode"><div class="mball" id="n5">✅</div><div class="mlabel">Done</div><div class="mapp">Make.com</div></div>
+        <div class="mnode"><div class="mn-b" id="n10">🎣</div><div class="mn-lbl">Webhook</div><div class="mn-app">Make.com</div></div>
+        <div class="mconn"><div class="mline" id="l10"></div></div>
+        <div class="mnode"><div class="mn-b" id="n11">🗄️</div><div class="mn-lbl">Add Patient Record</div><div class="mn-app">Airtable</div></div>
+        <div class="mconn"><div class="mline" id="l11"></div></div>
+        <div class="mnode"><div class="mn-b" id="n12">📧</div><div class="mn-lbl">Confirm to Patient</div><div class="mn-app">Gmail</div></div>
+        <div class="mconn"><div class="mline" id="l12"></div></div>
+        <div class="mnode"><div class="mn-b" id="n13">💬</div><div class="mn-lbl">Slack #staff</div><div class="mn-app">Slack</div></div>
+        <div class="mconn"><div class="mline" id="l13"></div></div>
+        <div class="mnode"><div class="mn-b" id="n14">📧</div><div class="mn-lbl">24hr Reminder</div><div class="mn-app">Gmail (Scheduled)</div></div>
+        <div class="mconn"><div class="mline" id="l14"></div></div>
+        <div class="mnode"><div class="mn-b" id="n15">✅</div><div class="mn-lbl">Done</div><div class="mn-app">Make.com</div></div>
       </div>
       <div id="log1" class="logbox" style="margin:0 14px 14px;">
-        <div class="log-hdr"><span id="ls1" class="lrun">● RUNNING</span><span style="margin-left:auto;color:#1e293b;font-size:9px;">Patient Booking Scenario</span></div>
+        <div class="log-top"><span id="ls1" class="ls-run">● RUNNING</span><span style="margin-left:auto;color:#1a3a5a;font-size:10px;">Patient Booking Scenario</span></div>
         <div class="log-body" id="lb1"></div>
       </div>
     </div>
   </div>
 
-  <!-- AIRTABLE -->
-  <div class="slbl"><div class="slbl-tag">Airtable — Patient & Appointment Database</div><div class="slbl-line"></div></div>
+  <div class="sdiv" style="margin-top:20px;"><div class="sdiv-num" style="background:var(--teal);">→</div><div class="sdiv-title">Airtable — Appointments Database</div><div class="sdiv-line"></div></div>
   <div class="card" style="margin-bottom:14px;">
-    <div class="at-tbl-wrap"><table class="at-tbl">
-      <thead><tr><th>Patient</th><th>Appointment</th><th>Date & Time</th><th>Doctor</th><th>Insurance</th><th>Status</th><th>Reminder</th></tr></thead>
-      <tbody id="p-table">
-        <tr><td>James Whitfield</td><td>Dental Cleaning</td><td>Mar 10, 9:00 AM</td><td>Dr. Patel</td><td>Aetna</td><td><span class="badge b-g">Confirmed</span></td><td><span class="badge b-t">Sent ✓</span></td></tr>
-        <tr><td>Rosa Kim</td><td>General Checkup</td><td>Mar 10, 11:00 AM</td><td>Dr. Johnson</td><td>Blue Cross</td><td><span class="badge b-y">Pending</span></td><td><span class="badge b-y">Scheduled</span></td></tr>
-        <tr><td>Ahmed Hassan</td><td>X-Ray</td><td>Mar 11, 2:00 PM</td><td>Dr. Patel</td><td>Medicare</td><td><span class="badge b-g">Confirmed</span></td><td><span class="badge b-t">Sent ✓</span></td></tr>
+    <div class="at-wrap"><table class="at-tbl">
+      <thead><tr><th>Patient Name</th><th>Appointment Type</th><th>Date</th><th>Time</th><th>Insurance</th><th>Reason</th><th>Status</th></tr></thead>
+      <tbody id="ptbl">
+        <tr><td>Sarah Johnson</td><td>Teeth Cleaning</td><td>Mar 10, 2026</td><td>9:00 AM</td><td>Delta Dental</td><td>Bi-annual cleaning</td><td><span class="badge b-g">Confirmed</span></td></tr>
+        <tr><td>Mike Torres</td><td>New Patient Exam</td><td>Mar 10, 2026</td><td>10:00 AM</td><td>MetLife</td><td>First visit</td><td><span class="badge b-t">Reminder Sent</span></td></tr>
+        <tr><td>Amanda Lee</td><td>Emergency Visit</td><td>Mar 10, 2026</td><td>2:00 PM</td><td>Cigna</td><td>Toothache</td><td><span class="badge b-y">Pending</span></td></tr>
       </tbody>
     </table></div>
   </div>
 
-  <!-- EMAIL + SLACK -->
   <div class="two-col" style="margin-bottom:14px;">
     <div>
-      <div class="slbl" style="margin-top:0;"><div class="slbl-tag">Gmail — Appointment Confirmation</div><div class="slbl-line"></div></div>
+      <div class="sdiv" style="margin-top:0;"><div class="sdiv-num" style="background:var(--teal);">→</div><div class="sdiv-title">Gmail — Patient Confirmation</div><div class="sdiv-line"></div></div>
       <div class="ecard">
-        <div class="echrome"><div class="ecdot" style="background:#ff5f57;"></div><div class="ecdot" style="background:#ffbd2e;"></div><div class="ecdot" style="background:#28c840;"></div><span style="font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--muted2);margin-left:8px;">Gmail — Sent</span></div>
-        <div id="e1-ph" class="eph">⏳ Submit the booking form above to trigger the confirmation email</div>
-        <div id="e1" style="display:none;">
-          <div class="emeta"><div class="emrow">To: <span id="e1-to">—</span></div><div class="emrow">From: <span>appointments@clinic.com</span></div></div>
-          <div class="esubj" id="e1-subj">—</div>
-          <div class="ebody" id="e1-body"></div>
+        <div class="echrome"><div class="ecd" style="background:#ff5f57;"></div><div class="ecd" style="background:#ffbd2e;"></div><div class="ecd" style="background:#28c840;"></div><span style="font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--muted2);margin-left:7px;">Gmail — Sent</span></div>
+        <div id="s1ep" class="epholder">⏳ Submit the patient form above to trigger the confirmation email</div>
+        <div id="s1em" style="display:none;">
+          <div class="emeta"><div class="em-row">To: <span id="s1et">—</span></div><div class="em-row">From: <span>appointments@clinicflow.com (via Gmail)</span></div></div>
+          <div class="esubj" id="s1es">—</div>
+          <div class="ebody" id="s1eb"></div>
         </div>
       </div>
     </div>
     <div>
-      <div class="slbl" style="margin-top:0;"><div class="slbl-tag">Slack — #front-desk</div><div class="slbl-line"></div></div>
-      <div class="slcard">
-        <div class="sltop"><span style="color:#9b9b9b;font-size:13px;">#</span><span class="slcn">front-desk</span></div>
-        <div class="slmsgs" id="sl1">
-          <div class="slmsg"><div class="slav" style="background:#0a2a28;">⚡</div><div class="slinner"><div class="slname">Make.com Bot <span class="ts">8:45am</span></div><div class="sltext">📅 New booking: <strong>Rosa Kim</strong> — <span class="stag stag-t">General Checkup</span> — Mar 10, 11:00 AM. Insurance: <span class="stag stag-g">Blue Cross</span>.</div></div></div>
+      <div class="sdiv" style="margin-top:0;"><div class="sdiv-num" style="background:var(--teal);">→</div><div class="sdiv-title">Slack — #clinic-staff</div><div class="sdiv-line"></div></div>
+      <div class="slack">
+        <div class="slack-top"><span style="color:#9b9b9b;font-size:13px;">#</span><span class="slack-cn">clinic-staff</span></div>
+        <div class="slack-msgs" id="s1sl">
+          <div class="smsg"><div class="sav" style="background:#003a4a;">⚡</div><div class="smi"><div class="sname">Make.com Bot <span class="ts">today 8:30am</span></div><div class="stxt">🩺 New booking: <strong>Mike Torres</strong> — <span class="st">New Patient Exam</span> • Mar 10 at 10AM. Insurance: <span class="sy">MetLife</span>. Confirmation sent ✓</div></div></div>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- SCENARIO 2 — FOLLOW-UP -->
-  <div class="slbl" style="margin-top:28px;"><div class="slbl-tag">Scenario 2 — Post-Visit Follow-Up</div><div class="slbl-line"></div></div>
-
+  <div class="sdiv" style="margin-top:36px;"><div class="sdiv-num">2</div><div class="sdiv-title">Scenario 2 — Appointment Reminder</div><div class="sdiv-line"></div><div class="spill" style="background:var(--green-light);color:var(--green);border-color:#a7f3d0;">Airtable → Gmail → Slack</div></div>
   <div class="two-col" style="margin-bottom:14px;">
     <div class="card">
-      <div class="card-hdr"><span class="ch-ico">🔄</span><div class="ch-ttl">Post-Visit Follow-Up Form</div><div class="ch-sub">Jotform — Doctor's Notes</div></div>
+      <div class="card-hdr"><div class="ch-ico" style="background:var(--green-light);">⏰</div><div class="ch-ttl">Send Reminder Form</div><div class="ch-sub">Jotform / Manual Trigger</div></div>
       <div class="card-body">
         <div class="fgrid">
-          <div class="field"><label>Patient Name <span>required</span></label><input class="finput" id="f-name" placeholder="e.g. Linda Martinez" /></div>
-          <div class="field"><label>Patient Email <span>required</span></label><input class="finput" id="f-email" placeholder="linda@email.com" /></div>
-          <div class="field"><label>Visit Date <span>required</span></label><input class="finput" id="f-date" type="date" /></div>
-          <div class="field"><label>Doctor <span>required</span></label><input class="finput" id="f-doc" placeholder="e.g. Dr. Sarah Patel" /></div>
-          <div class="field"><label>Follow-up Required? <span>required</span></label>
-            <select class="fselect" id="f-req">
-              <option value="">— Select —</option>
-              <option>Yes — within 1 week</option><option>Yes — within 2 weeks</option><option>Yes — within 1 month</option><option>No — patient discharged</option>
-            </select>
+          <div class="field"><label>Patient Name <span>required</span></label><input class="finput" id="r-name" placeholder="e.g. Jordan Williams"/></div>
+          <div class="field"><label>Patient Email <span>required</span></label><input class="finput" id="r-email" placeholder="jordan@email.com"/></div>
+          <div class="field"><label>Appointment Type <span>required</span></label>
+            <select class="fselect" id="r-type"><option value="">— Select —</option><option>New Patient Exam</option><option>Teeth Cleaning</option><option>Emergency Visit</option><option>Consultation</option><option>Follow-up</option></select>
           </div>
-          <div class="field"><label>Prescription Issued? <span>required</span></label>
-            <select class="fselect" id="f-rx">
-              <option value="">— Select —</option>
-              <option>Yes</option><option>No</option>
-            </select>
+          <div class="field"><label>Appointment Date <span>required</span></label><input class="finput" id="r-date" type="date"/></div>
+          <div class="field"><label>Appointment Time <span>required</span></label>
+            <select class="fselect" id="r-time"><option value="">— Select —</option><option>8:00 AM</option><option>9:00 AM</option><option>10:00 AM</option><option>11:00 AM</option><option>1:00 PM</option><option>2:00 PM</option><option>3:00 PM</option><option>4:00 PM</option></select>
           </div>
-          <div class="field ffull"><label>Doctor's Notes for Patient <span>required</span></label><input class="finput" id="f-notes" placeholder="e.g. Take antibiotics twice daily, rest for 3 days" /></div>
+          <div class="field"><label>Doctor / Dentist <span>required</span></label><input class="finput" id="r-doc" placeholder="e.g. Dr. Patricia Wong"/></div>
         </div>
-        <button class="sbtn sbtn-blue" onclick="runS2()">🔄 Submit Notes & Trigger Follow-Up Automation</button>
+        <button class="sbtn sbtn-grn" onclick="runS2()">⏰ Send Reminder & Trigger Automation</button>
       </div>
     </div>
-
     <div class="card">
-      <div class="card-hdr"><span class="ch-ico">⚡</span><div class="ch-ttl">Make.com — Follow-Up Scenario</div><div class="ch-sub" id="s2-st">IDLE</div></div>
+      <div class="card-hdr"><div class="ch-ico" style="background:var(--green-light);">⚡</div><div class="ch-ttl">Make.com — Reminder Scenario</div><div class="ch-sub" id="s2st">IDLE</div></div>
       <div class="mflow">
-        <div class="mnode"><div class="mball" id="fn0">🎣</div><div class="mlabel">Webhook</div><div class="mapp">Make.com</div></div>
-        <div class="mconn"><div class="mline" id="fl0"></div></div>
-        <div class="mnode"><div class="mball" id="fn1">🗄️</div><div class="mlabel">Update Record</div><div class="mapp">Airtable</div></div>
-        <div class="mconn"><div class="mline" id="fl1"></div></div>
-        <div class="mnode"><div class="mball" id="fn2">🔀</div><div class="mlabel">Router: Follow-up?</div><div class="mapp">Make.com</div></div>
-        <div class="mconn"><div class="mline" id="fl2"></div></div>
-        <div class="mnode"><div class="mball" id="fn3">📧</div><div class="mlabel">Summary Email</div><div class="mapp">Gmail → Patient</div></div>
-        <div class="mconn"><div class="mline" id="fl3"></div></div>
-        <div class="mnode"><div class="mball" id="fn4">💬</div><div class="mlabel">Slack #doctors</div><div class="mapp">Slack</div></div>
-        <div class="mconn"><div class="mline" id="fl4"></div></div>
-        <div class="mnode"><div class="mball" id="fn5">✅</div><div class="mlabel">Done</div><div class="mapp">Make.com</div></div>
+        <div class="mnode"><div class="mn-b" id="n20">⏰</div><div class="mn-lbl">Scheduled Trigger</div><div class="mn-app">Make.com</div></div>
+        <div class="mconn"><div class="mline" id="l20"></div></div>
+        <div class="mnode"><div class="mn-b" id="n21">🗄️</div><div class="mn-lbl">Fetch from Airtable</div><div class="mn-app">Airtable</div></div>
+        <div class="mconn"><div class="mline" id="l21"></div></div>
+        <div class="mnode"><div class="mn-b" id="n22">📧</div><div class="mn-lbl">Reminder Email</div><div class="mn-app">Gmail</div></div>
+        <div class="mconn"><div class="mline" id="l22"></div></div>
+        <div class="mnode"><div class="mn-b" id="n23">🗄️</div><div class="mn-lbl">Update Status</div><div class="mn-app">Airtable</div></div>
+        <div class="mconn"><div class="mline" id="l23"></div></div>
+        <div class="mnode"><div class="mn-b" id="n24">💬</div><div class="mn-lbl">Slack #staff</div><div class="mn-app">Slack</div></div>
+        <div class="mconn"><div class="mline" id="l24"></div></div>
+        <div class="mnode"><div class="mn-b" id="n25">✅</div><div class="mn-lbl">Done</div><div class="mn-app">Make.com</div></div>
       </div>
       <div id="log2" class="logbox" style="margin:0 14px 14px;">
-        <div class="log-hdr"><span id="ls2" class="lrun">● RUNNING</span><span style="margin-left:auto;color:#1e293b;font-size:9px;">Follow-Up Scenario</span></div>
+        <div class="log-top"><span id="ls2" class="ls-run">● RUNNING</span><span style="margin-left:auto;color:#1a3a5a;font-size:10px;">Appointment Reminder Scenario</span></div>
         <div class="log-body" id="lb2"></div>
       </div>
     </div>
@@ -331,189 +281,139 @@ body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;min-h
 
   <div class="two-col" style="margin-bottom:40px;">
     <div>
-      <div class="slbl" style="margin-top:0;"><div class="slbl-tag">Gmail — Patient Follow-Up Summary</div><div class="slbl-line"></div></div>
+      <div class="sdiv" style="margin-top:0;"><div class="sdiv-num" style="background:var(--green);">→</div><div class="sdiv-title">Gmail — Appointment Reminder</div><div class="sdiv-line"></div></div>
       <div class="ecard">
-        <div class="echrome"><div class="ecdot" style="background:#ff5f57;"></div><div class="ecdot" style="background:#ffbd2e;"></div><div class="ecdot" style="background:#28c840;"></div><span style="font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--muted2);margin-left:8px;">Gmail — Sent</span></div>
-        <div id="e2-ph" class="eph">⏳ Submit the follow-up form above to trigger the summary email</div>
-        <div id="e2" style="display:none;">
-          <div class="emeta"><div class="emrow">To: <span id="e2-to">—</span></div><div class="emrow">From: <span>care@clinic.com</span></div></div>
-          <div class="esubj" id="e2-subj">—</div>
-          <div class="ebody" id="e2-body"></div>
+        <div class="echrome"><div class="ecd" style="background:#ff5f57;"></div><div class="ecd" style="background:#ffbd2e;"></div><div class="ecd" style="background:#28c840;"></div><span style="font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--muted2);margin-left:7px;">Gmail — Sent</span></div>
+        <div id="s2ep" class="epholder">⏳ Trigger a reminder above to see the reminder email</div>
+        <div id="s2em" style="display:none;">
+          <div class="emeta"><div class="em-row">To: <span id="s2et">—</span></div><div class="em-row">From: <span>reminders@clinicflow.com (via Gmail)</span></div></div>
+          <div class="esubj" id="s2es">—</div>
+          <div class="ebody" id="s2eb"></div>
         </div>
       </div>
     </div>
     <div>
-      <div class="slbl" style="margin-top:0;"><div class="slbl-tag">Slack — #doctors</div><div class="slbl-line"></div></div>
-      <div class="slcard">
-        <div class="sltop"><span style="color:#9b9b9b;font-size:13px;">#</span><span class="slcn">doctors</span></div>
-        <div class="slmsgs" id="sl2">
-          <div class="slmsg"><div class="slav" style="background:#0a1a2e;">⚡</div><div class="slinner"><div class="slname">Make.com Bot <span class="ts">3:20pm</span></div><div class="sltext">🔄 Follow-up needed: <strong>Ahmed Hassan</strong> — visit with <strong>Dr. Patel</strong>. Next appt: <span class="stag stag-y">within 1 week</span>. Rx: <span class="stag stag-t">Issued</span>.</div></div></div>
+      <div class="sdiv" style="margin-top:0;"><div class="sdiv-num" style="background:var(--green);">→</div><div class="sdiv-title">Slack — #clinic-staff</div><div class="sdiv-line"></div></div>
+      <div class="slack">
+        <div class="slack-top"><span style="color:#9b9b9b;font-size:13px;">#</span><span class="slack-cn">clinic-staff</span></div>
+        <div class="slack-msgs" id="s2sl">
+          <div class="smsg"><div class="sav" style="background:#003a1a;">⚡</div><div class="smi"><div class="sname">Make.com Bot <span class="ts">today 3:00pm</span></div><div class="stxt">⏰ Reminder sent: <strong>Mike Torres</strong> — <span class="st">New Patient Exam</span> tomorrow 10AM. Status updated to <span class="sg">Reminder Sent</span>.</div></div></div>
         </div>
       </div>
     </div>
   </div>
 
-  <div style="text-align:center;padding-bottom:20px;">
-    <button class="reset-btn" onclick="location.reload()">↺ Reset Demo</button>
-    <p style="margin-top:10px;font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--muted2);">Want this built for your clinic? → <a href="https://contra.com/s/BMcFPFU6-automated-lead-followup-system-jotform-airtable-make-gmail-slack" style="color:var(--accent);">contra.com/joseph_tucker</a></p>
+  <div style="text-align:center;padding-bottom:16px;">
+    <button class="reset-btn" onclick="location.reload()">↺ Reset All Demos</button>
+    <p style="margin-top:10px;font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--muted2);">Want this built for your clinic? → <a href="https://contra.com/s/BMcFPFU6-automated-lead-followup-system-jotform-airtable-make-gmail-slack" style="color:var(--teal);">Book a free call</a></p>
   </div>
-
 </div>
-
 <script>
-let r1=false,r2=false;
 function sleep(ms){return new Promise(r=>setTimeout(r,ms));}
-
+let r1=false,r2=false;
 async function runS1(){
   if(r1)return;r1=true;
-  const name=document.getElementById('p-name').value||'Linda Martinez';
-  const email=document.getElementById('p-email').value||'linda@email.com';
-  const type=document.getElementById('p-type').value||'General Checkup';
-  const date=document.getElementById('p-date').value||'March 15, 2026';
+  const name=document.getElementById('p-name').value||'Jordan Williams';
+  const email=document.getElementById('p-email').value||'jordan@email.com';
+  const type=document.getElementById('p-type').value||'New Patient Exam';
+  const date=document.getElementById('p-date').value||'March 12, 2026';
   const time=document.getElementById('p-time').value||'10:00 AM';
-  const ins=document.getElementById('p-ins').value||'Blue Cross Blue Shield';
-  const notes=document.getElementById('p-notes').value||'Routine checkup';
+  const ins=document.getElementById('p-ins').value||'Delta Dental';
+  const reason=document.getElementById('p-reason').value||'Regular checkup';
   const fn=name.split(' ')[0];
-  const urgent=type==='Emergency';
-
-  const lb=document.getElementById('lb1'),ls=document.getElementById('ls1');
-  document.getElementById('log1').classList.add('show');
-  lb.innerHTML='';ls.className='lrun';ls.textContent='● RUNNING';
-  document.getElementById('s1-st').textContent='RUNNING...';
-  for(let i=0;i<6;i++){const n=document.getElementById('n'+i);if(n)n.className='mball';const l=document.getElementById('l'+i);if(l)l.className='mline';}
-
+  const lb=document.getElementById('lb1'),ls=document.getElementById('ls1'),log=document.getElementById('log1');
+  log.classList.add('show');lb.innerHTML='';ls.className='ls-run';ls.textContent='● RUNNING';
+  document.getElementById('s1st').textContent='RUNNING...';
+  for(let i=0;i<6;i++){const n=document.getElementById('n1'+i);if(n)n.className='mn-b';const l=document.getElementById('l1'+i);if(l)l.className='mline';}
   const steps=[
-    {ico:'🎣',msg:`<span class="te">Webhook received</span> — Booking from <span class="te">${name}</span>`,node:0},
-    {ico:'🗄️',msg:`<span class="gr">Airtable record created</span> — ${type} • ${date} ${time}${urgent?' • <span style="color:#ef4444">URGENT</span>':''}`,node:1},
-    {ico:'📧',msg:`<span class="te">Confirmation email sent</span> → ${email}`,node:2},
-    {ico:'💬',msg:`<span class="te">Slack alert</span> → #front-desk — "${name} booked ${type}"`,node:3},
-    {ico:'⏰',msg:`<span class="gr">Reminder scheduled</span> — Auto-reminder set for 24hrs before appointment`,node:4},
-    {ico:'✅',msg:`<span class="gr">Booking scenario complete</span> — All steps in 5.4 seconds`,node:5},
+    {ic:'🎣',tx:`<span class="t">Webhook received</span> — new patient booking from <span class="t">${name}</span>`,nd:0},
+    {ic:'🗄️',tx:`<span class="g">Airtable record created</span> — ${type} on ${date} at ${time}`,nd:1},
+    {ic:'📧',tx:`<span class="t">Confirmation email sent</span> → ${email}`,nd:2},
+    {ic:'💬',tx:`<span class="t">Slack posted</span> → #clinic-staff — new patient ${name} booked`,nd:3},
+    {ic:'📧',tx:`<span class="y">24hr reminder scheduled</span> → fires automatically tomorrow`,nd:4},
+    {ic:'✅',tx:`<span class="g">Patient booking complete</span> — executed in 5.2 seconds`,nd:5},
   ];
-
   const now=new Date();
   for(let i=0;i<steps.length;i++){
-    await sleep(i*750);
-    const s=steps[i];
+    await sleep(i*700);const s=steps[i];
     const ts=new Date(now.getTime()+i*1000).toTimeString().slice(0,8);
     const line=document.createElement('div');line.className='ll show';
-    line.innerHTML=`<span class="lts">${ts}</span><span class="lic">${s.ico}</span><span class="lmsg">${s.msg}</span>`;
+    line.innerHTML=`<span class="ll-ts">${ts}</span><span class="ll-ic">${s.ic}</span><span class="ll-tx">${s.tx}</span>`;
     lb.appendChild(line);
-    const nd=document.getElementById('n'+s.node);if(nd)nd.className='mball act';
-    if(s.node<5){const ln=document.getElementById('l'+s.node);if(ln){ln.className='mline flow-t';await sleep(500);ln.className='mline';if(nd)nd.className='mball done';}}
-    else{if(nd){await sleep(300);nd.className='mball done';}}
-    if(s.node===1)addPRow(name,type,date,time,ins,urgent);
-    if(s.node===2)showE1(name,email,fn,type,date,time,ins,notes,urgent);
-    if(s.node===3)addSl1(name,type,date,time,ins,urgent);
+    const node=document.getElementById('n1'+s.nd);if(node)node.className='mn-b act';
+    if(s.nd<5){const ln=document.getElementById('l1'+s.nd);if(ln){ln.className='mline flt';await sleep(500);ln.className='mline';if(node)node.className='mn-b done';}}
+    else{if(node){await sleep(300);node.className='mn-b done';}}
+    if(s.nd===1){
+      const tb=document.getElementById('ptbl');const tr=document.createElement('tr');tr.className='fl-t';
+      tr.innerHTML=`<td>${name}</td><td>${type}</td><td>${date}</td><td>${time}</td><td>${ins||'N/A'}</td><td>${reason}</td><td><span class="badge b-t">Confirmed</span></td>`;
+      tb.prepend(tr);
+    }
+    if(s.nd===2){
+      document.getElementById('s1ep').style.display='none';
+      document.getElementById('s1et').textContent=email;
+      document.getElementById('s1es').textContent=`Your ${type} is confirmed — ${date} at ${time}`;
+      document.getElementById('s1eb').innerHTML=`Hi <span class="hi">${fn}</span>,<br><br>Your appointment is confirmed! Here are your details:<br><br><strong>Appointment:</strong> <span class="hi">${type}</span><br><strong>Date:</strong> <span class="hi">${date}</span><br><strong>Time:</strong> <span class="hi">${time}</span>${ins?`<br><strong>Insurance:</strong> <span class="hi">${ins}</span>`:''}<br><br>📋 <strong>Please bring:</strong><br>• Photo ID<br>• Insurance card<br>• List of current medications<br><br>You'll receive a reminder email 24 hours before your appointment.<br><br>Need to reschedule? <span class="lnk">[Click here to reschedule]</span><br><br>See you soon!<br><strong>ClinicFlow Team</strong>`;
+      document.getElementById('s1em').style.display='block';
+    }
+    if(s.nd===3){
+      const c=document.getElementById('s1sl');const m=document.createElement('div');m.className='smsg snew';
+      const t=new Date().toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'});
+      m.innerHTML=`<div class="sav" style="background:#003a4a;">⚡</div><div class="smi"><div class="sname">Make.com Bot <span class="ts">today ${t}</span></div><div class="stxt">🩺 New booking: <strong>${name}</strong> — <span class="st">${type}</span> • ${date} at ${time}${ins?` • Ins: <span class="sy">${ins}</span>`:' • No insurance'}. Confirmation sent ✓</div></div>`;
+      c.appendChild(m);
+    }
   }
-  document.getElementById('dw-apts').textContent=parseInt(document.getElementById('dw-apts').textContent)+1;
+  document.getElementById('dw-apt').textContent=parseInt(document.getElementById('dw-apt').textContent)+1;
   document.getElementById('dw-new').textContent=parseInt(document.getElementById('dw-new').textContent)+1;
-  ls.className='ldone';ls.textContent='✓ COMPLETED';document.getElementById('s1-st').textContent='DONE ✓';r1=false;
+  document.getElementById('dw-conf').textContent=parseInt(document.getElementById('dw-conf').textContent)+1;
+  ls.className='ls-done';ls.textContent='✓ COMPLETED';document.getElementById('s1st').textContent='DONE ✓';r1=false;
 }
-
-function addPRow(name,type,date,time,ins,urgent){
-  const tb=document.getElementById('p-table');
-  const tr=document.createElement('tr');tr.className='nr-t';
-  const status=urgent?'<span class="badge b-r">URGENT</span>':'<span class="badge b-y">Pending</span>';
-  tr.innerHTML=`<td>${name}</td><td>${type}</td><td>${date} ${time}</td><td>Dr. Assigned</td><td>${ins||'Not provided'}</td><td>${status}</td><td><span class="badge b-t">Scheduled</span></td>`;
-  tb.prepend(tr);
-}
-
-function showE1(name,email,fn,type,date,time,ins,notes,urgent){
-  document.getElementById('e1-ph').style.display='none';
-  document.getElementById('e1-to').textContent=email;
-  document.getElementById('e1-subj').textContent=`Your appointment is confirmed, ${fn}`;
-  document.getElementById('e1-body').innerHTML=`Hi <span class="hi">${fn}</span>,<br><br>
-Your appointment has been successfully booked. Here are your details:<br><br>
-<strong>Appointment Type:</strong> <span class="hi">${type}</span><br>
-<strong>Date:</strong> <span class="hi">${date}</span><br>
-<strong>Time:</strong> <span class="hi">${time}</span><br>
-<strong>Insurance:</strong> <span class="hi">${ins||'Not provided'}</span><br><br>
-${urgent?'<strong style="color:#c62828;">⚠️ You have booked an emergency appointment. Please arrive as soon as possible.</strong><br><br>':''}
-<strong>Before your visit:</strong><br>
-• <span class="lnk">[Complete your patient intake form]</span><br>
-• Bring your insurance card and photo ID<br>
-• Arrive 10 minutes early<br><br>
-You'll receive an automatic reminder 24 hours before your appointment.<br><br>
-To reschedule: <span class="lnk">[Click here]</span><br><br>
-See you soon,<br><strong>The Clinic Team</strong>`;
-  document.getElementById('e1').style.display='block';
-}
-
-function addSl1(name,type,date,time,ins,urgent){
-  const c=document.getElementById('sl1');
-  const msg=document.createElement('div');msg.className='slmsg slnew';
-  const t=new Date().toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'});
-  msg.innerHTML=`<div class="slav" style="background:#0a2a28;">⚡</div><div class="slinner"><div class="slname">Make.com Bot <span class="ts">${t}</span></div><div class="sltext">${urgent?'🚨':'📅'} New booking: <strong>${name}</strong> — <span class="stag stag-t">${type}</span> — ${date} ${time}${urgent?' <strong style="color:#ef9a9a;">EMERGENCY</strong>':''}. Insurance: ${ins||'None'}.</div></div>`;
-  c.appendChild(msg);
-}
-
 async function runS2(){
   if(r2)return;r2=true;
-  const name=document.getElementById('f-name').value||'Linda Martinez';
-  const email=document.getElementById('f-email').value||'linda@email.com';
-  const doc=document.getElementById('f-doc').value||'Dr. Sarah Patel';
-  const req=document.getElementById('f-req').value||'Yes — within 2 weeks';
-  const rx=document.getElementById('f-rx').value||'Yes';
-  const notes=document.getElementById('f-notes').value||'Take antibiotics twice daily, rest for 3 days';
+  const name=document.getElementById('r-name').value||'Jordan Williams';
+  const email=document.getElementById('r-email').value||'jordan@email.com';
+  const type=document.getElementById('r-type').value||'New Patient Exam';
+  const date=document.getElementById('r-date').value||'March 12, 2026';
+  const time=document.getElementById('r-time').value||'10:00 AM';
+  const doc=document.getElementById('r-doc').value||'Dr. Patricia Wong';
   const fn=name.split(' ')[0];
-  const needsFollowUp=req&&!req.includes('discharged');
-
-  const lb=document.getElementById('lb2'),ls=document.getElementById('ls2');
-  document.getElementById('log2').classList.add('show');
-  lb.innerHTML='';ls.className='lrun';ls.textContent='● RUNNING';
-  document.getElementById('s2-st').textContent='RUNNING...';
-  for(let i=0;i<6;i++){const n=document.getElementById('fn'+i);if(n)n.className='mball';const l=document.getElementById('fl'+i);if(l)l.className='mline';}
-
+  const lb=document.getElementById('lb2'),ls=document.getElementById('ls2'),log=document.getElementById('log2');
+  log.classList.add('show');lb.innerHTML='';ls.className='ls-run';ls.textContent='● RUNNING';
+  document.getElementById('s2st').textContent='RUNNING...';
+  for(let i=0;i<6;i++){const n=document.getElementById('n2'+i);if(n)n.className='mn-b';const l=document.getElementById('l2'+i);if(l)l.className='mline';}
   const steps=[
-    {ico:'🎣',msg:`<span class="te">Webhook received</span> — Visit notes from <span class="te">${doc}</span> for ${name}`,node:0},
-    {ico:'🗄️',msg:`<span class="gr">Airtable updated</span> — Visit complete • Rx: ${rx} • Follow-up: ${needsFollowUp?req:'None'}`,node:1},
-    {ico:'🔀',msg:`<span class="te">Router:</span> Follow-up ${needsFollowUp?'<span class="gr">required → notification route</span>':'<span class="te">not required → discharge route</span>'}`,node:2},
-    {ico:'📧',msg:`<span class="te">Visit summary sent</span> → ${email} — Doctor notes included`,node:3},
-    {ico:'💬',msg:`<span class="te">Slack #doctors</span> — "${name} follow-up: ${req}"`,node:4},
-    {ico:'✅',msg:`<span class="gr">Follow-up scenario complete</span> — All notifications sent`,node:5},
+    {ic:'⏰',tx:`<span class="t">Scheduled trigger fired</span> — 24hr reminder for ${name}'s appointment`,nd:0},
+    {ic:'🗄️',tx:`<span class="g">Airtable fetched</span> — ${type} on ${date} at ${time} with ${doc}`,nd:1},
+    {ic:'📧',tx:`<span class="g">Reminder email sent</span> → ${email} — appointment tomorrow`,nd:2},
+    {ic:'🗄️',tx:`<span class="g">Airtable updated</span> — status changed to "Reminder Sent"`,nd:3},
+    {ic:'💬',tx:`<span class="t">Slack posted</span> → #clinic-staff — reminder sent for ${name}`,nd:4},
+    {ic:'✅',tx:`<span class="g">Reminder scenario complete</span> — executed in 4.8 seconds`,nd:5},
   ];
-
   const now=new Date();
   for(let i=0;i<steps.length;i++){
-    await sleep(i*750);
-    const s=steps[i];
+    await sleep(i*700);const s=steps[i];
     const ts=new Date(now.getTime()+i*1000).toTimeString().slice(0,8);
     const line=document.createElement('div');line.className='ll show';
-    line.innerHTML=`<span class="lts">${ts}</span><span class="lic">${s.ico}</span><span class="lmsg">${s.msg}</span>`;
+    line.innerHTML=`<span class="ll-ts">${ts}</span><span class="ll-ic">${s.ic}</span><span class="ll-tx">${s.tx}</span>`;
     lb.appendChild(line);
-    const nd=document.getElementById('fn'+s.node);if(nd)nd.className='mball act-b';
-    if(s.node<5){const ln=document.getElementById('fl'+s.node);if(ln){ln.className='mline flow-b';await sleep(500);ln.className='mline';if(nd)nd.className='mball done';}}
-    else{if(nd){await sleep(300);nd.className='mball done';}}
-    if(s.node===3)showE2(name,email,fn,doc,req,rx,notes,needsFollowUp);
-    if(s.node===4)addSl2(name,doc,req,rx,needsFollowUp);
+    const node=document.getElementById('n2'+s.nd);if(node)node.className='mn-b actg';
+    if(s.nd<5){const ln=document.getElementById('l2'+s.nd);if(ln){ln.className='mline flg';await sleep(500);ln.className='mline';if(node)node.className='mn-b done';}}
+    else{if(node){await sleep(300);node.className='mn-b done';}}
+    if(s.nd===2){
+      document.getElementById('s2ep').style.display='none';
+      document.getElementById('s2et').textContent=email;
+      document.getElementById('s2es').textContent=`Reminder: Your ${type} is tomorrow at ${time}`;
+      document.getElementById('s2eb').innerHTML=`Hi <span class="hig">${fn}</span>,<br><br>This is a friendly reminder that your appointment is <strong>tomorrow</strong>:<br><br><strong>Appointment:</strong> <span class="hig">${type}</span><br><strong>Date:</strong> <span class="hig">${date}</span><br><strong>Time:</strong> <span class="hig">${time}</span><br><strong>Doctor:</strong> <span class="hig">${doc}</span><br><br>📋 <strong>Don't forget to bring:</strong><br>• Photo ID & insurance card<br>• List of current medications<br><br>✅ <span class="lnk">[Confirm your appointment]</span><br>🔄 <span class="lnk">[Reschedule if needed]</span><br><br>See you tomorrow!<br><strong>ClinicFlow Team</strong>`;
+      document.getElementById('s2em').style.display='block';
+    }
+    if(s.nd===4){
+      const c=document.getElementById('s2sl');const m=document.createElement('div');m.className='smsg snew';
+      const t=new Date().toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'});
+      m.innerHTML=`<div class="sav" style="background:#003a1a;">⚡</div><div class="smi"><div class="sname">Make.com Bot <span class="ts">today ${t}</span></div><div class="stxt">⏰ Reminder sent: <strong>${name}</strong> — <span class="st">${type}</span> tomorrow ${time} with <span class="sg">${doc}</span>. Status updated.</div></div>`;
+      c.appendChild(m);
+    }
   }
   document.getElementById('dw-remind').textContent=parseInt(document.getElementById('dw-remind').textContent)+1;
-  ls.className='ldone';ls.textContent='✓ COMPLETED';document.getElementById('s2-st').textContent='DONE ✓';r2=false;
-}
-
-function showE2(name,email,fn,doc,req,rx,notes,needsFollowUp){
-  document.getElementById('e2-ph').style.display='none';
-  document.getElementById('e2-to').textContent=email;
-  document.getElementById('e2-subj').textContent=`Your visit summary from ${doc}`;
-  document.getElementById('e2-body').innerHTML=`Hi <span class="hi-b">${fn}</span>,<br><br>
-Thank you for visiting us today. Here's a summary of your appointment with <span class="hi-b">${doc}</span>:<br><br>
-<strong>Doctor's Notes:</strong><br>
-<em>"${notes}"</em><br><br>
-<strong>Prescription:</strong> <span class="hi-b">${rx==='Yes'?'Issued — see details below':'Not required'}</span><br>
-<strong>Follow-up:</strong> <span class="hi-b">${req}</span><br><br>
-${needsFollowUp?`<strong>⏰ Your follow-up appointment:</strong><br>Please book your next visit within the recommended timeframe:<br><span class="lnk">[Book your follow-up appointment here]</span><br><br>`:''}
-If you have any questions about your visit, reply to this email or call us directly.<br><br>
-Take care,<br><strong>${doc} & The Clinic Team</strong>`;
-  document.getElementById('e2').style.display='block';
-}
-
-function addSl2(name,doc,req,rx,needsFollowUp){
-  const c=document.getElementById('sl2');
-  const msg=document.createElement('div');msg.className='slmsg slnew';
-  const t=new Date().toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'});
-  msg.innerHTML=`<div class="slav" style="background:#0a1a2e;">⚡</div><div class="slinner"><div class="slname">Make.com Bot <span class="ts">${t}</span></div><div class="sltext">🔄 Visit complete: <strong>${name}</strong> — seen by <strong>${doc}</strong>. Follow-up: <span class="stag ${needsFollowUp?'stag-y':'stag-g'}">${req}</span>. Rx: <span class="stag stag-t">${rx}</span>.</div></div>`;
-  c.appendChild(msg);
+  ls.className='ls-done';ls.textContent='✓ COMPLETED';document.getElementById('s2st').textContent='DONE ✓';r2=false;
 }
 </script>
 </body>

@@ -3,346 +3,281 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>E-Commerce Store Automation — automation.portfolio</title>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<title>E-commerce Automation Simulator</title>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box;}
-:root{
-  --bg:#0b0b0f;--surface:#111116;--card:#17171d;
-  --border:#222228;--border2:#2e2e38;
-  --text:#f0f0f8;--muted:#5a5a72;--muted2:#3a3a50;
-  --accent:#ff5c35;--accent2:#ff7a5a;--accent-dim:rgba(255,92,53,0.1);
-  --green:#22d37a;--green-dim:rgba(34,211,122,0.1);
-  --blue:#4ea8ff;--blue-dim:rgba(78,168,255,0.1);
-  --yellow:#ffc940;--yellow-dim:rgba(255,201,64,0.1);
-  --purple:#b47aff;--purple-dim:rgba(180,122,255,0.1);
-}
-body{background:var(--bg);color:var(--text);font-family:'Syne',sans-serif;min-height:100vh;overflow-x:hidden;}
-
-/* TOPBAR */
-.topbar{background:var(--surface);border-bottom:1px solid var(--border);padding:0 44px;height:54px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;}
-.brand{font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:400;color:var(--muted);letter-spacing:0.05em;}
-.brand span{color:var(--text);}
-.tb-mid{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted2);letter-spacing:0.12em;text-transform:uppercase;}
-.live{display:flex;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--green);}
-.ldot{width:6px;height:6px;background:var(--green);border-radius:50%;animation:lp 2s infinite;}
+:root{--bg:#0d0d0d;--surface:#141414;--card:#1a1a1a;--border:rgba(255,255,255,0.08);--border2:rgba(255,255,255,0.14);--text:#f5f5f5;--muted:#666;--muted2:#444;--accent:#00d4aa;--accent2:#00f5c4;--accent-dim:rgba(0,212,170,0.1);--orange:#ff6b35;--orange-dim:rgba(255,107,53,0.1);--purple:#a855f7;--purple-dim:rgba(168,85,247,0.1);--yellow:#fbbf24;--yellow-dim:rgba(251,191,36,0.1);--red:#ef4444;}
+body{background:var(--bg);color:var(--text);font-family:'Manrope',sans-serif;min-height:100vh;overflow-x:hidden;}
+.topbar{background:#0a0a0a;padding:0 48px;height:58px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;border-bottom:1px solid var(--border);}
+.brand{display:flex;align-items:center;gap:10px;}
+.brand-icon{width:30px;height:30px;background:var(--accent);border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:15px;}
+.brand-name{font-weight:800;font-size:16px;color:var(--text);letter-spacing:-0.02em;}
+.brand-name span{color:var(--accent);}
+.topbar-tag{font-family:'Roboto Mono',monospace;font-size:11px;color:#2a2a2a;background:rgba(255,255,255,0.04);padding:5px 14px;border-radius:100px;border:1px solid var(--border);}
+.live-pill{display:flex;align-items:center;gap:6px;font-family:'Roboto Mono',monospace;font-size:11px;color:var(--accent);}
+.live-d{width:6px;height:6px;background:var(--accent);border-radius:50%;animation:lp 2s infinite;}
 @keyframes lp{0%,100%{opacity:1;}50%{opacity:0.3;}}
-
-/* HERO */
-.hero{background:var(--surface);padding:60px 44px 48px;border-bottom:1px solid var(--border);position:relative;overflow:hidden;}
-.hero::before{content:'';position:absolute;top:-180px;right:-100px;width:560px;height:560px;background:radial-gradient(circle,rgba(255,92,53,0.08) 0%,transparent 65%);pointer-events:none;}
-.hero::after{content:'';position:absolute;bottom:-120px;left:100px;width:400px;height:400px;background:radial-gradient(circle,rgba(78,168,255,0.05) 0%,transparent 65%);pointer-events:none;}
-.hero-tag{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--accent2);letter-spacing:0.15em;text-transform:uppercase;margin-bottom:20px;}
-.hero h1{font-size:clamp(30px,5vw,56px);font-weight:800;color:var(--text);line-height:1.05;letter-spacing:-0.02em;margin-bottom:14px;}
-.hero h1 em{font-style:normal;color:var(--accent);}
-.hero-sub{color:var(--muted);font-size:15px;max-width:520px;line-height:1.7;margin-bottom:32px;}
-.hero-tools{display:flex;gap:8px;flex-wrap:wrap;}
-.htool{font-family:'JetBrains Mono',monospace;font-size:9px;padding:5px 12px;border:1px solid var(--border2);color:var(--muted2);border-radius:3px;}
-
-/* MAIN */
-.main{padding:32px 44px 80px;max-width:1400px;margin:0 auto;}
-.slbl{display:flex;align-items:center;gap:12px;margin-bottom:16px;margin-top:32px;}
-.slbl-tag{font-family:'JetBrains Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:0.12em;color:var(--accent);}
-.slbl-line{flex:1;height:1px;background:var(--border);}
-.slbl-note{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--muted2);}
-
-/* CARD */
-.card{background:var(--card);border:1px solid var(--border);border-radius:10px;overflow:hidden;}
-.card-hdr{padding:12px 18px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:9px;background:var(--surface);}
-.ch-ico{font-size:17px;}
+.hero{background:linear-gradient(180deg,#0a0a0a 0%,#0d0d0d 100%);padding:56px 48px 48px;position:relative;overflow:hidden;border-bottom:1px solid var(--border);}
+.hero::before{content:'';position:absolute;top:-100px;right:-100px;width:500px;height:500px;background:radial-gradient(circle,rgba(0,212,170,0.06) 0%,transparent 65%);pointer-events:none;}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(0,212,170,0.08);border:1px solid rgba(0,212,170,0.2);border-radius:100px;padding:5px 14px;font-family:'Roboto Mono',monospace;font-size:10px;color:var(--accent);margin-bottom:20px;letter-spacing:0.08em;}
+.hero h1{font-size:clamp(28px,4.5vw,52px);font-weight:800;color:var(--text);line-height:1.08;letter-spacing:-0.04em;margin-bottom:14px;}
+.hero h1 em{color:var(--accent);font-style:normal;}
+.hero-sub{color:#555;font-size:15px;max-width:520px;line-height:1.7;margin-bottom:36px;font-weight:400;}
+.hero-nums{display:flex;gap:40px;}
+.hn-val{font-size:26px;font-weight:800;color:var(--text);letter-spacing:-0.03em;}
+.hn-key{font-family:'Roboto Mono',monospace;font-size:10px;color:#333;text-transform:uppercase;letter-spacing:0.1em;margin-top:2px;}
+.main{padding:36px 48px 80px;max-width:1400px;margin:0 auto;}
+.sdiv{display:flex;align-items:center;gap:12px;margin-bottom:18px;margin-top:36px;}
+.sdiv-num{width:26px;height:26px;background:var(--accent);border-radius:6px;display:flex;align-items:center;justify-content:center;font-family:'Roboto Mono',monospace;font-size:11px;font-weight:600;color:#000;flex-shrink:0;}
+.sdiv-title{font-weight:700;font-size:12px;text-transform:uppercase;letter-spacing:0.08em;color:var(--text);}
+.sdiv-line{flex:1;height:1px;background:var(--border);}
+.spill{display:inline-flex;align-items:center;gap:6px;padding:4px 12px;border-radius:100px;font-family:'Roboto Mono',monospace;font-size:10px;font-weight:500;letter-spacing:0.04em;background:var(--accent-dim);color:var(--accent);border:1px solid rgba(0,212,170,0.2);}
+.card{background:var(--card);border:1px solid var(--border);border-radius:12px;overflow:hidden;}
+.card-hdr{padding:13px 18px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:9px;background:var(--surface);}
+.ch-ico{width:30px;height:30px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0;}
 .ch-ttl{font-weight:700;font-size:13px;color:var(--text);}
-.ch-sub{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--muted2);margin-left:auto;}
+.ch-sub{font-family:'Roboto Mono',monospace;font-size:10px;color:var(--muted2);margin-left:auto;}
 .card-body{padding:18px;}
-
-/* GRID */
 .two-col{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
 .fgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
 .ffull{grid-column:1/-1;}
-
-/* FORM */
 .field{display:flex;flex-direction:column;gap:4px;}
-.field label{font-size:11px;font-weight:600;color:var(--text);}
-.field label span{font-weight:400;color:var(--muted2);font-size:10px;margin-left:3px;}
-.finput{background:var(--bg);border:1px solid var(--border2);border-radius:6px;padding:9px 11px;font-size:12px;color:var(--text);font-family:'Syne',sans-serif;width:100%;outline:none;transition:all 0.2s;}
-.finput:focus{border-color:var(--accent);box-shadow:0 0 0 2px var(--accent-dim);}
-.fselect{background:var(--bg);border:1px solid var(--border2);border-radius:6px;padding:9px 11px;font-size:12px;color:var(--text);font-family:'Syne',sans-serif;width:100%;outline:none;appearance:none;cursor:pointer;}
-.fselect:focus{border-color:var(--accent);}
-.sbtn{width:100%;padding:11px;border-radius:7px;font-size:13px;font-weight:700;cursor:pointer;border:none;margin-top:8px;transition:all 0.2s;font-family:'Syne',sans-serif;}
-.sbtn-red{background:var(--accent);color:white;}
-.sbtn-blue{background:var(--blue);color:#0b0b0f;}
-.sbtn:hover{filter:brightness(1.1);transform:translateY(-1px);}
-
-/* LOG */
-.logbox{background:#08080c;border:1px solid var(--border);border-radius:8px;overflow:hidden;display:none;margin-bottom:14px;}
-.logbox.show{display:block;animation:fadeUp 0.3s ease;}
-@keyframes fadeUp{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:translateY(0);}}
-.log-hdr{padding:8px 14px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;font-family:'JetBrains Mono',monospace;font-size:10px;}
-.lrun{color:var(--yellow);}.ldone{color:var(--green);}
-.log-body{padding:10px 14px;font-family:'JetBrains Mono',monospace;font-size:11px;}
-.ll{display:flex;gap:8px;align-items:flex-start;padding:3px 0;opacity:0;}
-.ll.show{opacity:1;animation:llin 0.25s ease;}
-@keyframes llin{from{opacity:0;transform:translateX(-5px);}to{opacity:1;transform:translateX(0);}}
-.lts{color:var(--muted2);font-size:9px;width:52px;flex-shrink:0;margin-top:1px;}
-.lic{font-size:12px;flex-shrink:0;}
-.lmsg{color:#4a4a62;line-height:1.5;}
-.lmsg .or{color:var(--accent2);}.lmsg .gr{color:var(--green);}.lmsg .bl{color:var(--blue);}
-
-/* MAKE FLOW */
+.field label{font-size:12px;font-weight:600;color:var(--text);}
+.field label span{font-weight:400;color:var(--muted2);font-size:11px;margin-left:4px;font-family:'Roboto Mono',monospace;}
+.finput,.fselect{background:#111;border:1px solid var(--border2);border-radius:7px;padding:8px 11px;font-size:13px;color:var(--text);font-family:'Manrope',sans-serif;width:100%;outline:none;transition:all 0.2s;}
+.finput:focus,.fselect:focus{border-color:var(--accent);background:#161616;box-shadow:0 0 0 3px rgba(0,212,170,0.08);}
+.finput::placeholder{color:#333;}
+.fselect{appearance:none;cursor:pointer;}
+.fselect option{background:#1a1a1a;}
+.sbtn{width:100%;padding:11px 18px;border-radius:8px;font-size:14px;font-weight:700;cursor:pointer;border:none;margin-top:8px;transition:all 0.2s;font-family:'Manrope',sans-serif;display:flex;align-items:center;justify-content:center;gap:7px;}
+.sbtn-acc{background:var(--accent);color:#000;}
+.sbtn-org{background:var(--orange);color:white;}
+.sbtn:hover{filter:brightness(1.1);transform:translateY(-1px);box-shadow:0 4px 16px rgba(0,0,0,0.3);}
+.logbox{background:#0a0a0a;border:1px solid var(--border);border-radius:10px;overflow:hidden;display:none;margin-bottom:14px;}
+.logbox.show{display:block;animation:fadeIn 0.3s ease;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:translateY(0);}}
+.log-top{padding:9px 14px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;font-family:'Roboto Mono',monospace;font-size:10px;}
+.ls-run{color:#fbbf24;}.ls-done{color:var(--accent);}
+.log-body{padding:10px 14px;font-family:'Roboto Mono',monospace;font-size:11px;}
+.ll{display:flex;align-items:flex-start;gap:9px;padding:3px 0;opacity:0;}
+.ll.show{opacity:1;animation:llIn 0.3s ease;}
+@keyframes llIn{from{opacity:0;transform:translateX(-5px);}to{opacity:1;transform:translateX(0);}}
+.ll-ts{color:#222;font-size:10px;width:52px;flex-shrink:0;margin-top:1px;}
+.ll-ic{font-size:12px;flex-shrink:0;}
+.ll-tx{color:#444;line-height:1.5;}
+.ll-tx .a{color:var(--accent);}.ll-tx .g{color:#4ade80;}.ll-tx .y{color:#fbbf24;}.ll-tx .o{color:var(--orange);}.ll-tx .p{color:var(--purple);}
 .mflow{display:flex;align-items:center;padding:20px 18px;overflow-x:auto;gap:0;}
 .mnode{display:flex;flex-direction:column;align-items:center;gap:6px;flex-shrink:0;}
-.mball{width:48px;height:48px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:18px;border:2px solid var(--border2);background:var(--surface);transition:all 0.3s;position:relative;}
-.mball.act{border-color:var(--accent);background:var(--accent-dim);box-shadow:0 0 0 3px rgba(255,92,53,0.12);}
-.mball.act-b{border-color:var(--blue);background:var(--blue-dim);box-shadow:0 0 0 3px rgba(78,168,255,0.12);}
-.mball.done{border-color:var(--green);background:var(--green-dim);}
-.mball.done::after{content:'✓';position:absolute;bottom:-2px;right:-2px;width:15px;height:15px;background:var(--green);border-radius:50%;font-size:8px;color:#08080c;display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;}
-.mlabel{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--muted);text-align:center;max-width:64px;line-height:1.3;}
-.mapp{font-family:'JetBrains Mono',monospace;font-size:8px;color:var(--muted2);}
+.mn-b{width:48px;height:48px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:18px;border:2px solid var(--border2);background:var(--surface);transition:all 0.3s;position:relative;}
+.mn-b.act{border-color:var(--accent);background:var(--accent-dim);box-shadow:0 0 0 4px rgba(0,212,170,0.08);}
+.mn-b.acto{border-color:var(--orange);background:var(--orange-dim);box-shadow:0 0 0 4px rgba(255,107,53,0.08);}
+.mn-b.done{border-color:#22c55e;background:rgba(34,197,94,0.1);}
+.mn-b.done::after{content:'✓';position:absolute;bottom:-3px;right:-3px;width:15px;height:15px;background:#22c55e;border-radius:50%;font-size:8px;color:white;display:flex;align-items:center;justify-content:center;}
+.mn-lbl{font-size:9px;color:var(--muted);text-align:center;max-width:64px;line-height:1.3;font-family:'Roboto Mono',monospace;}
+.mn-app{font-size:9px;color:var(--muted2);font-family:'Roboto Mono',monospace;}
 .mconn{display:flex;align-items:center;padding:0 3px;margin-bottom:20px;}
-.mline{height:2px;width:26px;background:var(--border2);position:relative;overflow:hidden;}
+.mline{height:2px;width:28px;background:var(--border2);position:relative;overflow:hidden;}
 .mline::after{content:'';position:absolute;left:-100%;top:0;width:100%;height:100%;}
-.mline.flow-r::after{background:linear-gradient(90deg,transparent,var(--accent),transparent);animation:lf 0.7s ease forwards;}
-.mline.flow-b::after{background:linear-gradient(90deg,transparent,var(--blue),transparent);animation:lf 0.7s ease forwards;}
+.mline.fla::after{background:linear-gradient(90deg,transparent,var(--accent),transparent);animation:lf 0.6s ease forwards;}
+.mline.flo::after{background:linear-gradient(90deg,transparent,var(--orange),transparent);animation:lf 0.6s ease forwards;}
 @keyframes lf{from{left:-100%;}to{left:100%;}}
-
-/* AIRTABLE */
 .at-wrap{overflow-x:auto;}
 .at-tbl{width:100%;border-collapse:collapse;font-size:12px;min-width:560px;}
-.at-tbl th{padding:8px 13px;text-align:left;font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--muted);letter-spacing:0.08em;text-transform:uppercase;border-bottom:1px solid var(--border);background:var(--surface);white-space:nowrap;}
+.at-tbl th{padding:8px 13px;text-align:left;font-family:'Roboto Mono',monospace;font-size:10px;color:var(--muted2);letter-spacing:0.08em;text-transform:uppercase;border-bottom:1px solid var(--border);background:var(--surface);white-space:nowrap;}
 .at-tbl td{padding:9px 13px;border-bottom:1px solid var(--border);color:var(--text);white-space:nowrap;}
-.at-tbl tr:hover td{background:rgba(255,92,53,0.03);}
-.at-tbl tr.nr-r td{animation:flr 1.5s ease;}
-.at-tbl tr.nr-b td{animation:flb 1.5s ease;}
-@keyframes flr{0%{background:rgba(255,92,53,0.12);}100%{background:transparent;}}
-@keyframes flb{0%{background:rgba(78,168,255,0.12);}100%{background:transparent;}}
-
-/* BADGE */
-.badge{display:inline-flex;align-items:center;padding:2px 8px;border-radius:3px;font-family:'JetBrains Mono',monospace;font-size:9px;}
-.b-r{background:var(--accent-dim);color:var(--accent2);border:1px solid rgba(255,92,53,0.25);}
-.b-g{background:var(--green-dim);color:var(--green);border:1px solid rgba(34,211,122,0.25);}
-.b-b{background:var(--blue-dim);color:var(--blue);border:1px solid rgba(78,168,255,0.25);}
-.b-y{background:var(--yellow-dim);color:var(--yellow);border:1px solid rgba(255,201,64,0.25);}
-.b-p{background:var(--purple-dim);color:var(--purple);border:1px solid rgba(180,122,255,0.25);}
-
-/* EMAIL */
-.ecard{background:var(--surface);border:1px solid var(--border);border-radius:8px;overflow:hidden;}
-.echrome{background:var(--bg);border-bottom:1px solid var(--border);padding:9px 14px;display:flex;align-items:center;gap:5px;}
-.ecdot{width:9px;height:9px;border-radius:50%;}
-.emeta{padding:12px 16px;border-bottom:1px solid var(--border);}
-.emrow{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted);margin-bottom:3px;}
-.emrow span{color:var(--text);}
-.esubj{padding:10px 16px;font-weight:700;font-size:14px;color:var(--text);border-bottom:1px solid var(--border);}
-.ebody{padding:16px;font-size:13px;line-height:1.8;color:var(--text);}
-.ebody .hi{color:var(--accent2);font-weight:700;}
-.ebody .hi-b{color:var(--blue);font-weight:700;}
-.ebody .lnk{color:var(--blue);text-decoration:underline;cursor:pointer;}
-.eph{padding:36px 16px;text-align:center;color:var(--muted2);font-family:'JetBrains Mono',monospace;font-size:11px;}
-
-/* SLACK */
-.slcard{background:#1a1d21;border-radius:8px;overflow:hidden;}
-.sltop{background:#19181f;padding:10px 14px;display:flex;align-items:center;gap:7px;border-bottom:1px solid #2a2d35;}
-.slcn{font-size:13px;font-weight:700;color:#e0e0e8;}
-.slmsgs{padding:12px 14px;display:flex;flex-direction:column;gap:10px;min-height:110px;}
-.slmsg{display:flex;gap:9px;}
-.slav{width:30px;height:30px;border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;}
-.slinner{flex:1;}
-.slname{font-size:12px;font-weight:700;color:#e0e0e8;margin-bottom:2px;}
-.slname .ts{font-size:10px;font-weight:400;color:#555;margin-left:5px;font-family:'JetBrains Mono',monospace;}
-.sltext{font-size:12px;color:#b0b0c0;line-height:1.6;}
-.sltext strong{color:white;}
-.stag{padding:1px 6px;border-radius:3px;font-size:11px;}
-.stag-r{background:rgba(255,92,53,0.2);color:#ff9a80;}
-.stag-g{background:rgba(34,211,122,0.15);color:#6ee7b7;}
-.stag-b{background:rgba(78,168,255,0.15);color:#93c5fd;}
-.stag-y{background:rgba(255,201,64,0.15);color:#fde68a;}
-.slnew{animation:slin 0.35s ease;}
-@keyframes slin{from{opacity:0;transform:translateX(-7px);}to{opacity:1;transform:translateX(0);}}
-
-/* DASH */
-.dash{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:14px;}
-.dw{background:var(--card);border:1px solid var(--border);border-radius:9px;padding:14px;}
-.dw-ico{font-size:20px;margin-bottom:7px;display:block;}
-.dw-n{font-size:25px;font-weight:800;color:var(--text);letter-spacing:-0.03em;margin-bottom:2px;}
-.dw-l{font-size:11px;color:var(--muted);}
-.dw-c{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--green);margin-top:3px;}
-
-.reset-btn{background:none;border:1px solid var(--border2);color:var(--muted);padding:8px 18px;border-radius:6px;cursor:pointer;font-family:'JetBrains Mono',monospace;font-size:10px;transition:all 0.2s;}
+.at-tbl tr:hover td{background:rgba(255,255,255,0.02);}
+.at-tbl tr.fl-a td{animation:fla 1.5s ease;}
+@keyframes fla{0%{background:rgba(0,212,170,0.08);}100%{background:transparent;}}
+.badge{display:inline-flex;align-items:center;gap:3px;padding:2px 8px;border-radius:100px;font-size:10px;font-weight:600;font-family:'Roboto Mono',monospace;white-space:nowrap;}
+.b-a{background:var(--accent-dim);color:var(--accent);border:1px solid rgba(0,212,170,0.2);}
+.b-g{background:rgba(34,197,94,0.1);color:#4ade80;border:1px solid rgba(34,197,94,0.2);}
+.b-y{background:var(--yellow-dim);color:var(--yellow);border:1px solid rgba(251,191,36,0.2);}
+.b-o{background:var(--orange-dim);color:var(--orange);border:1px solid rgba(255,107,53,0.2);}
+.b-p{background:var(--purple-dim);color:var(--purple);border:1px solid rgba(168,85,247,0.2);}
+.ecard{background:var(--card);border:1px solid var(--border);border-radius:10px;overflow:hidden;}
+.echrome{background:var(--surface);border-bottom:1px solid var(--border);padding:9px 14px;display:flex;align-items:center;gap:5px;}
+.ecd{width:9px;height:9px;border-radius:50%;}
+.emeta{padding:12px 16px;border-bottom:1px solid var(--border);background:var(--surface);}
+.em-row{font-family:'Roboto Mono',monospace;font-size:11px;color:var(--muted);margin-bottom:3px;display:flex;gap:7px;}
+.em-row span{color:var(--text);font-weight:600;}
+.esubj{padding:11px 16px;font-weight:700;font-size:14px;border-bottom:1px solid var(--border);color:var(--text);}
+.ebody{padding:16px;font-size:13px;line-height:1.8;color:#ccc;}
+.ebody .hi{color:var(--accent);font-weight:700;}
+.ebody .hio{color:var(--orange);font-weight:700;}
+.ebody .lnk{color:var(--accent);text-decoration:underline;cursor:pointer;}
+.epholder{padding:36px 16px;text-align:center;color:var(--muted2);font-family:'Roboto Mono',monospace;font-size:11px;}
+.slack{background:#1a1d21;border-radius:10px;overflow:hidden;}
+.slack-top{background:#19181f;padding:10px 14px;display:flex;align-items:center;gap:7px;border-bottom:1px solid #2a2d35;}
+.slack-cn{font-size:13px;font-weight:700;color:#e0e0e8;}
+.slack-msgs{padding:12px 14px;display:flex;flex-direction:column;gap:10px;min-height:110px;}
+.smsg{display:flex;gap:9px;}
+.sav{width:30px;height:30px;border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0;}
+.smi{flex:1;}
+.sname{font-size:12px;font-weight:700;color:#e0e0e8;margin-bottom:2px;}
+.sname .ts{font-size:10px;font-weight:400;color:#555;margin-left:5px;font-family:'Roboto Mono',monospace;}
+.stxt{font-size:12px;color:#b0b0c0;line-height:1.6;}
+.stxt strong{color:white;}
+.sa{background:rgba(0,212,170,0.15);color:var(--accent);padding:1px 5px;border-radius:3px;font-size:11px;}
+.so{background:rgba(255,107,53,0.15);color:var(--orange);padding:1px 5px;border-radius:3px;font-size:11px;}
+.sg{background:rgba(34,197,94,0.15);color:#4ade80;padding:1px 5px;border-radius:3px;font-size:11px;}
+.sy{background:rgba(251,191,36,0.15);color:var(--yellow);padding:1px 5px;border-radius:3px;font-size:11px;}
+.snew{animation:sIn 0.4s ease;}
+@keyframes sIn{from{opacity:0;transform:translateX(-6px);}to{opacity:1;transform:translateX(0);}}
+.dgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:14px;}
+.dw{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:14px;transition:all 0.2s;}
+.dw:hover{border-color:var(--border2);transform:translateY(-1px);}
+.dw-ico{font-size:20px;margin-bottom:8px;display:block;}
+.dw-num{font-size:26px;font-weight:800;letter-spacing:-0.03em;margin-bottom:2px;transition:all 0.3s;}
+.dw-lbl{font-size:11px;color:var(--muted);font-weight:500;}
+.reset-btn{background:none;border:1px solid var(--border2);color:var(--muted);padding:8px 18px;border-radius:7px;cursor:pointer;font-family:'Roboto Mono',monospace;font-size:11px;transition:all 0.2s;}
 .reset-btn:hover{border-color:var(--accent);color:var(--accent);}
-
-@media(max-width:900px){.topbar,.hero,.main{padding-left:20px;padding-right:20px;}.two-col,.fgrid{grid-template-columns:1fr;}.dash{grid-template-columns:repeat(2,1fr);}.ffull{grid-column:1;}}
+@media(max-width:900px){.topbar,.hero,.main{padding-left:20px;padding-right:20px;}.two-col,.fgrid{grid-template-columns:1fr;}.dgrid{grid-template-columns:repeat(2,1fr);}}
 </style>
 </head>
 <body>
-
 <div class="topbar">
-  <div class="brand">automation<span>.portfolio</span></div>
-  <div class="tb-mid">e-commerce store automation</div>
-  <div class="live"><div class="ldot"></div>LIVE DEMO</div>
+  <div class="brand"><div class="brand-icon">🛒</div><div class="brand-name">Store<span>Flow</span></div></div>
+  <div class="topbar-tag">e-commerce store automation</div>
+  <div class="live-pill"><div class="live-d"></div>LIVE DEMO</div>
 </div>
-
 <div class="hero">
-  <div class="hero-tag">Interactive Simulator — No Signup Needed</div>
-  <h1>E-Commerce.<br><em>Zero Manual Work.</em></h1>
-  <p class="hero-sub">Watch what happens the moment a customer places an order or a refund is requested. Every confirmation, alert, and update fires automatically. Fill in the forms and see it live.</p>
-  <div class="hero-tools">
-    <div class="htool">Jotform</div><div class="htool">Airtable</div><div class="htool">Make.com</div><div class="htool">Gmail</div><div class="htool">Slack</div>
+  <div class="hero-badge">INTERACTIVE SIMULATOR — NO SIGNUP NEEDED</div>
+  <h1>Every order.<br><em>Handled automatically.</em></h1>
+  <p class="hero-sub">Place a test order and watch everything trigger — order confirmation email, Airtable inventory update, fulfilment Slack alert, low-stock warning. Zero manual work.</p>
+  <div class="hero-nums">
+    <div><div class="hn-val">2</div><div class="hn-key">Live Scenarios</div></div>
+    <div><div class="hn-val">0</div><div class="hn-key">Manual Steps</div></div>
+    <div><div class="hn-val">&lt;8s</div><div class="hn-key">Response Time</div></div>
   </div>
 </div>
-
 <div class="main">
-
-  <!-- DASHBOARD -->
-  <div class="slbl" style="margin-top:0;"><div class="slbl-tag">Live Dashboard</div><div class="slbl-line"></div></div>
-  <div class="dash">
-    <div class="dw"><span class="dw-ico">🛍️</span><div class="dw-n" id="dw-orders">142</div><div class="dw-l">Orders Today</div><div class="dw-c">+8 last hour</div></div>
-    <div class="dw"><span class="dw-ico">💰</span><div class="dw-n" id="dw-rev">$8,420</div><div class="dw-l">Revenue Today</div><div class="dw-c">↑ 18% vs yesterday</div></div>
-    <div class="dw"><span class="dw-ico">📦</span><div class="dw-n" id="dw-ship">118</div><div class="dw-l">Shipped</div><div class="dw-c">Auto-confirmed</div></div>
-    <div class="dw"><span class="dw-ico">🔄</span><div class="dw-n" id="dw-refunds">4</div><div class="dw-l">Refund Requests</div><div class="dw-c">In progress</div></div>
+  <div class="sdiv"><div class="sdiv-num">0</div><div class="sdiv-title">Live Dashboard</div><div class="sdiv-line"></div></div>
+  <div class="dgrid">
+    <div class="dw"><span class="dw-ico">📦</span><div class="dw-num" id="dw-orders" style="color:var(--accent);">47</div><div class="dw-lbl">Orders Today</div></div>
+    <div class="dw"><span class="dw-ico">💰</span><div class="dw-num" id="dw-rev" style="color:#4ade80;">$3,840</div><div class="dw-lbl">Revenue Today</div></div>
+    <div class="dw"><span class="dw-ico">🚚</span><div class="dw-num" id="dw-ship" style="color:var(--orange);">12</div><div class="dw-lbl">Pending Fulfilment</div></div>
+    <div class="dw"><span class="dw-ico">⚠️</span><div class="dw-num" id="dw-low" style="color:var(--yellow);">3</div><div class="dw-lbl">Low Stock Alerts</div></div>
   </div>
 
-  <!-- SCENARIO 1 — NEW ORDER -->
-  <div class="slbl"><div class="slbl-tag">Scenario 1 — Customer Places Order</div><div class="slbl-line"></div><div class="slbl-note">Jotform → Airtable → Gmail → Slack</div></div>
-
+  <div class="sdiv"><div class="sdiv-num">1</div><div class="sdiv-title">Scenario 1 — New Order Placed</div><div class="sdiv-line"></div><div class="spill">Jotform → Airtable → Gmail → Slack</div></div>
   <div class="two-col" style="margin-bottom:14px;">
     <div class="card">
-      <div class="card-hdr"><span class="ch-ico">🛍️</span><div class="ch-ttl">New Order Form</div><div class="ch-sub">Jotform</div></div>
+      <div class="card-hdr"><div class="ch-ico" style="background:var(--accent-dim);">🛒</div><div class="ch-ttl">New Order Form</div><div class="ch-sub">Jotform / Store Checkout</div></div>
       <div class="card-body">
         <div class="fgrid">
-          <div class="field"><label>Customer Name <span>required</span></label><input class="finput" id="o-name" placeholder="e.g. Jasmine Park" /></div>
-          <div class="field"><label>Email <span>required</span></label><input class="finput" id="o-email" placeholder="jasmine@email.com" /></div>
-          <div class="field"><label>Product Name <span>required</span></label><input class="finput" id="o-product" placeholder="e.g. Wireless Headphones" /></div>
-          <div class="field"><label>Quantity <span>required</span></label>
-            <select class="fselect" id="o-qty">
-              <option value="">— Select —</option>
-              <option>1</option><option>2</option><option>3</option><option>4</option><option>5+</option>
-            </select>
+          <div class="field"><label>Customer Name <span>required</span></label><input class="finput" id="o-name" placeholder="e.g. Taylor Brooks"/></div>
+          <div class="field"><label>Customer Email <span>required</span></label><input class="finput" id="o-email" placeholder="taylor@email.com"/></div>
+          <div class="field"><label>Product Name <span>required</span></label><input class="finput" id="o-product" placeholder="e.g. Premium Wireless Headphones"/></div>
+          <div class="field"><label>Category <span>required</span></label>
+            <select class="fselect" id="o-cat"><option value="">— Select —</option><option>Electronics</option><option>Clothing</option><option>Home & Garden</option><option>Beauty & Health</option><option>Sports</option><option>Books</option></select>
           </div>
-          <div class="field"><label>Order Total <span>required</span></label><input class="finput" id="o-total" placeholder="e.g. $149.00" /></div>
-          <div class="field"><label>Shipping Speed <span>required</span></label>
-            <select class="fselect" id="o-ship">
-              <option value="">— Select —</option>
-              <option>Standard (5–7 days)</option><option>Express (2–3 days)</option><option>Overnight</option>
-            </select>
-          </div>
-          <div class="field ffull"><label>Shipping Address <span>required</span></label><input class="finput" id="o-addr" placeholder="123 Main St, Las Vegas, NV 89101" /></div>
+          <div class="field"><label>Quantity <span>required</span></label><input class="finput" id="o-qty" placeholder="e.g. 2" type="number" min="1"/></div>
+          <div class="field"><label>Order Total <span>required</span></label><input class="finput" id="o-total" placeholder="e.g. $149.99"/></div>
+          <div class="field ffull"><label>Shipping Address <span>required</span></label><input class="finput" id="o-addr" placeholder="e.g. 123 Main St, Las Vegas, NV 89101"/></div>
           <div class="field"><label>Payment Method <span>required</span></label>
-            <select class="fselect" id="o-pay">
-              <option value="">— Select —</option>
-              <option>Credit Card</option><option>PayPal</option><option>Stripe</option><option>Apple Pay</option>
-            </select>
+            <select class="fselect" id="o-pay"><option value="">— Select —</option><option>Credit Card</option><option>PayPal</option><option>Apple Pay</option><option>Shop Pay</option><option>Klarna</option></select>
           </div>
-          <div class="field"><label>Promo Code <span>optional</span></label><input class="finput" id="o-promo" placeholder="e.g. SAVE10" /></div>
+          <div class="field"><label>Shipping Speed <span>required</span></label>
+            <select class="fselect" id="o-ship"><option value="">— Select —</option><option>Standard (5–7 days)</option><option>Express (2–3 days)</option><option>Overnight</option></select>
+          </div>
         </div>
-        <button class="sbtn sbtn-red" onclick="runS1()">🛍️ Place Order & Trigger Automation</button>
+        <button class="sbtn sbtn-acc" onclick="runS1()">🛒 Place Order & Trigger Automation</button>
       </div>
     </div>
-
     <div class="card">
-      <div class="card-hdr"><span class="ch-ico">⚡</span><div class="ch-ttl">Make.com — Order Scenario</div><div class="ch-sub" id="s1-st">IDLE</div></div>
+      <div class="card-hdr"><div class="ch-ico" style="background:var(--accent-dim);">⚡</div><div class="ch-ttl">Make.com — Order Scenario</div><div class="ch-sub" id="s1st">IDLE</div></div>
       <div class="mflow">
-        <div class="mnode"><div class="mball" id="n0">🎣</div><div class="mlabel">Webhook</div><div class="mapp">Make.com</div></div>
-        <div class="mconn"><div class="mline" id="l0"></div></div>
-        <div class="mnode"><div class="mball" id="n1">🗄️</div><div class="mlabel">Log Order</div><div class="mapp">Airtable</div></div>
-        <div class="mconn"><div class="mline" id="l1"></div></div>
-        <div class="mnode"><div class="mball" id="n2">📧</div><div class="mlabel">Order Confirm</div><div class="mapp">Gmail</div></div>
-        <div class="mconn"><div class="mline" id="l2"></div></div>
-        <div class="mnode"><div class="mball" id="n3">💬</div><div class="mlabel">Slack #orders</div><div class="mapp">Slack</div></div>
-        <div class="mconn"><div class="mline" id="l3"></div></div>
-        <div class="mnode"><div class="mball" id="n4">📦</div><div class="mlabel">Fulfillment Alert</div><div class="mapp">Slack #warehouse</div></div>
-        <div class="mconn"><div class="mline" id="l4"></div></div>
-        <div class="mnode"><div class="mball" id="n5">✅</div><div class="mlabel">Done</div><div class="mapp">Make.com</div></div>
+        <div class="mnode"><div class="mn-b" id="n10">🎣</div><div class="mn-lbl">Webhook</div><div class="mn-app">Make.com</div></div>
+        <div class="mconn"><div class="mline" id="l10"></div></div>
+        <div class="mnode"><div class="mn-b" id="n11">🗄️</div><div class="mn-lbl">Log Order</div><div class="mn-app">Airtable</div></div>
+        <div class="mconn"><div class="mline" id="l11"></div></div>
+        <div class="mnode"><div class="mn-b" id="n12">📦</div><div class="mn-lbl">Update Inventory</div><div class="mn-app">Airtable</div></div>
+        <div class="mconn"><div class="mline" id="l12"></div></div>
+        <div class="mnode"><div class="mn-b" id="n13">📧</div><div class="mn-lbl">Order Confirmation</div><div class="mn-app">Gmail</div></div>
+        <div class="mconn"><div class="mline" id="l13"></div></div>
+        <div class="mnode"><div class="mn-b" id="n14">💬</div><div class="mn-lbl">Slack #orders</div><div class="mn-app">Slack</div></div>
+        <div class="mconn"><div class="mline" id="l14"></div></div>
+        <div class="mnode"><div class="mn-b" id="n15">✅</div><div class="mn-lbl">Done</div><div class="mn-app">Make.com</div></div>
       </div>
       <div id="log1" class="logbox" style="margin:0 14px 14px;">
-        <div class="log-hdr"><span id="ls1" class="lrun">● RUNNING</span><span style="margin-left:auto;color:#1a1a2a;font-size:9px;">Order Scenario</span></div>
+        <div class="log-top"><span id="ls1" class="ls-run">● RUNNING</span><span style="margin-left:auto;color:#222;font-size:10px;">Order Processing Scenario</span></div>
         <div class="log-body" id="lb1"></div>
       </div>
     </div>
   </div>
 
-  <!-- AIRTABLE -->
-  <div class="slbl"><div class="slbl-tag">Airtable — Order Tracker</div><div class="slbl-line"></div></div>
+  <div class="sdiv" style="margin-top:20px;"><div class="sdiv-num" style="background:var(--accent);color:#000;">→</div><div class="sdiv-title">Airtable — Orders Database</div><div class="sdiv-line"></div></div>
   <div class="card" style="margin-bottom:14px;">
     <div class="at-wrap"><table class="at-tbl">
-      <thead><tr><th>Customer</th><th>Product</th><th>Total</th><th>Shipping</th><th>Payment</th><th>Status</th><th>Fulfillment</th></tr></thead>
-      <tbody id="o-table">
-        <tr><td>Marcus Webb</td><td>Smart Watch</td><td>$299.00</td><td>Express</td><td>Credit Card</td><td><span class="badge b-g">Paid</span></td><td><span class="badge b-b">Picking</span></td></tr>
-        <tr><td>Sofia Reyes</td><td>Yoga Mat Bundle</td><td>$89.00</td><td>Standard</td><td>PayPal</td><td><span class="badge b-g">Paid</span></td><td><span class="badge b-g">Shipped ✓</span></td></tr>
-        <tr><td>Liam Johnson</td><td>Desk Lamp</td><td>$54.00</td><td>Standard</td><td>Stripe</td><td><span class="badge b-y">Pending</span></td><td><span class="badge b-y">Processing</span></td></tr>
+      <thead><tr><th>Customer</th><th>Product</th><th>Category</th><th>Qty</th><th>Total</th><th>Shipping</th><th>Payment</th><th>Status</th></tr></thead>
+      <tbody id="otbl">
+        <tr><td>Chris Park</td><td>Bluetooth Speaker</td><td>Electronics</td><td>1</td><td>$89.99</td><td>Express</td><td>PayPal</td><td><span class="badge b-a">Processing</span></td></tr>
+        <tr><td>Emma Davis</td><td>Yoga Mat Pro</td><td>Sports</td><td>2</td><td>$74.00</td><td>Standard</td><td>Credit Card</td><td><span class="badge b-g">Shipped</span></td></tr>
+        <tr><td>Ryan Kim</td><td>Face Serum Kit</td><td>Beauty & Health</td><td>3</td><td>$127.50</td><td>Overnight</td><td>Apple Pay</td><td><span class="badge b-y">Pending</span></td></tr>
       </tbody>
     </table></div>
   </div>
 
-  <!-- EMAIL + SLACK S1 -->
   <div class="two-col" style="margin-bottom:14px;">
     <div>
-      <div class="slbl" style="margin-top:0;"><div class="slbl-tag">Gmail — Order Confirmation</div><div class="slbl-line"></div></div>
+      <div class="sdiv" style="margin-top:0;"><div class="sdiv-num" style="background:var(--accent);color:#000;">→</div><div class="sdiv-title">Gmail — Order Confirmation</div><div class="sdiv-line"></div></div>
       <div class="ecard">
-        <div class="echrome"><div class="ecdot" style="background:#ff5f57;"></div><div class="ecdot" style="background:#ffbd2e;"></div><div class="ecdot" style="background:#28c840;"></div><span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted2);margin-left:8px;">Gmail — Sent</span></div>
-        <div id="e1-ph" class="eph">⏳ Place an order above to trigger the confirmation email</div>
-        <div id="e1" style="display:none;">
-          <div class="emeta"><div class="emrow">To: <span id="e1-to">—</span></div><div class="emrow">From: <span>orders@store.com (via Gmail)</span></div></div>
-          <div class="esubj" id="e1-subj">—</div>
-          <div class="ebody" id="e1-body"></div>
+        <div class="echrome"><div class="ecd" style="background:#ff5f57;"></div><div class="ecd" style="background:#ffbd2e;"></div><div class="ecd" style="background:#28c840;"></div><span style="font-family:'Roboto Mono',monospace;font-size:10px;color:var(--muted2);margin-left:7px;">Gmail — Sent</span></div>
+        <div id="s1ep" class="epholder">⏳ Place an order above to trigger the confirmation email</div>
+        <div id="s1em" style="display:none;">
+          <div class="emeta"><div class="em-row">To: <span id="s1et">—</span></div><div class="em-row">From: <span>orders@storeflow.com (via Gmail)</span></div></div>
+          <div class="esubj" id="s1es">—</div>
+          <div class="ebody" id="s1eb"></div>
         </div>
       </div>
     </div>
     <div>
-      <div class="slbl" style="margin-top:0;"><div class="slbl-tag">Slack — #orders + #warehouse</div><div class="slbl-line"></div></div>
-      <div class="slcard">
-        <div class="sltop"><span style="color:#9b9b9b;font-size:13px;">#</span><span class="slcn">orders</span></div>
-        <div class="slmsgs" id="sl1">
-          <div class="slmsg"><div class="slav" style="background:#2a0f08;">⚡</div><div class="slinner"><div class="slname">Make.com Bot <span class="ts">11:42am</span></div><div class="sltext">🛍️ New order: <strong>Marcus Webb</strong> — <span class="stag stag-r">Smart Watch</span> — <span class="stag stag-g">$299.00</span> — Express shipping. <strong>Needs immediate pick.</strong></div></div></div>
+      <div class="sdiv" style="margin-top:0;"><div class="sdiv-num" style="background:var(--accent);color:#000;">→</div><div class="sdiv-title">Slack — #orders</div><div class="sdiv-line"></div></div>
+      <div class="slack">
+        <div class="slack-top"><span style="color:#9b9b9b;font-size:13px;">#</span><span class="slack-cn">orders</span></div>
+        <div class="slack-msgs" id="s1sl">
+          <div class="smsg"><div class="sav" style="background:#001a14;">⚡</div><div class="smi"><div class="sname">Make.com Bot <span class="ts">today 10:42am</span></div><div class="stxt">📦 New order: <strong>Chris Park</strong> — <span class="sa">Bluetooth Speaker</span> × 1 — <span class="sg">$89.99</span> • Express shipping • PayPal ✓</div></div></div>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- SCENARIO 2 — REFUND REQUEST -->
-  <div class="slbl" style="margin-top:28px;"><div class="slbl-tag">Scenario 2 — Refund Request</div><div class="slbl-line"></div><div class="slbl-note">Jotform → Airtable → Gmail → Slack Router</div></div>
-
+  <div class="sdiv" style="margin-top:36px;"><div class="sdiv-num">2</div><div class="sdiv-title">Scenario 2 — Low Stock Alert</div><div class="sdiv-line"></div><div class="spill" style="background:var(--orange-dim);color:var(--orange);border-color:rgba(255,107,53,0.2);">Airtable → Gmail → Slack</div></div>
   <div class="two-col" style="margin-bottom:14px;">
     <div class="card">
-      <div class="card-hdr"><span class="ch-ico">🔄</span><div class="ch-ttl">Refund Request Form</div><div class="ch-sub">Jotform</div></div>
+      <div class="card-hdr"><div class="ch-ico" style="background:var(--orange-dim);">⚠️</div><div class="ch-ttl">Inventory Check Form</div><div class="ch-sub">Manual / Scheduled Trigger</div></div>
       <div class="card-body">
         <div class="fgrid">
-          <div class="field"><label>Customer Name <span>required</span></label><input class="finput" id="r-name" placeholder="e.g. Sofia Reyes" /></div>
-          <div class="field"><label>Email <span>required</span></label><input class="finput" id="r-email" placeholder="sofia@email.com" /></div>
-          <div class="field"><label>Order ID <span>required</span></label><input class="finput" id="r-order" placeholder="e.g. ORD-20260308" /></div>
-          <div class="field"><label>Refund Amount <span>required</span></label><input class="finput" id="r-amount" placeholder="e.g. $89.00" /></div>
-          <div class="field"><label>Reason <span>required</span></label>
-            <select class="fselect" id="r-reason">
-              <option value="">— Select —</option>
-              <option>Wrong item received</option><option>Item damaged/defective</option><option>Item not as described</option><option>Changed my mind</option><option>Never arrived</option>
-            </select>
+          <div class="field"><label>Product Name <span>required</span></label><input class="finput" id="i-prod" placeholder="e.g. Wireless Headphones"/></div>
+          <div class="field"><label>SKU <span>required</span></label><input class="finput" id="i-sku" placeholder="e.g. WH-PRO-001"/></div>
+          <div class="field"><label>Current Stock <span>required</span></label><input class="finput" id="i-stock" placeholder="e.g. 4" type="number" min="0"/></div>
+          <div class="field"><label>Reorder Threshold <span>required</span></label>
+            <select class="fselect" id="i-thresh"><option value="">— Select —</option><option value="5">5 units</option><option value="10">10 units</option><option value="15">15 units</option><option value="20">20 units</option></select>
           </div>
-          <div class="field"><label>Preferred Resolution <span>required</span></label>
-            <select class="fselect" id="r-res">
-              <option value="">— Select —</option>
-              <option>Full refund</option><option>Replacement item</option><option>Store credit</option><option>Partial refund</option>
-            </select>
-          </div>
-          <div class="field ffull"><label>Additional Details <span>optional</span></label><input class="finput" id="r-details" placeholder="Any additional context about your request" /></div>
+          <div class="field"><label>Supplier Email <span>required</span></label><input class="finput" id="i-sup" placeholder="supplier@wholesale.com"/></div>
+          <div class="field"><label>Reorder Quantity <span>required</span></label><input class="finput" id="i-reorder" placeholder="e.g. 50" type="number" min="1"/></div>
         </div>
-        <button class="sbtn sbtn-blue" onclick="runS2()">🔄 Submit Refund & Trigger Automation</button>
+        <button class="sbtn sbtn-org" onclick="runS2()">⚠️ Trigger Low Stock Alert</button>
       </div>
     </div>
-
     <div class="card">
-      <div class="card-hdr"><span class="ch-ico">⚡</span><div class="ch-ttl">Make.com — Refund Scenario</div><div class="ch-sub" id="s2-st">IDLE</div></div>
+      <div class="card-hdr"><div class="ch-ico" style="background:var(--orange-dim);">⚡</div><div class="ch-ttl">Make.com — Low Stock Scenario</div><div class="ch-sub" id="s2st">IDLE</div></div>
       <div class="mflow">
-        <div class="mnode"><div class="mball" id="rn0">🎣</div><div class="mlabel">Webhook</div><div class="mapp">Make.com</div></div>
-        <div class="mconn"><div class="mline" id="rl0"></div></div>
-        <div class="mnode"><div class="mball" id="rn1">🗄️</div><div class="mlabel">Log Request</div><div class="mapp">Airtable</div></div>
-        <div class="mconn"><div class="mline" id="rl1"></div></div>
-        <div class="mnode"><div class="mball" id="rn2">🔀</div><div class="mlabel">Router: Reason</div><div class="mapp">Make.com</div></div>
-        <div class="mconn"><div class="mline" id="rl2"></div></div>
-        <div class="mnode"><div class="mball" id="rn3">📧</div><div class="mlabel">Customer Email</div><div class="mapp">Gmail</div></div>
-        <div class="mconn"><div class="mline" id="rl3"></div></div>
-        <div class="mnode"><div class="mball" id="rn4">💬</div><div class="mlabel">Slack #support</div><div class="mapp">Slack</div></div>
-        <div class="mconn"><div class="mline" id="rl4"></div></div>
-        <div class="mnode"><div class="mball" id="rn5">✅</div><div class="mlabel">Done</div><div class="mapp">Make.com</div></div>
+        <div class="mnode"><div class="mn-b" id="n20">🗄️</div><div class="mn-lbl">Airtable Watch</div><div class="mn-app">Airtable</div></div>
+        <div class="mconn"><div class="mline" id="l20"></div></div>
+        <div class="mnode"><div class="mn-b" id="n21">🔀</div><div class="mn-lbl">Stock Check Router</div><div class="mn-app">Make.com</div></div>
+        <div class="mconn"><div class="mline" id="l21"></div></div>
+        <div class="mnode"><div class="mn-b" id="n22">📧</div><div class="mn-lbl">Alert to Manager</div><div class="mn-app">Gmail</div></div>
+        <div class="mconn"><div class="mline" id="l22"></div></div>
+        <div class="mnode"><div class="mn-b" id="n23">📧</div><div class="mn-lbl">Reorder to Supplier</div><div class="mn-app">Gmail</div></div>
+        <div class="mconn"><div class="mline" id="l23"></div></div>
+        <div class="mnode"><div class="mn-b" id="n24">💬</div><div class="mn-lbl">Slack #inventory</div><div class="mn-app">Slack</div></div>
+        <div class="mconn"><div class="mline" id="l24"></div></div>
+        <div class="mnode"><div class="mn-b" id="n25">✅</div><div class="mn-lbl">Done</div><div class="mn-app">Make.com</div></div>
       </div>
       <div id="log2" class="logbox" style="margin:0 14px 14px;">
-        <div class="log-hdr"><span id="ls2" class="lrun">● RUNNING</span><span style="margin-left:auto;color:#1a1a2a;font-size:9px;">Refund Scenario</span></div>
+        <div class="log-top"><span id="ls2" class="ls-run">● RUNNING</span><span style="margin-left:auto;color:#222;font-size:10px;">Low Stock Alert Scenario</span></div>
         <div class="log-body" id="lb2"></div>
       </div>
     </div>
@@ -350,195 +285,144 @@ body{background:var(--bg);color:var(--text);font-family:'Syne',sans-serif;min-he
 
   <div class="two-col" style="margin-bottom:40px;">
     <div>
-      <div class="slbl" style="margin-top:0;"><div class="slbl-tag">Gmail — Refund Acknowledgement</div><div class="slbl-line"></div></div>
+      <div class="sdiv" style="margin-top:0;"><div class="sdiv-num" style="background:var(--orange);">→</div><div class="sdiv-title">Gmail — Low Stock Alert</div><div class="sdiv-line"></div></div>
       <div class="ecard">
-        <div class="echrome"><div class="ecdot" style="background:#ff5f57;"></div><div class="ecdot" style="background:#ffbd2e;"></div><div class="ecdot" style="background:#28c840;"></div><span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted2);margin-left:8px;">Gmail — Sent</span></div>
-        <div id="e2-ph" class="eph">⏳ Submit a refund request above to trigger the acknowledgement email</div>
-        <div id="e2" style="display:none;">
-          <div class="emeta"><div class="emrow">To: <span id="e2-to">—</span></div><div class="emrow">From: <span>support@store.com (via Gmail)</span></div></div>
-          <div class="esubj" id="e2-subj">—</div>
-          <div class="ebody" id="e2-body"></div>
+        <div class="echrome"><div class="ecd" style="background:#ff5f57;"></div><div class="ecd" style="background:#ffbd2e;"></div><div class="ecd" style="background:#28c840;"></div><span style="font-family:'Roboto Mono',monospace;font-size:10px;color:var(--muted2);margin-left:7px;">Gmail — Sent</span></div>
+        <div id="s2ep" class="epholder">⏳ Trigger a low stock alert above to see the email</div>
+        <div id="s2em" style="display:none;">
+          <div class="emeta"><div class="em-row">To: <span id="s2et">—</span></div><div class="em-row">From: <span>inventory@storeflow.com (via Gmail)</span></div></div>
+          <div class="esubj" id="s2es">—</div>
+          <div class="ebody" id="s2eb"></div>
         </div>
       </div>
     </div>
     <div>
-      <div class="slbl" style="margin-top:0;"><div class="slbl-tag">Slack — #support</div><div class="slbl-line"></div></div>
-      <div class="slcard">
-        <div class="sltop"><span style="color:#9b9b9b;font-size:13px;">#</span><span class="slcn">support</span></div>
-        <div class="slmsgs" id="sl2">
-          <div class="slmsg"><div class="slav" style="background:#0a1a2a;">⚡</div><div class="slinner"><div class="slname">Make.com Bot <span class="ts">2:05pm</span></div><div class="sltext">🔄 Refund request: <strong>Liam Johnson</strong> — <span class="stag stag-b">$54.00</span> — Reason: <span class="stag stag-y">Item damaged</span>. Resolution: Full refund. Ticket auto-opened.</div></div></div>
+      <div class="sdiv" style="margin-top:0;"><div class="sdiv-num" style="background:var(--orange);">→</div><div class="sdiv-title">Slack — #inventory</div><div class="sdiv-line"></div></div>
+      <div class="slack">
+        <div class="slack-top"><span style="color:#9b9b9b;font-size:13px;">#</span><span class="slack-cn">inventory</span></div>
+        <div class="slack-msgs" id="s2sl">
+          <div class="smsg"><div class="sav" style="background:#1a0a00;">⚡</div><div class="smi"><div class="sname">Make.com Bot <span class="ts">today 2:15pm</span></div><div class="stxt">⚠️ Low stock: <strong>Yoga Mat Pro</strong> — <span class="sy">3 units left</span> (threshold: 5). Reorder sent to supplier. PO raised automatically.</div></div></div>
         </div>
       </div>
     </div>
   </div>
 
-  <div style="text-align:center;padding-bottom:20px;">
-    <button class="reset-btn" onclick="location.reload()">↺ Reset Demo</button>
-    <p style="margin-top:10px;font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted2);">Want this built for your store? → <a href="https://contra.com/s/BMcFPFU6-automated-lead-followup-system-jotform-airtable-make-gmail-slack" style="color:var(--accent2);">contra.com/joseph_tucker</a></p>
+  <div style="text-align:center;padding-bottom:16px;">
+    <button class="reset-btn" onclick="location.reload()">↺ Reset All Demos</button>
+    <p style="margin-top:10px;font-family:'Roboto Mono',monospace;font-size:11px;color:var(--muted2);">Want this built for your store? → <a href="https://contra.com/s/BMcFPFU6-automated-lead-followup-system-jotform-airtable-make-gmail-slack" style="color:var(--accent);">Book a free call</a></p>
   </div>
-
 </div>
-
 <script>
-let r1=false,r2=false;
 function sleep(ms){return new Promise(r=>setTimeout(r,ms));}
-
+let r1=false,r2=false;
 async function runS1(){
   if(r1)return;r1=true;
-  const name=document.getElementById('o-name').value||'Jasmine Park';
-  const email=document.getElementById('o-email').value||'jasmine@email.com';
-  const product=document.getElementById('o-product').value||'Wireless Headphones';
+  const name=document.getElementById('o-name').value||'Taylor Brooks';
+  const email=document.getElementById('o-email').value||'taylor@email.com';
+  const prod=document.getElementById('o-product').value||'Premium Wireless Headphones';
+  const cat=document.getElementById('o-cat').value||'Electronics';
   const qty=document.getElementById('o-qty').value||'1';
-  const total=document.getElementById('o-total').value||'$149.00';
-  const ship=document.getElementById('o-ship').value||'Standard (5–7 days)';
-  const addr=document.getElementById('o-addr').value||'123 Main St, Las Vegas, NV';
+  const total=document.getElementById('o-total').value||'$149.99';
+  const addr=document.getElementById('o-addr').value||'123 Main St, Las Vegas, NV 89101';
   const pay=document.getElementById('o-pay').value||'Credit Card';
-  const promo=document.getElementById('o-promo').value;
+  const ship=document.getElementById('o-ship').value||'Standard (5–7 days)';
   const fn=name.split(' ')[0];
-  const orderId='ORD-'+Date.now().toString().slice(-6);
-
-  const lb=document.getElementById('lb1'),ls=document.getElementById('ls1');
-  document.getElementById('log1').classList.add('show');
-  lb.innerHTML='';ls.className='lrun';ls.textContent='● RUNNING';
-  document.getElementById('s1-st').textContent='RUNNING...';
-  for(let i=0;i<6;i++){const n=document.getElementById('n'+i);if(n)n.className='mball';const l=document.getElementById('l'+i);if(l)l.className='mline';}
-
+  const orderId='ORD-'+Math.floor(Math.random()*90000+10000);
+  const lb=document.getElementById('lb1'),ls=document.getElementById('ls1'),log=document.getElementById('log1');
+  log.classList.add('show');lb.innerHTML='';ls.className='ls-run';ls.textContent='● RUNNING';
+  document.getElementById('s1st').textContent='RUNNING...';
+  for(let i=0;i<6;i++){const n=document.getElementById('n1'+i);if(n)n.className='mn-b';const l=document.getElementById('l1'+i);if(l)l.className='mline';}
   const steps=[
-    {ico:'🎣',msg:`<span class="or">Webhook received</span> — Order from <span class="or">${name}</span> — ${product}`,node:0},
-    {ico:'🗄️',msg:`<span class="gr">Airtable logged</span> — Order ${orderId} • ${total} • ${pay}${promo?' • Promo: '+promo:''}`,node:1},
-    {ico:'📧',msg:`<span class="or">Confirmation email sent</span> → ${email}`,node:2},
-    {ico:'💬',msg:`<span class="or">Slack #orders</span> — "${name} ordered ${product} (${qty}x) — ${total}"`,node:3},
-    {ico:'📦',msg:`<span class="gr">Fulfillment alert</span> → #warehouse — "${product} × ${qty} — ${ship}"`,node:4},
-    {ico:'✅',msg:`<span class="gr">Order scenario complete</span> — All steps in 4.9 seconds`,node:5},
+    {ic:'🎣',tx:`<span class="a">Webhook received</span> — new order from <span class="a">${name}</span> — ${orderId}`,nd:0},
+    {ic:'🗄️',tx:`<span class="g">Order logged in Airtable</span> — ${prod} × ${qty} — ${total}`,nd:1},
+    {ic:'📦',tx:`<span class="y">Inventory updated</span> — ${prod} stock decremented by ${qty}`,nd:2},
+    {ic:'📧',tx:`<span class="a">Order confirmation sent</span> → ${email} — ${orderId}`,nd:3},
+    {ic:'💬',tx:`<span class="a">Slack posted</span> → #orders — "${name} ordered ${prod} × ${qty}"`,nd:4},
+    {ic:'✅',tx:`<span class="g">Order scenario complete</span> — executed in 4.9 seconds`,nd:5},
   ];
-
   const now=new Date();
   for(let i=0;i<steps.length;i++){
-    await sleep(i*750);
-    const s=steps[i];
+    await sleep(i*700);const s=steps[i];
     const ts=new Date(now.getTime()+i*1000).toTimeString().slice(0,8);
     const line=document.createElement('div');line.className='ll show';
-    line.innerHTML=`<span class="lts">${ts}</span><span class="lic">${s.ico}</span><span class="lmsg">${s.msg}</span>`;
+    line.innerHTML=`<span class="ll-ts">${ts}</span><span class="ll-ic">${s.ic}</span><span class="ll-tx">${s.tx}</span>`;
     lb.appendChild(line);
-    const nd=document.getElementById('n'+s.node);if(nd)nd.className='mball act';
-    if(s.node<5){const ln=document.getElementById('l'+s.node);if(ln){ln.className='mline flow-r';await sleep(500);ln.className='mline';if(nd)nd.className='mball done';}}
-    else{if(nd){await sleep(300);nd.className='mball done';}}
-    if(s.node===1)addOrderRow(name,product,total,ship,pay);
-    if(s.node===2)showE1(name,email,fn,product,qty,total,ship,addr,pay,promo,orderId);
-    if(s.node===3)addSl1(name,product,total,ship);
+    const node=document.getElementById('n1'+s.nd);if(node)node.className='mn-b act';
+    if(s.nd<5){const ln=document.getElementById('l1'+s.nd);if(ln){ln.className='mline fla';await sleep(500);ln.className='mline';if(node)node.className='mn-b done';}}
+    else{if(node){await sleep(300);node.className='mn-b done';}}
+    if(s.nd===1){
+      const tb=document.getElementById('otbl');const tr=document.createElement('tr');tr.className='fl-a';
+      tr.innerHTML=`<td>${name}</td><td>${prod}</td><td>${cat}</td><td>${qty}</td><td>${total}</td><td>${ship.split(' ')[0]}</td><td>${pay}</td><td><span class="badge b-a">Processing</span></td>`;
+      tb.prepend(tr);
+    }
+    if(s.nd===3){
+      document.getElementById('s1ep').style.display='none';
+      document.getElementById('s1et').textContent=email;
+      document.getElementById('s1es').textContent=`Order confirmed — ${orderId} — Thank you ${fn}!`;
+      document.getElementById('s1eb').innerHTML=`Hi <span class="hi">${fn}</span>,<br><br>Your order is confirmed! 🎉<br><br><strong>Order ID:</strong> <span class="hi">${orderId}</span><br><strong>Product:</strong> <span class="hi">${prod}</span> × ${qty}<br><strong>Total:</strong> <span class="hi">${total}</span><br><strong>Shipping:</strong> <span class="hi">${ship}</span><br><strong>Payment:</strong> <span class="hi">${pay}</span><br><strong>Deliver to:</strong> ${addr}<br><br>📦 <span class="lnk">[Track your order]</span><br>🔄 <span class="lnk">[Manage your order]</span><br>💬 <span class="lnk">[Contact support]</span><br><br>Thank you for shopping with us!<br><strong>StoreFlow Team</strong>`;
+      document.getElementById('s1em').style.display='block';
+    }
+    if(s.nd===4){
+      const c=document.getElementById('s1sl');const m=document.createElement('div');m.className='smsg snew';
+      const t=new Date().toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'});
+      m.innerHTML=`<div class="sav" style="background:#001a14;">⚡</div><div class="smi"><div class="sname">Make.com Bot <span class="ts">today ${t}</span></div><div class="stxt">📦 New order <span class="sa">${orderId}</span>: <strong>${name}</strong> — <span class="sa">${prod}</span> × ${qty} — <span class="sg">${total}</span> • ${ship.split(' ')[0]} • ${pay} ✓</div></div>`;
+      c.appendChild(m);
+    }
   }
   const rev=document.getElementById('dw-rev');
-  const cur=parseFloat(rev.textContent.replace(/[^0-9.]/g,''))||8420;
-  const add=parseFloat(total.replace(/[^0-9.]/g,''))||149;
-  rev.textContent='$'+(cur+add).toLocaleString();
+  const cur=parseFloat(rev.textContent.replace(/[^0-9.]/g,''))||3840;
+  const amt=parseFloat((total||'0').replace(/[^0-9.]/g,''))||0;
+  rev.textContent='$'+(cur+amt).toLocaleString(undefined,{minimumFractionDigits:2,maximumFractionDigits:2});
   document.getElementById('dw-orders').textContent=parseInt(document.getElementById('dw-orders').textContent)+1;
-  ls.className='ldone';ls.textContent='✓ COMPLETED';document.getElementById('s1-st').textContent='DONE ✓';r1=false;
+  document.getElementById('dw-ship').textContent=parseInt(document.getElementById('dw-ship').textContent)+1;
+  ls.className='ls-done';ls.textContent='✓ COMPLETED';document.getElementById('s1st').textContent='DONE ✓';r1=false;
 }
-
-function addOrderRow(name,product,total,ship,pay){
-  const tb=document.getElementById('o-table');
-  const tr=document.createElement('tr');tr.className='nr-r';
-  tr.innerHTML=`<td>${name}</td><td>${product}</td><td>${total}</td><td>${ship.split(' ')[0]}</td><td>${pay}</td><td><span class="badge b-g">Paid</span></td><td><span class="badge b-y">Processing</span></td>`;
-  tb.prepend(tr);
-}
-
-function showE1(name,email,fn,product,qty,total,ship,addr,pay,promo,orderId){
-  document.getElementById('e1-ph').style.display='none';
-  document.getElementById('e1-to').textContent=email;
-  document.getElementById('e1-subj').textContent=`Order confirmed! Your ${product} is on its way, ${fn}`;
-  document.getElementById('e1-body').innerHTML=`Hi <span class="hi">${fn}</span>,<br><br>
-Your order has been placed successfully! 🎉 Here's your summary:<br><br>
-<strong>Order ID:</strong> <span class="hi">${orderId}</span><br>
-<strong>Item:</strong> <span class="hi">${product}</span> × ${qty}<br>
-<strong>Total Charged:</strong> <span class="hi">${total}</span>${promo?` (Promo <span class="hi">${promo}</span> applied)`:''}<br>
-<strong>Shipping:</strong> <span class="hi">${ship}</span><br>
-<strong>Delivery Address:</strong> <span class="hi">${addr}</span><br>
-<strong>Payment:</strong> <span class="hi">${pay}</span><br><br>
-You'll receive a separate email with your tracking number once your order is dispatched from our warehouse.<br><br>
-<span class="lnk">[Track your order]</span> · <span class="lnk">[View order details]</span> · <span class="lnk">[Contact support]</span><br><br>
-Thanks for shopping with us!<br><strong>The Store Team</strong>`;
-  document.getElementById('e1').style.display='block';
-}
-
-function addSl1(name,product,total,ship){
-  const c=document.getElementById('sl1');
-  const msg=document.createElement('div');msg.className='slmsg slnew';
-  const t=new Date().toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'});
-  msg.innerHTML=`<div class="slav" style="background:#2a0f08;">⚡</div><div class="slinner"><div class="slname">Make.com Bot <span class="ts">${t}</span></div><div class="sltext">🛍️ New order: <strong>${name}</strong> — <span class="stag stag-r">${product}</span> — <span class="stag stag-g">${total}</span> — ${ship.split(' ')[0]} shipping. Fulfillment alert sent to #warehouse.</div></div>`;
-  c.appendChild(msg);
-}
-
 async function runS2(){
   if(r2)return;r2=true;
-  const name=document.getElementById('r-name').value||'Sofia Reyes';
-  const email=document.getElementById('r-email').value||'sofia@email.com';
-  const orderId=document.getElementById('r-order').value||'ORD-202603';
-  const amount=document.getElementById('r-amount').value||'$89.00';
-  const reason=document.getElementById('r-reason').value||'Item damaged/defective';
-  const res=document.getElementById('r-res').value||'Full refund';
-  const fn=name.split(' ')[0];
-  const autoApprove=reason.includes('damaged')||reason.includes('defective')||reason.includes('arrived');
-  const ticketId='TKT-'+Math.floor(Math.random()*9000+1000);
-
-  const lb=document.getElementById('lb2'),ls=document.getElementById('ls2');
-  document.getElementById('log2').classList.add('show');
-  lb.innerHTML='';ls.className='lrun';ls.textContent='● RUNNING';
-  document.getElementById('s2-st').textContent='RUNNING...';
-  for(let i=0;i<6;i++){const n=document.getElementById('rn'+i);if(n)n.className='mball';const l=document.getElementById('rl'+i);if(l)l.className='mline';}
-
+  const prod=document.getElementById('i-prod').value||'Wireless Headphones';
+  const sku=document.getElementById('i-sku').value||'WH-PRO-001';
+  const stock=document.getElementById('i-stock').value||'4';
+  const thresh=document.getElementById('i-thresh').value||'5';
+  const sup=document.getElementById('i-sup').value||'supplier@wholesale.com';
+  const reorder=document.getElementById('i-reorder').value||'50';
+  const lb=document.getElementById('lb2'),ls=document.getElementById('ls2'),log=document.getElementById('log2');
+  log.classList.add('show');lb.innerHTML='';ls.className='ls-run';ls.textContent='● RUNNING';
+  document.getElementById('s2st').textContent='RUNNING...';
+  for(let i=0;i<6;i++){const n=document.getElementById('n2'+i);if(n)n.className='mn-b';const l=document.getElementById('l2'+i);if(l)l.className='mline';}
   const steps=[
-    {ico:'🎣',msg:`<span class="bl">Webhook received</span> — Refund request from <span class="bl">${name}</span>`,node:0},
-    {ico:'🗄️',msg:`<span class="gr">Airtable logged</span> — Ticket ${ticketId} • Reason: ${reason}`,node:1},
-    {ico:'🔀',msg:`<span class="bl">Router: reason check</span> — "${reason}" → ${autoApprove?'<span class="gr">auto-approve route</span>':'<span class="or">manual review route</span>'}`,node:2},
-    {ico:'📧',msg:`<span class="bl">Acknowledgement sent</span> → ${email} — Ticket ${ticketId}`,node:3},
-    {ico:'💬',msg:`<span class="bl">Slack #support</span> — "${name} refund request: ${amount} — ${reason}"`,node:4},
-    {ico:'✅',msg:`<span class="gr">Refund scenario complete</span> — ${autoApprove?'Auto-approved and processed':'Escalated for manual review'}`,node:5},
+    {ic:'🗄️',tx:`<span class="o">Airtable watch triggered</span> — ${prod} stock = ${stock} units`,nd:0},
+    {ic:'🔀',tx:`<span class="y">Router: stock check</span> — ${stock} units < ${thresh} threshold → <span class="o">LOW STOCK route activated</span>`,nd:1},
+    {ic:'📧',tx:`<span class="o">Alert sent to manager</span> — ${prod} (${sku}) needs reorder`,nd:2},
+    {ic:'📧',tx:`<span class="o">Reorder email sent</span> → ${sup} — requesting ${reorder} units`,nd:3},
+    {ic:'💬',tx:`<span class="o">Slack posted</span> → #inventory — "${prod} low stock: ${stock} left"`,nd:4},
+    {ic:'✅',tx:`<span class="g">Low stock scenario complete</span> — executed in 5.6 seconds`,nd:5},
   ];
-
   const now=new Date();
   for(let i=0;i<steps.length;i++){
-    await sleep(i*750);
-    const s=steps[i];
+    await sleep(i*700);const s=steps[i];
     const ts=new Date(now.getTime()+i*1000).toTimeString().slice(0,8);
     const line=document.createElement('div');line.className='ll show';
-    line.innerHTML=`<span class="lts">${ts}</span><span class="lic">${s.ico}</span><span class="lmsg">${s.msg}</span>`;
+    line.innerHTML=`<span class="ll-ts">${ts}</span><span class="ll-ic">${s.ic}</span><span class="ll-tx">${s.tx}</span>`;
     lb.appendChild(line);
-    const nd=document.getElementById('rn'+s.node);if(nd)nd.className='mball act-b';
-    if(s.node<5){const ln=document.getElementById('rl'+s.node);if(ln){ln.className='mline flow-b';await sleep(500);ln.className='mline';if(nd)nd.className='mball done';}}
-    else{if(nd){await sleep(300);nd.className='mball done';}}
-    if(s.node===3)showE2(name,email,fn,orderId,amount,reason,res,autoApprove,ticketId);
-    if(s.node===4)addSl2(name,amount,reason,res,autoApprove,ticketId);
+    const node=document.getElementById('n2'+s.nd);if(node)node.className='mn-b acto';
+    if(s.nd<5){const ln=document.getElementById('l2'+s.nd);if(ln){ln.className='mline flo';await sleep(500);ln.className='mline';if(node)node.className='mn-b done';}}
+    else{if(node){await sleep(300);node.className='mn-b done';}}
+    if(s.nd===2){
+      document.getElementById('s2ep').style.display='none';
+      document.getElementById('s2et').textContent='store-manager@storeflow.com';
+      document.getElementById('s2es').textContent=`⚠️ Low Stock Alert — ${prod} (${sku}) — Action Required`;
+      document.getElementById('s2eb').innerHTML=`Hi Store Manager,<br><br>⚠️ <strong>Low stock alert triggered automatically by Make.com</strong><br><br><strong>Product:</strong> <span class="hio">${prod}</span><br><strong>SKU:</strong> <span class="hio">${sku}</span><br><strong>Current Stock:</strong> <span class="hio">${stock} units</span><br><strong>Reorder Threshold:</strong> ${thresh} units<br><strong>Reorder Qty Sent:</strong> <span class="hio">${reorder} units</span><br><strong>Supplier Notified:</strong> ${sup}<br><br>✅ <strong>A reorder email has been automatically sent to your supplier.</strong><br><br>📊 <span class="lnk">[View full inventory report]</span><br>✏️ <span class="lnk">[Update reorder settings]</span><br><br><strong>StoreFlow Inventory Bot</strong>`;
+      document.getElementById('s2em').style.display='block';
+    }
+    if(s.nd===4){
+      const c=document.getElementById('s2sl');const m=document.createElement('div');m.className='smsg snew';
+      const t=new Date().toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'});
+      m.innerHTML=`<div class="sav" style="background:#1a0a00;">⚡</div><div class="smi"><div class="sname">Make.com Bot <span class="ts">today ${t}</span></div><div class="stxt">⚠️ Low stock: <strong>${prod}</strong> (<span class="so">${sku}</span>) — <span class="sy">${stock} units left</span> (threshold: ${thresh}). Reorder of <span class="sg">${reorder} units</span> sent to supplier automatically.</div></div>`;
+      c.appendChild(m);
+    }
   }
-  document.getElementById('dw-refunds').textContent=parseInt(document.getElementById('dw-refunds').textContent)+1;
-  ls.className='ldone';ls.textContent='✓ COMPLETED';document.getElementById('s2-st').textContent='DONE ✓';r2=false;
-}
-
-function showE2(name,email,fn,orderId,amount,reason,res,autoApprove,ticketId){
-  document.getElementById('e2-ph').style.display='none';
-  document.getElementById('e2-to').textContent=email;
-  document.getElementById('e2-subj').textContent=`We've received your refund request — Ticket ${ticketId}`;
-  document.getElementById('e2-body').innerHTML=`Hi <span class="hi-b">${fn}</span>,<br><br>
-We've received your refund request and we're sorry to hear about your experience.<br><br>
-<strong>Ticket ID:</strong> <span class="hi-b">${ticketId}</span><br>
-<strong>Order:</strong> <span class="hi-b">${orderId}</span><br>
-<strong>Refund Amount:</strong> <span class="hi-b">${amount}</span><br>
-<strong>Reason:</strong> <span class="hi-b">${reason}</span><br>
-<strong>Requested Resolution:</strong> <span class="hi-b">${res}</span><br><br>
-${autoApprove
-  ?`✅ <strong>Your refund has been automatically approved.</strong> You should see the ${amount} returned to your original payment method within 3–5 business days.`
-  :`Our support team is reviewing your request. You'll hear back within <strong>1–2 business days</strong>.`
-}<br><br>
-<span class="lnk">[Check ticket status]</span> · <span class="lnk">[Contact support]</span><br><br>
-We appreciate your patience,<br><strong>Customer Support Team</strong>`;
-  document.getElementById('e2').style.display='block';
-}
-
-function addSl2(name,amount,reason,res,autoApprove,ticketId){
-  const c=document.getElementById('sl2');
-  const msg=document.createElement('div');msg.className='slmsg slnew';
-  const t=new Date().toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'});
-  msg.innerHTML=`<div class="slav" style="background:#0a1a2a;">⚡</div><div class="slinner"><div class="slname">Make.com Bot <span class="ts">${t}</span></div><div class="sltext">🔄 Refund ${ticketId}: <strong>${name}</strong> — <span class="stag stag-b">${amount}</span> — <span class="stag stag-y">${reason}</span> — Resolution: ${res}. Status: <span class="stag ${autoApprove?'stag-g':'stag-r'}">${autoApprove?'Auto-Approved':'Manual Review'}</span></div></div>`;
-  c.appendChild(msg);
+  document.getElementById('dw-low').textContent=parseInt(document.getElementById('dw-low').textContent)+1;
+  ls.className='ls-done';ls.textContent='✓ COMPLETED';document.getElementById('s2st').textContent='DONE ✓';r2=false;
 }
 </script>
 </body>
