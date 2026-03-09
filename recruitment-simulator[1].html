@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Recruitment Agency Automation — automation.portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+:root {
+  --bg: #0e0e0e;
+  --surface: #161616;
+  --card: #1c1c1c;
+  --border: #2a2a2a;
+  --border2: #333;
+  --text: #f0f0f0;
+  --muted: #777;
+  --muted2: #444;
+  --accent: #f0c040;
+  --accent2: #f5d060;
+  --accent-dim: rgba(240,192,64,0.1);
+  --green: #34d399;
+  --green-dim: rgba(52,211,153,0.1);
+  --red: #f87171;
+  --blue: #60a5fa;
+  --blue-dim: rgba(96,165,250,0.1);
+  --white: #ffffff;
+}
+body { background:var(--bg); color:var(--text); font-family:'DM Sans',sans-serif; min-height:100vh; overflow-x:hidden; }
+
+/* TOPBAR */
+.topbar { background:var(--surface); border-bottom:1px solid var(--border); padding:0 44px; height:54px; display:flex; align-items:center; justify-content:space-between; position:sticky; top:0; z-index:100; }
+.brand { font-family:'Space Mono',monospace; font-size:13px; font-weight:400; color:#777; letter-spacing:0.05em; }
+.brand span { color:var(--text); }
+.tb-center { font-family:'Space Mono',monospace; font-size:10px; color:var(--muted); letter-spacing:0.1em; text-transform:uppercase; }
+.live { display:flex; align-items:center; gap:7px; font-family:'Space Mono',monospace; font-size:10px; color:var(--green); }
+.live-dot { width:7px; height:7px; background:var(--green); border-radius:50%; animation:lp 2s infinite; }
+@keyframes lp { 0%,100%{opacity:1;} 50%{opacity:0.3;} }
+
+/* HERO */
+.hero { background:var(--surface); padding:56px 44px 48px; border-bottom:1px solid var(--border); position:relative; overflow:hidden; }
+.hero::before { content:''; position:absolute; top:-150px; right:-150px; width:500px; height:500px; background:radial-gradient(circle, rgba(240,192,64,0.07) 0%, transparent 65%); pointer-events:none; }
+.hero-tag { font-family:'Space Mono',monospace; font-size:10px; color:var(--accent); text-transform:uppercase; letter-spacing:0.15em; margin-bottom:20px; display:flex; align-items:center; gap:8px; }
+.hero-tag::before { content:''; width:20px; height:1px; background:var(--accent); }
+.hero h1 { font-size:clamp(30px,5vw,54px); font-weight:700; color:var(--white); line-height:1.1; letter-spacing:-0.02em; margin-bottom:14px; }
+.hero h1 em { font-style:normal; color:var(--accent); }
+.hero-sub { color:var(--muted); font-size:15px; max-width:540px; line-height:1.7; margin-bottom:36px; }
+.hero-pills { display:flex; gap:10px; flex-wrap:wrap; }
+.hp { font-family:'Space Mono',monospace; font-size:10px; padding:6px 14px; border:1px solid var(--border2); color:var(--muted); border-radius:4px; }
+
+/* MAIN */
+.main { padding:36px 44px 80px; max-width:1400px; margin:0 auto; }
+
+/* SECTION LABEL */
+.slabel { display:flex; align-items:center; gap:12px; margin-bottom:18px; margin-top:36px; }
+.slabel-tag { font-family:'Space Mono',monospace; font-size:10px; text-transform:uppercase; letter-spacing:0.12em; color:var(--accent); }
+.slabel-line { flex:1; height:1px; background:var(--border); }
+.slabel-num { font-family:'Space Mono',monospace; font-size:10px; color:var(--muted2); }
+
+/* CARD */
+.card { background:var(--card); border:1px solid var(--border); border-radius:10px; overflow:hidden; }
+.card-hdr { padding:13px 18px; border-bottom:1px solid var(--border); display:flex; align-items:center; gap:10px; background:var(--surface); }
+.ch-ico { font-size:18px; }
+.ch-ttl { font-weight:700; font-size:13px; color:var(--white); }
+.ch-sub { font-family:'Space Mono',monospace; font-size:9px; color:var(--muted); margin-left:auto; }
+.card-body { padding:18px; }
+
+/* GRID */
+.two-col { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+
+/* FORM */
+.fgrid { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+.ffull { grid-column:1/-1; }
+.field { display:flex; flex-direction:column; gap:4px; }
+.field label { font-size:11px; font-weight:600; color:var(--text); font-family:'Space Mono',monospace; }
+.field label span { font-weight:400; color:var(--muted2); font-size:10px; }
+.finput { background:var(--bg); border:1px solid var(--border2); border-radius:6px; padding:9px 11px; font-size:12px; color:var(--text); font-family:'DM Sans',sans-serif; width:100%; outline:none; transition:all 0.2s; }
+.finput:focus { border-color:var(--accent); box-shadow:0 0 0 2px var(--accent-dim); }
+.fselect { background:var(--bg); border:1px solid var(--border2); border-radius:6px; padding:9px 11px; font-size:12px; color:var(--text); font-family:'DM Sans',sans-serif; width:100%; outline:none; appearance:none; cursor:pointer; transition:all 0.2s; }
+.fselect:focus { border-color:var(--accent); }
+.sbtn { width:100%; padding:11px; border-radius:7px; font-size:13px; font-weight:700; cursor:pointer; border:none; margin-top:8px; transition:all 0.2s; font-family:'DM Sans',sans-serif; }
+.sbtn-yellow { background:var(--accent); color:#0e0e0e; }
+.sbtn:hover { filter:brightness(1.1); transform:translateY(-1px); }
+
+/* LOG */
+.logbox { background:#0a0a0a; border:1px solid var(--border); border-radius:8px; overflow:hidden; display:none; margin-bottom:14px; }
+.logbox.show { display:block; animation:fadeUp 0.3s ease; }
+@keyframes fadeUp { from{opacity:0;transform:translateY(6px);} to{opacity:1;transform:translateY(0);} }
+.log-hdr { padding:9px 14px; border-bottom:1px solid var(--border); display:flex; align-items:center; gap:8px; font-family:'Space Mono',monospace; font-size:10px; }
+.lrun { color:var(--accent); } .ldone { color:var(--green); }
+.log-body { padding:10px 14px; font-family:'Space Mono',monospace; font-size:11px; }
+.ll { display:flex; gap:8px; align-items:flex-start; padding:3px 0; opacity:0; }
+.ll.show { opacity:1; animation:llIn 0.25s ease; }
+@keyframes llIn { from{opacity:0;transform:translateX(-5px);} to{opacity:1;transform:translateX(0);} }
+.lts { color:var(--muted2); font-size:9px; width:52px; flex-shrink:0; margin-top:1px; }
+.lic { font-size:12px; flex-shrink:0; }
+.lmsg { color:#888; line-height:1.5; }
+.lmsg .ya { color:var(--accent); } .lmsg .gr { color:var(--green); } .lmsg .bl { color:var(--blue); }
+
+/* MAKE FLOW */
+.mflow { display:flex; align-items:center; padding:20px 18px; overflow-x:auto; gap:0; }
+.mnode { display:flex; flex-direction:column; align-items:center; gap:6px; flex-shrink:0; }
+.mball { width:50px; height:50px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:18px; border:2px solid var(--border2); background:var(--surface); transition:all 0.3s; position:relative; }
+.mball.act { border-color:var(--accent); background:var(--accent-dim); box-shadow:0 0 0 3px rgba(240,192,64,0.12); }
+.mball.done { border-color:var(--green); background:var(--green-dim); }
+.mball.done::after { content:'✓'; position:absolute; bottom:-2px; right:-2px; width:15px; height:15px; background:var(--green); border-radius:50%; font-size:8px; color:#0e0e0e; display:flex; align-items:center; justify-content:center; font-family:'Space Mono',monospace; font-weight:700; }
+.mlabel { font-family:'Space Mono',monospace; font-size:9px; color:var(--muted); text-align:center; max-width:66px; line-height:1.3; }
+.mapp { font-family:'Space Mono',monospace; font-size:8px; color:var(--muted2); }
+.mconn { display:flex; align-items:center; padding:0 3px; margin-bottom:20px; }
+.mline { height:2px; width:28px; background:var(--border2); position:relative; overflow:hidden; }
+.mline::after { content:''; position:absolute; left:-100%; top:0; width:100%; height:100%; }
+.mline.flow::after { background:linear-gradient(90deg,transparent,var(--accent),transparent); animation:lflow 0.7s ease forwards; }
+@keyframes lflow { from{left:-100%;} to{left:100%;} }
+
+/* AIRTABLE */
+.at-tabs { display:flex; gap:3px; padding:10px 14px 0; border-bottom:1px solid var(--border); background:var(--surface); }
+.at-tab { font-family:'Space Mono',monospace; font-size:10px; padding:6px 12px; cursor:pointer; border-radius:5px 5px 0 0; color:var(--muted); border:1px solid transparent; border-bottom:none; background:none; transition:all 0.15s; margin-bottom:-1px; }
+.at-tab.active { background:var(--card); color:var(--text); border-color:var(--border); border-bottom-color:var(--card); }
+.at-wrap { overflow-x:auto; }
+.at-tbl { width:100%; border-collapse:collapse; font-size:12px; min-width:580px; }
+.at-tbl th { padding:8px 13px; text-align:left; font-family:'Space Mono',monospace; font-size:9px; color:var(--muted); letter-spacing:0.08em; text-transform:uppercase; border-bottom:1px solid var(--border); background:var(--surface); white-space:nowrap; }
+.at-tbl td { padding:9px 13px; border-bottom:1px solid var(--border); color:var(--text); white-space:nowrap; }
+.at-tbl tr:hover td { background:rgba(240,192,64,0.03); }
+.at-tbl tr.nr td { animation:rowF 1.5s ease; }
+@keyframes rowF { 0%{background:rgba(240,192,64,0.12);} 100%{background:transparent;} }
+
+/* BADGES */
+.badge { display:inline-flex; align-items:center; padding:2px 8px; border-radius:3px; font-family:'Space Mono',monospace; font-size:9px; font-weight:700; }
+.b-y { background:rgba(240,192,64,0.12); color:var(--accent); border:1px solid rgba(240,192,64,0.25); }
+.b-g { background:var(--green-dim); color:var(--green); border:1px solid rgba(52,211,153,0.25); }
+.b-b { background:var(--blue-dim); color:var(--blue); border:1px solid rgba(96,165,250,0.25); }
+.b-r { background:rgba(248,113,113,0.1); color:var(--red); border:1px solid rgba(248,113,113,0.25); }
+.b-m { background:rgba(167,139,250,0.1); color:#a78bfa; border:1px solid rgba(167,139,250,0.25); }
+
+/* EMAIL */
+.ecard { background:var(--surface); border:1px solid var(--border); border-radius:8px; overflow:hidden; }
+.echrome { background:var(--bg); border-bottom:1px solid var(--border); padding:9px 14px; display:flex; align-items:center; gap:5px; }
+.ecdot { width:9px; height:9px; border-radius:50%; }
+.emeta { padding:12px 16px; border-bottom:1px solid var(--border); }
+.emrow { font-family:'Space Mono',monospace; font-size:10px; color:var(--muted); margin-bottom:3px; }
+.emrow span { color:var(--text); }
+.esubj { padding:10px 16px; font-weight:700; font-size:14px; color:var(--white); border-bottom:1px solid var(--border); }
+.ebody { padding:16px; font-size:13px; line-height:1.8; color:var(--text); }
+.ebody .hi { color:var(--accent); font-weight:700; }
+.ebody .lnk { color:var(--blue); text-decoration:underline; cursor:pointer; }
+.eplaceholder { padding:36px 16px; text-align:center; color:var(--muted2); font-family:'Space Mono',monospace; font-size:11px; }
+
+/* SLACK */
+.slcard { background:#1a1d21; border-radius:8px; overflow:hidden; }
+.sltop { background:#19181f; padding:10px 14px; display:flex; align-items:center; gap:7px; border-bottom:1px solid #2a2d35; }
+.slcname { font-size:13px; font-weight:700; color:#e0e0e8; }
+.slmsgs { padding:12px 14px; display:flex; flex-direction:column; gap:10px; min-height:110px; }
+.slmsg { display:flex; gap:9px; }
+.slav { width:30px; height:30px; border-radius:5px; display:flex; align-items:center; justify-content:center; font-size:14px; flex-shrink:0; }
+.slinner { flex:1; }
+.slname { font-size:12px; font-weight:700; color:#e0e0e8; margin-bottom:2px; }
+.slname .ts { font-size:10px; font-weight:400; color:#555; margin-left:5px; font-family:'Space Mono',monospace; }
+.sltext { font-size:12px; color:#b0b0c0; line-height:1.6; }
+.sltext strong { color:white; }
+.stag { padding:1px 6px; border-radius:3px; font-size:11px; }
+.stag-y { background:rgba(240,192,64,0.15); color:#f5d060; }
+.stag-g { background:rgba(52,211,153,0.15); color:#6ee7b7; }
+.stag-b { background:rgba(96,165,250,0.15); color:#93c5fd; }
+.stag-r { background:rgba(248,113,113,0.15); color:#fca5a5; }
+.slnew { animation:slin 0.35s ease; }
+@keyframes slin { from{opacity:0;transform:translateX(-7px);} to{opacity:1;transform:translateX(0);} }
+
+/* KANBAN */
+.kanban { display:flex; gap:10px; overflow-x:auto; padding:16px; }
+.kb-col { flex-shrink:0; width:165px; background:var(--surface); border-radius:7px; padding:10px; }
+.kb-col-t { font-family:'Space Mono',monospace; font-size:9px; color:var(--muted); text-transform:uppercase; letter-spacing:0.1em; margin-bottom:8px; display:flex; align-items:center; justify-content:space-between; }
+.kb-cnt { background:var(--border); color:var(--muted); border-radius:10px; padding:1px 5px; font-size:9px; }
+.kbc { background:var(--bg); border:1px solid var(--border); border-radius:5px; padding:8px 9px; margin-bottom:6px; }
+.kbc-n { font-weight:700; font-size:11px; color:var(--white); margin-bottom:2px; }
+.kbc-s { font-family:'Space Mono',monospace; font-size:9px; color:var(--muted); }
+.kbc-new-y { border-color:var(--accent); background:rgba(240,192,64,0.05); animation:kpop 0.4s ease; }
+@keyframes kpop { from{transform:scale(0.9);opacity:0;} to{transform:scale(1);opacity:1;} }
+
+/* DASHBOARD */
+.dash { display:grid; grid-template-columns:repeat(4,1fr); gap:12px; margin-bottom:14px; }
+.dw { background:var(--card); border:1px solid var(--border); border-radius:9px; padding:15px; }
+.dw-ico { font-size:20px; margin-bottom:8px; display:block; }
+.dw-n { font-size:26px; font-weight:700; color:var(--white); letter-spacing:-0.03em; margin-bottom:2px; }
+.dw-l { font-size:11px; color:var(--muted); }
+.dw-c { font-family:'Space Mono',monospace; font-size:9px; color:var(--green); margin-top:3px; }
+
+.reset-btn { background:none; border:1px solid var(--border2); color:var(--muted); padding:8px 18px; border-radius:6px; cursor:pointer; font-family:'Space Mono',monospace; font-size:10px; transition:all 0.2s; }
+.reset-btn:hover { border-color:var(--accent); color:var(--accent); }
+
+@media(max-width:900px) { .topbar,.hero,.main{padding-left:20px;padding-right:20px;} .two-col,.fgrid{grid-template-columns:1fr;} .dash{grid-template-columns:repeat(2,1fr);} .ffull{grid-column:1;} }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="brand">automation<span>.portfolio</span></div>
+  <div class="tb-center">recruitment agency automation</div>
+  <div class="live"><div class="live-dot"></div>LIVE DEMO</div>
+</div>
+
+<div class="hero">
+  <div class="hero-tag">Interactive Simulator — No Signup Needed</div>
+  <h1>Recruitment.<br><em>On Autopilot.</em></h1>
+  <p class="hero-sub">Watch what happens when a candidate applies or a job is filled. Every step fires automatically — Airtable updates, emails send, Slack alerts. Fill in the forms and see it live.</p>
+  <div class="hero-pills">
+    <div class="hp">Jotform</div>
+    <div class="hp">Airtable</div>
+    <div class="hp">Make.com</div>
+    <div class="hp">Gmail</div>
+    <div class="hp">Slack</div>
+  </div>
+</div>
+
+<div class="main">
+
+  <!-- DASHBOARD -->
+  <div class="slabel" style="margin-top:0;">
+    <div class="slabel-tag">Live Dashboard</div>
+    <div class="slabel-line"></div>
+    <div class="slabel-num">updates as you run demos</div>
+  </div>
+  <div class="dash">
+    <div class="dw"><span class="dw-ico">📨</span><div class="dw-n" id="dw-apps">24</div><div class="dw-l">Total Applications</div><div class="dw-c">+3 this week</div></div>
+    <div class="dw"><span class="dw-ico">🔍</span><div class="dw-n" id="dw-screening">6</div><div class="dw-l">In Screening</div><div class="dw-c">Active now</div></div>
+    <div class="dw"><span class="dw-ico">📅</span><div class="dw-n" id="dw-interviews">4</div><div class="dw-l">Interviews Booked</div><div class="dw-c">This week</div></div>
+    <div class="dw"><span class="dw-ico">🏆</span><div class="dw-n" id="dw-placed">11</div><div class="dw-l">Candidates Placed</div><div class="dw-c">This month</div></div>
+  </div>
+
+  <!-- SCENARIO 1 — CANDIDATE APPLICATION -->
+  <div class="slabel">
+    <div class="slabel-tag">Scenario 1 — Candidate Applies</div>
+    <div class="slabel-line"></div>
+    <div class="slabel-num">Jotform → Airtable → Gmail → Slack</div>
+  </div>
+
+  <div class="two-col" style="margin-bottom:14px;">
+    <div class="card">
+      <div class="card-hdr"><span class="ch-ico">📋</span><div class="ch-ttl">Candidate Application Form</div><div class="ch-sub">Jotform</div></div>
+      <div class="card-body">
+        <div class="fgrid">
+          <div class="field"><label>Full Name <span>required</span></label><input class="finput" id="c-name" placeholder="e.g. Aaliyah Brooks" /></div>
+          <div class="field"><label>Email <span>required</span></label><input class="finput" id="c-email" placeholder="aaliyah@email.com" /></div>
+          <div class="field"><label>Phone <span>optional</span></label><input class="finput" id="c-phone" placeholder="+1 702 555 0123" /></div>
+          <div class="field"><label>Position Applied For <span>required</span></label><input class="finput" id="c-role" placeholder="e.g. Financial Analyst" /></div>
+          <div class="field"><label>Years Experience <span>required</span></label>
+            <select class="fselect" id="c-exp">
+              <option value="">— Select —</option>
+              <option>0–1 years</option><option>1–3 years</option><option>3–5 years</option><option>5–10 years</option><option>10+ years</option>
+            </select>
+          </div>
+          <div class="field"><label>Availability <span>required</span></label>
+            <select class="fselect" id="c-avail">
+              <option value="">— Select —</option>
+              <option>Immediately</option><option>2 weeks notice</option><option>1 month notice</option><option>Negotiable</option>
+            </select>
+          </div>
+          <div class="field"><label>Expected Salary <span>optional</span></label><input class="finput" id="c-salary" placeholder="e.g. $75,000/yr" /></div>
+          <div class="field"><label>Source <span>required</span></label>
+            <select class="fselect" id="c-source">
+              <option value="">— Select —</option>
+              <option>LinkedIn</option><option>Indeed</option><option>Referral</option><option>Company Website</option><option>Other</option>
+            </select>
+          </div>
+          <div class="field ffull"><label>Brief Cover Note <span>optional</span></label><input class="finput" id="c-note" placeholder="Why are you a great fit for this role?" /></div>
+        </div>
+        <button class="sbtn sbtn-yellow" onclick="runS1()">⚡ Submit Application & Trigger Automation</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-hdr"><span class="ch-ico">⚡</span><div class="ch-ttl">Make.com — Application Scenario</div><div class="ch-sub" id="s1-stat">IDLE</div></div>
+      <div class="mflow">
+        <div class="mnode"><div class="mball" id="mn0">🎣</div><div class="mlabel">Webhook Trigger</div><div class="mapp">Make.com</div></div>
+        <div class="mconn"><div class="mline" id="ml0"></div></div>
+        <div class="mnode"><div class="mball" id="mn1">🗄️</div><div class="mlabel">Create Candidate</div><div class="mapp">Airtable</div></div>
+        <div class="mconn"><div class="mline" id="ml1"></div></div>
+        <div class="mnode"><div class="mball" id="mn2">🔀</div><div class="mlabel">Score & Route</div><div class="mapp">Make.com</div></div>
+        <div class="mconn"><div class="mline" id="ml2"></div></div>
+        <div class="mnode"><div class="mball" id="mn3">📧</div><div class="mlabel">Confirm Email</div><div class="mapp">Gmail</div></div>
+        <div class="mconn"><div class="mline" id="ml3"></div></div>
+        <div class="mnode"><div class="mball" id="mn4">💬</div><div class="mlabel">Slack Alert</div><div class="mapp">#recruiting</div></div>
+        <div class="mconn"><div class="mline" id="ml4"></div></div>
+        <div class="mnode"><div class="mball" id="mn5">✅</div><div class="mlabel">Done</div><div class="mapp">Make.com</div></div>
+      </div>
+      <div id="log1" class="logbox" style="margin:0 16px 16px;">
+        <div class="log-hdr"><span id="ls1" class="lrun">● RUNNING</span><span style="margin-left:auto;color:#333;font-size:9px;">Candidate Application Scenario</span></div>
+        <div class="log-body" id="lb1"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- AIRTABLE -->
+  <div class="slabel"><div class="slabel-tag">Airtable — Candidate Pipeline</div><div class="slabel-line"></div></div>
+  <div class="card" style="margin-bottom:14px;">
+    <div class="at-tabs">
+      <button class="at-tab active" onclick="stab('grid1',this)">Grid View</button>
+      <button class="at-tab" onclick="stab('kanban1',this)">Pipeline View</button>
+    </div>
+    <div id="grid1">
+      <div class="at-wrap"><table class="at-tbl">
+        <thead><tr><th>Candidate</th><th>Role</th><th>Experience</th><th>Availability</th><th>Source</th><th>Score</th><th>Stage</th></tr></thead>
+        <tbody id="c-table">
+          <tr><td>David Chen</td><td>Marketing Manager</td><td>5–10 years</td><td>2 weeks notice</td><td>LinkedIn</td><td><span class="badge b-g">92/100</span></td><td><span class="badge b-y">Interview</span></td></tr>
+          <tr><td>Fatima Al-Rashid</td><td>Data Analyst</td><td>3–5 years</td><td>Immediately</td><td>Indeed</td><td><span class="badge b-b">78/100</span></td><td><span class="badge b-b">Screening</span></td></tr>
+          <tr><td>Tom O'Brien</td><td>Sales Executive</td><td>1–3 years</td><td>1 month notice</td><td>Referral</td><td><span class="badge b-m">65/100</span></td><td><span class="badge b-m">Applied</span></td></tr>
+        </tbody>
+      </table></div>
+    </div>
+    <div id="kanban1" style="display:none;">
+      <div class="kanban">
+        <div class="kb-col"><div class="kb-col-t">APPLIED <span class="kb-cnt" id="kc-applied">1</span></div><div id="kb-applied">
+          <div class="kbc"><div class="kbc-n">Tom O'Brien</div><div class="kbc-s">Sales Executive</div></div>
+        </div></div>
+        <div class="kb-col"><div class="kb-col-t">SCREENING <span class="kb-cnt">1</span></div><div id="kb-screening">
+          <div class="kbc"><div class="kbc-n">Fatima Al-Rashid</div><div class="kbc-s">Data Analyst</div></div>
+        </div></div>
+        <div class="kb-col"><div class="kb-col-t">INTERVIEW <span class="kb-cnt">1</span></div><div id="kb-interview">
+          <div class="kbc"><div class="kbc-n">David Chen</div><div class="kbc-s">Marketing Manager</div></div>
+        </div></div>
+        <div class="kb-col"><div class="kb-col-t">OFFER <span class="kb-cnt">0</span></div><div id="kb-offer"></div></div>
+        <div class="kb-col"><div class="kb-col-t">PLACED <span class="kb-cnt">0</span></div><div id="kb-placed"></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- EMAIL + SLACK S1 -->
+  <div class="two-col" style="margin-bottom:14px;">
+    <div>
+      <div class="slabel" style="margin-top:0;"><div class="slabel-tag">Gmail — Candidate Confirmation</div><div class="slabel-line"></div></div>
+      <div class="ecard">
+        <div class="echrome"><div class="ecdot" style="background:#ff5f57;"></div><div class="ecdot" style="background:#ffbd2e;"></div><div class="ecdot" style="background:#28c840;"></div><span style="font-family:'Space Mono',monospace;font-size:10px;color:var(--muted);margin-left:8px;">Gmail — Sent</span></div>
+        <div id="e1-ph" class="eplaceholder">⏳ Submit the application form to trigger the confirmation email</div>
+        <div id="e1" style="display:none;">
+          <div class="emeta"><div class="emrow">To: <span id="e1-to">—</span></div><div class="emrow">From: <span>applications@recruitco.com</span></div></div>
+          <div class="esubj" id="e1-subj">—</div>
+          <div class="ebody" id="e1-body"></div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="slabel" style="margin-top:0;"><div class="slabel-tag">Slack — #recruiting</div><div class="slabel-line"></div></div>
+      <div class="slcard">
+        <div class="sltop"><span style="color:#9b9b9b;font-size:13px;">#</span><span class="slcname">recruiting</span></div>
+        <div class="slmsgs" id="sl1">
+          <div class="slmsg"><div class="slav" style="background:#2a2000;">⚡</div><div class="slinner"><div class="slname">Make.com Bot <span class="ts">9:32am</span></div><div class="sltext">📨 New application: <strong>David Chen</strong> — <span class="stag stag-y">Marketing Manager</span> — Score: <span class="stag stag-g">92/100</span> — Source: LinkedIn. <strong>Hot candidate!</strong></div></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SCENARIO 2 — JOB PLACED -->
+  <div class="slabel" style="margin-top:32px;">
+    <div class="slabel-tag">Scenario 2 — Candidate Placed</div>
+    <div class="slabel-line"></div>
+    <div class="slabel-num">Airtable → Gmail → Slack → Client Notification</div>
+  </div>
+
+  <div class="two-col" style="margin-bottom:14px;">
+    <div class="card">
+      <div class="card-hdr"><span class="ch-ico">🏆</span><div class="ch-ttl">Placement Confirmation Form</div><div class="ch-sub">Jotform</div></div>
+      <div class="card-body">
+        <div class="fgrid">
+          <div class="field"><label>Candidate Name <span>required</span></label><input class="finput" id="p-cname" placeholder="e.g. David Chen" /></div>
+          <div class="field"><label>Client Company <span>required</span></label><input class="finput" id="p-company" placeholder="e.g. Goldman Sachs" /></div>
+          <div class="field"><label>Role Placed <span>required</span></label><input class="finput" id="p-role" placeholder="e.g. Marketing Manager" /></div>
+          <div class="field"><label>Start Date <span>required</span></label><input class="finput" id="p-start" type="date" /></div>
+          <div class="field"><label>Salary Agreed <span>required</span></label><input class="finput" id="p-salary" placeholder="e.g. $95,000/yr" /></div>
+          <div class="field"><label>Placement Fee <span>required</span></label><input class="finput" id="p-fee" placeholder="e.g. $9,500" /></div>
+          <div class="field ffull"><label>Client Contact Email <span>required</span></label><input class="finput" id="p-cemail" placeholder="hiring@goldmansachs.com" /></div>
+        </div>
+        <button class="sbtn sbtn-yellow" onclick="runS2()">🏆 Confirm Placement & Trigger Automation</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-hdr"><span class="ch-ico">⚡</span><div class="ch-ttl">Make.com — Placement Scenario</div><div class="ch-sub" id="s2-stat">IDLE</div></div>
+      <div class="mflow">
+        <div class="mnode"><div class="mball" id="pn0">🎣</div><div class="mlabel">Webhook</div><div class="mapp">Make.com</div></div>
+        <div class="mconn"><div class="mline" id="pl0"></div></div>
+        <div class="mnode"><div class="mball" id="pn1">🗄️</div><div class="mlabel">Update Record</div><div class="mapp">Airtable</div></div>
+        <div class="mconn"><div class="mline" id="pl1"></div></div>
+        <div class="mnode"><div class="mball" id="pn2">📧</div><div class="mlabel">Congrats Email</div><div class="mapp">Gmail → Candidate</div></div>
+        <div class="mconn"><div class="mline" id="pl2"></div></div>
+        <div class="mnode"><div class="mball" id="pn3">📧</div><div class="mlabel">Client Confirm</div><div class="mapp">Gmail → Client</div></div>
+        <div class="mconn"><div class="mline" id="pl3"></div></div>
+        <div class="mnode"><div class="mball" id="pn4">💬</div><div class="mlabel">Slack #wins</div><div class="mapp">Slack</div></div>
+        <div class="mconn"><div class="mline" id="pl4"></div></div>
+        <div class="mnode"><div class="mball" id="pn5">✅</div><div class="mlabel">Done</div><div class="mapp">Make.com</div></div>
+      </div>
+      <div id="log2" class="logbox" style="margin:0 16px 16px;">
+        <div class="log-hdr"><span id="ls2" class="lrun">● RUNNING</span><span style="margin-left:auto;color:#333;font-size:9px;">Placement Scenario</span></div>
+        <div class="log-body" id="lb2"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- EMAIL + SLACK S2 -->
+  <div class="two-col" style="margin-bottom:40px;">
+    <div>
+      <div class="slabel" style="margin-top:0;"><div class="slabel-tag">Gmail — Candidate Congrats Email</div><div class="slabel-line"></div></div>
+      <div class="ecard">
+        <div class="echrome"><div class="ecdot" style="background:#ff5f57;"></div><div class="ecdot" style="background:#ffbd2e;"></div><div class="ecdot" style="background:#28c840;"></div><span style="font-family:'Space Mono',monospace;font-size:10px;color:var(--muted);margin-left:8px;">Gmail — Sent</span></div>
+        <div id="e2-ph" class="eplaceholder">⏳ Confirm a placement above to trigger the congratulations email</div>
+        <div id="e2" style="display:none;">
+          <div class="emeta"><div class="emrow">To: <span id="e2-to">—</span></div><div class="emrow">From: <span>placements@recruitco.com</span></div></div>
+          <div class="esubj" id="e2-subj">—</div>
+          <div class="ebody" id="e2-body"></div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="slabel" style="margin-top:0;"><div class="slabel-tag">Slack — #wins</div><div class="slabel-line"></div></div>
+      <div class="slcard">
+        <div class="sltop"><span style="color:#9b9b9b;font-size:13px;">#</span><span class="slcname">wins</span></div>
+        <div class="slmsgs" id="sl2">
+          <div class="slmsg"><div class="slav" style="background:#1a2a1a;">⚡</div><div class="slinner"><div class="slname">Make.com Bot <span class="ts">2:15pm</span></div><div class="sltext">🏆 PLACEMENT: <strong>Fatima Al-Rashid</strong> placed at <strong>Deloitte</strong> as <span class="stag stag-y">Data Analyst</span> — Fee: <span class="stag stag-g">$8,200</span> 🎉</div></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="text-align:center;padding-bottom:20px;">
+    <button class="reset-btn" onclick="location.reload()">↺ Reset Demo</button>
+    <p style="margin-top:10px;font-family:'Space Mono',monospace;font-size:10px;color:var(--muted2);">Want this built for your agency? → <a href="https://contra.com/s/BMcFPFU6-automated-lead-followup-system-jotform-airtable-make-gmail-slack" style="color:var(--accent);">contra.com/joseph_tucker</a></p>
+  </div>
+
+</div>
+
+<script>
+let r1=false,r2=false;
+function sleep(ms){return new Promise(r=>setTimeout(r,ms));}
+
+function stab(view,btn){
+  ['grid1','kanban1'].forEach(id=>{const e=document.getElementById(id);if(e)e.style.display='none';});
+  const t=document.getElementById(view);if(t)t.style.display='';
+  btn.closest('.card').querySelectorAll('.at-tab').forEach(t=>t.classList.remove('active'));
+  btn.classList.add('active');
+}
+
+async function runS1(){
+  if(r1)return; r1=true;
+  const name=document.getElementById('c-name').value||'Aaliyah Brooks';
+  const email=document.getElementById('c-email').value||'aaliyah@email.com';
+  const role=document.getElementById('c-role').value||'Financial Analyst';
+  const exp=document.getElementById('c-exp').value||'3–5 years';
+  const avail=document.getElementById('c-avail').value||'Immediately';
+  const salary=document.getElementById('c-salary').value||'$75,000/yr';
+  const source=document.getElementById('c-source').value||'LinkedIn';
+  const fn=name.split(' ')[0];
+  const score=exp.includes('5–10')||exp.includes('10+')?'88/100':exp.includes('3–5')?'74/100':'61/100';
+  const hot=parseInt(score)>=80;
+
+  const lb=document.getElementById('lb1'),ls=document.getElementById('ls1');
+  document.getElementById('log1').classList.add('show');
+  lb.innerHTML=''; ls.className='lrun'; ls.textContent='● RUNNING';
+  document.getElementById('s1-stat').textContent='RUNNING...';
+  for(let i=0;i<6;i++){const n=document.getElementById('mn'+i);if(n)n.className='mball';const l=document.getElementById('ml'+i);if(l)l.className='mline';}
+
+  const steps=[
+    {ico:'🎣',msg:`<span class="ya">Webhook received</span> — Application from <span class="ya">${name}</span>`,node:0},
+    {ico:'🗄️',msg:`<span class="gr">Airtable record created</span> — ${role} • ${exp} • Score: ${score}`,node:1},
+    {ico:'🔀',msg:`<span class="ya">Router: scoring</span> — ${score} → ${hot?'<span class="gr">Hot candidate — fast track route</span>':'Standard screening route'}`,node:2},
+    {ico:'📧',msg:`<span class="ya">Confirmation email sent</span> → ${email}`,node:3},
+    {ico:'💬',msg:`<span class="ya">Slack posted</span> → #recruiting — "${name} applied for ${role}"`,node:4},
+    {ico:'✅',msg:`<span class="gr">Application scenario complete</span> — 5 steps in 5.8 seconds`,node:5},
+  ];
+
+  const now=new Date();
+  for(let i=0;i<steps.length;i++){
+    await sleep(i*750);
+    const s=steps[i];
+    const ts=new Date(now.getTime()+i*1100).toTimeString().slice(0,8);
+    const line=document.createElement('div');
+    line.className='ll show';
+    line.innerHTML=`<span class="lts">${ts}</span><span class="lic">${s.ico}</span><span class="lmsg">${s.msg}</span>`;
+    lb.appendChild(line);
+    const nd=document.getElementById('mn'+s.node);
+    if(nd)nd.className='mball act';
+    if(s.node<5){const ln=document.getElementById('ml'+s.node);if(ln){ln.className='mline flow';await sleep(500);ln.className='mline';if(nd)nd.className='mball done';}}
+    else{if(nd){await sleep(300);nd.className='mball done';}}
+    if(s.node===1)addCandRow(name,role,exp,avail,source,score);
+    if(s.node===3)showE1(name,email,fn,role,exp,avail,salary,source,score,hot);
+    if(s.node===4)addSl1(name,role,score,source,hot);
+  }
+  document.getElementById('dw-apps').textContent=parseInt(document.getElementById('dw-apps').textContent)+1;
+  document.getElementById('dw-screening').textContent=parseInt(document.getElementById('dw-screening').textContent)+1;
+  ls.className='ldone'; ls.textContent='✓ COMPLETED';
+  document.getElementById('s1-stat').textContent='DONE ✓';
+  r1=false;
+}
+
+function addCandRow(name,role,exp,avail,source,score){
+  const tb=document.getElementById('c-table');
+  const sc=parseInt(score);
+  const sbadge=sc>=80?'b-g':sc>=70?'b-b':'b-m';
+  const stage=sc>=80?'<span class="badge b-y">Fast Track</span>':'<span class="badge b-b">Screening</span>';
+  const tr=document.createElement('tr');tr.className='nr';
+  tr.innerHTML=`<td>${name}</td><td>${role}</td><td>${exp}</td><td>${avail}</td><td>${source}</td><td><span class="badge ${sbadge}">${score}</span></td><td>${stage}</td>`;
+  tb.prepend(tr);
+  const kb=document.getElementById('kb-applied');
+  const card=document.createElement('div');
+  card.className='kbc kbc-new-y';
+  card.innerHTML=`<div class="kbc-n">${name}</div><div class="kbc-s">${role}</div>`;
+  kb.prepend(card);
+  document.getElementById('kc-applied').textContent=kb.children.length;
+}
+
+function showE1(name,email,fn,role,exp,avail,salary,source,score,hot){
+  document.getElementById('e1-ph').style.display='none';
+  document.getElementById('e1-to').textContent=email;
+  document.getElementById('e1-subj').textContent=`We received your application, ${fn} — here's what happens next`;
+  document.getElementById('e1-body').innerHTML=`Hi <span class="hi">${fn}</span>,<br><br>
+Thank you for applying for the <span class="hi">${role}</span> position. We've received your application and our team is reviewing it now.<br><br>
+${hot?`<strong>Great news</strong> — based on your <span class="hi">${exp}</span> of experience, you've been flagged as a <span class="hi">priority candidate</span>. You can expect to hear from us within <span class="hi">24–48 hours</span>.`:`Our team typically reviews applications within <span class="hi">3–5 business days</span>. We'll be in touch shortly.`}<br><br>
+<strong>Your application summary:</strong><br>
+Role: <span class="hi">${role}</span><br>
+Experience: <span class="hi">${exp}</span><br>
+Availability: <span class="hi">${avail}</span><br>
+Expected Salary: <span class="hi">${salary||'Not specified'}</span><br><br>
+If you have any questions, reply to this email.<br><br>
+Best regards,<br><strong>The Recruitment Team</strong>`;
+  document.getElementById('e1').style.display='block';
+}
+
+function addSl1(name,role,score,source,hot){
+  const c=document.getElementById('sl1');
+  const msg=document.createElement('div');msg.className='slmsg slnew';
+  const t=new Date().toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'});
+  msg.innerHTML=`<div class="slav" style="background:#2a2000;">⚡</div><div class="slinner"><div class="slname">Make.com Bot <span class="ts">${t}</span></div><div class="sltext">📨 New application: <strong>${name}</strong> — <span class="stag stag-y">${role}</span> — Score: <span class="stag ${parseInt(score)>=80?'stag-g':'stag-b'}">${score}</span> — Source: ${source}.${hot?' <strong>🔥 Hot candidate!</strong>':''}</div></div>`;
+  c.appendChild(msg);
+}
+
+async function runS2(){
+  if(r2)return; r2=true;
+  const cname=document.getElementById('p-cname').value||'David Chen';
+  const company=document.getElementById('p-company').value||'Goldman Sachs';
+  const role=document.getElementById('p-role').value||'Marketing Manager';
+  const start=document.getElementById('p-start').value||'March 20, 2026';
+  const salary=document.getElementById('p-salary').value||'$95,000/yr';
+  const fee=document.getElementById('p-fee').value||'$9,500';
+  const cemail=document.getElementById('p-cemail').value||'hiring@goldmansachs.com';
+  const fn=cname.split(' ')[0];
+
+  const lb=document.getElementById('lb2'),ls=document.getElementById('ls2');
+  document.getElementById('log2').classList.add('show');
+  lb.innerHTML=''; ls.className='lrun'; ls.textContent='● RUNNING';
+  document.getElementById('s2-stat').textContent='RUNNING...';
+  for(let i=0;i<6;i++){const n=document.getElementById('pn'+i);if(n)n.className='mball';const l=document.getElementById('pl'+i);if(l)l.className='mline';}
+
+  const steps=[
+    {ico:'🎣',msg:`<span class="ya">Webhook received</span> — Placement confirmed: <span class="ya">${cname}</span> → ${company}`,node:0},
+    {ico:'🗄️',msg:`<span class="gr">Airtable updated</span> — Stage: Placed ✓ • Fee logged: ${fee}`,node:1},
+    {ico:'📧',msg:`<span class="ya">Congratulations email sent</span> → ${cname}`,node:2},
+    {ico:'📧',msg:`<span class="ya">Client confirmation sent</span> → ${cemail}`,node:3},
+    {ico:'💬',msg:`<span class="gr">Slack #wins</span> — "${cname} placed at ${company} — Fee: ${fee}"`,node:4},
+    {ico:'✅',msg:`<span class="gr">Placement scenario complete</span> — All notifications sent`,node:5},
+  ];
+
+  const now=new Date();
+  for(let i=0;i<steps.length;i++){
+    await sleep(i*750);
+    const s=steps[i];
+    const ts=new Date(now.getTime()+i*1100).toTimeString().slice(0,8);
+    const line=document.createElement('div');line.className='ll show';
+    line.innerHTML=`<span class="lts">${ts}</span><span class="lic">${s.ico}</span><span class="lmsg">${s.msg}</span>`;
+    lb.appendChild(line);
+    const nd=document.getElementById('pn'+s.node);
+    if(nd)nd.className='mball act';
+    if(s.node<5){const ln=document.getElementById('pl'+s.node);if(ln){ln.className='mline flow';await sleep(500);ln.className='mline';if(nd)nd.className='mball done';}}
+    else{if(nd){await sleep(300);nd.className='mball done';}}
+    if(s.node===2)showE2(cname,fn,company,role,start,salary,fee);
+    if(s.node===4)addSl2(cname,company,role,fee);
+  }
+  document.getElementById('dw-placed').textContent=parseInt(document.getElementById('dw-placed').textContent)+1;
+  ls.className='ldone'; ls.textContent='✓ COMPLETED';
+  document.getElementById('s2-stat').textContent='DONE ✓';
+  r2=false;
+}
+
+function showE2(cname,fn,company,role,start,salary,fee){
+  document.getElementById('e2-ph').style.display='none';
+  document.getElementById('e2-to').textContent=cname;
+  document.getElementById('e2-subj').textContent=`Congratulations ${fn}! You've been placed at ${company}`;
+  document.getElementById('e2-body').innerHTML=`Hi <span class="hi">${fn}</span>,<br><br>
+We are absolutely thrilled to share the news — you have officially been placed at <span class="hi">${company}</span> as their new <span class="hi">${role}</span>! 🎉<br><br>
+<strong>Your placement details:</strong><br>
+Company: <span class="hi">${company}</span><br>
+Role: <span class="hi">${role}</span><br>
+Start Date: <span class="hi">${start}</span><br>
+Agreed Salary: <span class="hi">${salary}</span><br><br>
+The HR team at ${company} will be in touch within the next 48 hours with your onboarding details.<br><br>
+It has been a pleasure working with you. We'd love a quick testimonial if you're happy with the service — <span class="lnk">[Leave a review here]</span><br><br>
+Congratulations again,<br><strong>The Recruitment Team</strong>`;
+  document.getElementById('e2').style.display='block';
+}
+
+function addSl2(cname,company,role,fee){
+  const c=document.getElementById('sl2');
+  const msg=document.createElement('div');msg.className='slmsg slnew';
+  const t=new Date().toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'});
+  msg.innerHTML=`<div class="slav" style="background:#1a2a1a;">⚡</div><div class="slinner"><div class="slname">Make.com Bot <span class="ts">${t}</span></div><div class="sltext">🏆 PLACEMENT WIN: <strong>${cname}</strong> → <strong>${company}</strong> as <span class="stag stag-y">${role}</span> — Fee: <span class="stag stag-g">${fee}</span> 🎉 Great work team!</div></div>`;
+  c.appendChild(msg);
+}
+</script>
+</body>
+</html>
